@@ -9,11 +9,11 @@ import com.xebialabs.deployit.BaseConfigurationItem;
  * Time: 15:38:09
  * To change this template use File | Settings | File Templates.
  */
-public class ConfigurationItem  {
+public class ConfigurationItem {
 
-      private String mainType;
-      private final StringBuilder parameters = new StringBuilder();
-      private String label;
+    private String mainType;
+    private final StringBuilder parameters = new StringBuilder();
+    private String label;
 
     public String getMainType() {
         return mainType;
@@ -32,11 +32,11 @@ public class ConfigurationItem  {
         if ("label".equals(name)) {
             label = value.toString();
         }
-      }
+    }
 
-      public String getCli() {
-          return "create "+mainType+" "+parameters;
-      }
+    public String getCli() {
+        return "create " + mainType + " " + parameters;
+    }
 
     @Override
     public String toString() {

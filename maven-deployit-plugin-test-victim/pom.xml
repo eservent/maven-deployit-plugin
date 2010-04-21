@@ -1,12 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.xebialabs.deployit</groupId>
-	<artifactId>maven-deployit-plugin-test-victim</artifactId>
-	<packaging>ear</packaging>
-	<version>1.2.2</version>
-	<name>mojo-victim</name>
-	<url>http://maven.apache.org</url>
-<build>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.xebialabs.deployit</groupId>
+    <artifactId>maven-deployit-plugin-test-victim</artifactId>
+    <packaging>ear</packaging>
+    <version>1.2.2</version>
+    <name>mojo-victim</name>
+    <url>http://maven.apache.org</url>
+    <build>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -17,8 +18,8 @@
                 </configuration>
             </plugin>
             <plugin>
-		<groupId>com.xebialabs.deployit</groupId>
-		<artifactId>maven-deployit-plugin</artifactId>
+                <groupId>com.xebialabs.deployit</groupId>
+                <artifactId>maven-deployit-plugin</artifactId>
                 <executions>
                     <execution>
                         <id>deployit-plugin-test</id>
@@ -62,49 +63,49 @@
                     <dependency>
                         <groupId>com.xebialabs.deployit</groupId>
                         <artifactId>jbossas-plugin</artifactId>
-			<version>1.2.2</version>
+                        <version>1.2.2</version>
                     </dependency>
                 </dependencies>
             </plugin>
         </plugins>
     </build>
 
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.xebialabs.deployit</groupId>
-			<artifactId>jbossas-plugin</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.xebialabs.deployit</groupId>
-			<artifactId>was-plugin</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.xebialabs.deployit</groupId>
-			<artifactId>wls-plugin</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.xebialabs.deployit</groupId>
-			<artifactId>tomcat-plugin</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>com.xebialabs.deployit</groupId>
-			<artifactId>plugin-api</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xebialabs.deployit</groupId>
+            <artifactId>jbossas-plugin</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xebialabs.deployit</groupId>
+            <artifactId>was-plugin</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xebialabs.deployit</groupId>
+            <artifactId>wls-plugin</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xebialabs.deployit</groupId>
+            <artifactId>tomcat-plugin</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xebialabs.deployit</groupId>
+            <artifactId>plugin-api</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+    </dependencies>
 </project>
