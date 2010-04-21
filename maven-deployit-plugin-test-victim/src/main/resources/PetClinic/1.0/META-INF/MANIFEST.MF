@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Deployit-Package-Format-Version: 1.1
+CI-Application: PetClinic
+CI-Version: 1.0
+
+Name: PetClinic-1.0.ear
+CI-Type: Ear
+CI-Name: PetClinic
+
