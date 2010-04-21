@@ -22,12 +22,8 @@ public class DeployitCIConverter extends AbstractConfigurationConverter {
 
         public static final String ROLE = ConfigurationConverter.class.getName();
               
-    public DeployitCIConverter() {
-        System.out.println("BMO IN CTOR");
-    }
     public boolean canConvert(Class type) {
-        System.out.println("BMO canConvert "+type) ;
-        return BaseConfigurationItem.class.isAssignableFrom( type );
+        return ConfigurationItem.class.isAssignableFrom( type );
     }
 
     /**
@@ -38,32 +34,26 @@ public class DeployitCIConverter extends AbstractConfigurationConverter {
                                      ConfigurationListener listener )
             throws ComponentConfigurationException
     {
-        System.out.println("BMO fromConfiguration "+type) ;
+        
+        ConfigurationItem ci = new ConfigurationItem();
 
-        Object retValue = fromExpression( configuration, expressionEvaluator, type );
+        try {
+        ci.setMainType(configuration.getAttribute("type"));
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        PlexusConfiguration[] children = configuration.getChildren();
 
-        System.out.println("BMO fromConfiguration  fromExp "+retValue) ;
-        if ( retValue != null )
-        {
-            return retValue;
-        }
-
-        Class implementation = getClassForImplementationHint( type, configuration, classLoader );
-        System.out.println("BMO fromConfiguration  implementation "+implementation) ;
-
-        retValue = instantiateObject( implementation );
-        System.out.println("BMO fromConfiguration  retValue from instantiateObject ["+retValue+"]");
-        if (retValue != null ) {
-            System.out.println("BMO fromConfiguration  retValue from instantiateObject ["+retValue.getClass()+"]");            
-        }
-        if ( !( retValue instanceof BaseConfigurationItem ) )
-        {
-            retValue = null;
-        }
-
-        //processConfiguration( (Target) retValue, configuration, expressionEvaluator );
-        System.out.println("BMO fromConfiguration  final retValue ["+retValue+"]");
-        return retValue;
+        for (PlexusConfiguration plexusConfiguration : children) {
+            try {
+	        String name = plexusConfiguration.getName();
+            String c = plexusConfiguration.getValue();
+                ci.addParameter(name,c);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+		}
+       return ci;
     }
 
 }

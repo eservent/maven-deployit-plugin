@@ -111,12 +111,12 @@ public class MyMojo extends AbstractMojo {
 	/**
 	 * @parameter
 	 */
-	private List<BaseConfigurationItem> middlewareResources;
+	private List<ConfigurationItem> middlewareResources;
 	
 	/**
 	 * @parameter
 	 */
-	private String[] environment;
+	private List<ConfigurationItem> environment;
 
     /**
      * the additionnal Deployments
@@ -182,18 +182,21 @@ public class MyMojo extends AbstractMojo {
 				+ "\" version=\"" + version + "\"";
         interpret(createDeploymentPackage);
 
-        getLog().info("create the artifacts");
+        getLog().info("create the main artifact");
         deploymentPackageName = artifactId + " - " + version;
         createJeeArchiveCI(jeeArtifact,this.packaging);
           //Handle additionnal maven artifacts
-        for (int i=0; i < additionnalArtifacts.length; i++) {
-            final Module additionnalArtifact = additionnalArtifacts[i];
+        if (additionnalArtifacts != null) {
+		getLog().info("create the additional artifacts");
+		for (int i=0; i < additionnalArtifacts.length; i++) {
+		    final Module additionnalArtifact = additionnalArtifacts[i];
 
-            Artifact additional = getArtifact(additionnalArtifact);
-            File additionalFile = additional.getFile();
+		    Artifact additional = getArtifact(additionnalArtifact);
+		    File additionalFile = additional.getFile();
 
-            createJeeArchiveCI(additionalFile, additional.getType());
-        }
+		    createJeeArchiveCI(additionalFile, additional.getType());
+		}
+	}
 
         // interpreter.interpret("import location=\"src/main/resources/" + packageName + "\"");
 		/*
@@ -211,9 +214,9 @@ public class MyMojo extends AbstractMojo {
         //Create Environment
         getLog().info("Create the environment");
 		List<String> members = new ArrayList<String>();
-		for (String each : environment) {
-			members.add(extractLabel(each));
-            interpret(each);
+		for (ConfigurationItem each : environment) {
+			members.add(each.getLabel());
+            interpret(each.getCli());
         }
         interpret("create Environment label=" + DEFAULT_ENVIRONMENT);
         for (String m : members) {
@@ -222,16 +225,9 @@ public class MyMojo extends AbstractMojo {
 		
 
         getLog().info("create Middleware Resources");
-		for (BaseConfigurationItem res : middlewareResources) {
-			System.out.println("--PL--> Found a mr: \"" + res + "\"");
-			String label = res.getLabel();
-			StringBuilder command = new StringBuilder();
-			command.append("create ").append(res.getClass().getSimpleName()).append(" label=\"").append(label).append(
-					"\" ");
-			String convertedString = PropertyListConverter.convertObjectToString(res);
-			command.append(convertedString);
-		    interpret(command.toString());
-            interpret("modify \"" + deploymentPackageName + "\" middlewareResources+=\"" + label + "\"");
+		for (ConfigurationItem ci : middlewareResources) {
+			interpret(ci.getCli());
+            interpret("modify \"" + deploymentPackageName + "\" middlewareResources+=\"" + ci.getLabel() + "\"");
         }
 
 		if (commands != null) {

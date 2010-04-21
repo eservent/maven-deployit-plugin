@@ -3,114 +3,79 @@
 	<groupId>com.xebialabs.deployit</groupId>
 	<artifactId>maven-deployit-plugin-test-victim</artifactId>
 	<packaging>ear</packaging>
-	<version>1.3-SNAPSHOT</version>
+	<version>1.2.2</version>
 	<name>mojo-victim</name>
 	<url>http://maven.apache.org</url>
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<encoding>UTF-8</encoding>
-					<source>1.5</source>
-					<target>1.5</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>com.xebialabs.experiments</groupId>
-				<artifactId>maven-deployit-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>deployit-plugin-test</id>
-						<phase>install</phase>
-						<goals>
-							<goal>deployit</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<port>9090</port>
+<build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+            <plugin>
+		<groupId>com.xebialabs.deployit</groupId>
+		<artifactId>maven-deployit-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>deployit-plugin-test</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>deployit</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <port>9090</port>
                     <testmode>true</testmode>
-					<commands>
-						<!--
-						<param>deployit_nosteps</param>
-						<param>create Deployment label="PetClinic on JBoss" source="${project.artifactId} - ${project.version}" target="JBoss environment"</param>
-						<param>delete "PetClinic on JBoss"</param>
-						<param>deployit_nosteps</param>
-						<param>create Deployment label="PetClinic on JBoss" source="${project.artifactId} - ${project.version}" target="JBoss environment"</param>
-						<param>deployit_nosteps</param>
-						-->
-					</commands>
-					<environment>
-					<!-- 
-						<com.xebialabs.deployit.ci.Host>
-							<label>JBoss Host</label>
-							<address>jboss-51</address>
-							<username>root</username>
-							<password>centos</password>
-							<operatingSystemFamily>UNIX</operatingSystemFamily>
-							<accessMethod>SSH_SFTP</accessMethod>							
-						</com.xebialabs.deployit.ci.Host>
-						<com.xebialabs.deployit.plugin.jbossas.ci.JbossasServer>
-							<label>JBoss serve</label>
-							<host>JBoss Host</host>
-							<home>/opt/jboss/5.1.0.GA</home>
-							<version>JBOSSAS_50</version>
-							<name>itest</name>
-						</com.xebialabs.deployit.plugin.jbossas.ci.JbossasServer>
-						 -->
-						<param>create Host label="JBosshost" address="jboss-51" username="root" password="centos" operatingsystemfamily="UNIX" accessmethod="SSH_SFTP"</param>
-						<param>create JbossasServer label="JBossserver" host="JBosshost" home="/opt/jboss/5.1.0.GA/" version=JBOSSAS_50 name="itest"</param>
-					</environment>
-<!-- 
+                    <commands>
+                        <!--
+                              <param>create Deployment label="PetClinic on JBoss" source="${project.artifactId} - ${project.version}" target="JBoss environment"</param>
+                              -->
+                    </commands>
+                    <environment>
+                        <ConfigurationItem type="Host">
+                            <label>JBoss Host</label>
+                            <address>jboss-51</address>
+                            <username>root</username>
+                            <password>centos</password>
+                            <operatingSystemFamily>UNIX</operatingSystemFamily>
+                            <accessMethod>SSH_SFTP</accessMethod>
+                        </ConfigurationItem>
+                        <ConfigurationItem type="JbossasServer">
+                            <label>JBoss server</label>
+                            <host>JBoss Host</host>
+                            <home>/opt/jboss/5.1.0.GA</home>
+                            <version>JBOSSAS_50</version>
+                            <name>itest</name>
+                        </ConfigurationItem>
+                    </environment>
                     <additionnalArtifacts>
-                        <dependency>
-                            <groupId>com.xebialabs.poc</groupId>
-                            <artifactId>pocweb-app</artifactId>
-                        </dependency>
-                        <dependency>
-                             <groupId>com.xebialabs.poc</groupId>
-                             <artifactId>pocweb</artifactId>
-                        </dependency>
+                       
                     </additionnalArtifacts>
- -->
                     <middlewareResources>
-                        	<ci.Host>
-							<label>JBoss Host</label>
-							<address>jboss-51</address>
-							<username>root</username>
-							<password>centos</password>
-<!-- 
+                        <ConfigurationItem type="JbossasQueue">
+                            <label>The resource</label>
+                            <name>maven-generated-queue</name>
+                            <maxDepth>768</maxDepth>
+                            <jndiName>jms/maven-generated-q</jndiName>
+                        </ConfigurationItem>
+                    </middlewareResources>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.xebialabs.deployit</groupId>
+                        <artifactId>jbossas-plugin</artifactId>
+			<version>1.2.2</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
 
-							<operatingSystemFamily>UNIX</operatingSystemFamily>
-							<accessMethod>SSH_SFTP</accessMethod>
-	 -->						
-						</ci.Host>
-                        	<com.xebialabs.deployit.plugin.jbossas.ci.JbossasServer>
-							<label>JBoss serve</label>
-							<host>JBoss Host</host>
-							<home>/opt/jboss/5.1.0.GA</home>
-							<version>JBOSSAS_50</version>
-							<name>itest</name>
-						</com.xebialabs.deployit.plugin.jbossas.ci.JbossasServer>
-						<com.xebialabs.deployit.plugin.jbossas.ci.JbossasQueue>
-							<label>The resource</label>
-							<name>maven-generated-queue</name>
-							<maxDepth>768</maxDepth>
-							<jndiName>jms/maven-generated-q</jndiName>
-						</com.xebialabs.deployit.plugin.jbossas.ci.JbossasQueue>
-					</middlewareResources>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>com.xebialabs.deployit</groupId>
-						<artifactId>jbossas-plugin</artifactId>
-						<version>1.2.2</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-		</plugins>
-	</build>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -126,27 +91,27 @@
 		<dependency>
 			<groupId>com.xebialabs.deployit</groupId>
 			<artifactId>jbossas-plugin</artifactId>
-			<version>1.3-SNAPSHOT</version>
+			<version>1.2.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.xebialabs.deployit</groupId>
 			<artifactId>was-plugin</artifactId>
-			<version>1.3-SNAPSHOT</version>
+			<version>1.2.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.xebialabs.deployit</groupId>
 			<artifactId>wls-plugin</artifactId>
-			<version>1.3-SNAPSHOT</version>
+			<version>1.2.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.xebialabs.deployit</groupId>
 			<artifactId>tomcat-plugin</artifactId>
-			<version>1.3-SNAPSHOT</version>
+			<version>1.2.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.xebialabs.deployit</groupId>
 			<artifactId>plugin-api</artifactId>
-			<version>1.3-SNAPSHOT</version>
+			<version>1.2.2</version>
 		</dependency>
 	</dependencies>
 </project>
