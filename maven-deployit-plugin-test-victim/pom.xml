@@ -31,11 +31,6 @@
                 <configuration>
                     <port>9090</port>
                     <testmode>true</testmode>
-                    <commands>
-                        <!--
-                              <param>create Deployment label="PetClinic on JBoss" source="${project.artifactId} - ${project.version}" target="JBoss environment"</param>
-                              -->
-                    </commands>
                     <environment>
                         <ConfigurationItem type="Host">
                             <label>JBoss Host</label>
@@ -53,9 +48,7 @@
                             <name>itest</name>
                         </ConfigurationItem>
                     </environment>
-                    <additionnalArtifacts>
-                       
-                    </additionnalArtifacts>
+
                     <middlewareResources>
                         <ConfigurationItem type="JbossasQueue">
                             <label>The resource</label>
