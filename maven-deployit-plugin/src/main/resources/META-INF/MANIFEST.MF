@@ -1,0 +1,2 @@
+Manifest-Version: 1.0
+Disabled-RunBooks: com/xebialabs/deployit/plugin/wls/runbook/WlsServerRunBook.class

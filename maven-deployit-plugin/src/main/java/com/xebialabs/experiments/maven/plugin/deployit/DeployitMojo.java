@@ -41,7 +41,7 @@ import org.apache.maven.artifact.ArtifactUtils;
 
 
 /**
- * Goal which touches a timestamp file.
+ * Deploy the current artifact in one give environment.
  *
  * @goal deployit
  * @phase install
@@ -196,7 +196,7 @@ public class DeployitMojo extends AbstractMojo {
                 createJeeArchiveCI(additionalFile, additional.getType());
             }
         }
-        
+
         //Create Environment
         getLog().info("Create the environment");
         List<String> members = new ArrayList<String>();
@@ -209,11 +209,12 @@ public class DeployitMojo extends AbstractMojo {
             interpret("modify " + DEFAULT_ENVIRONMENT + " members += \"" + m + "\" ");
         }
 
-
-        getLog().info("create Middleware Resources");
-        for (ConfigurationItem ci : middlewareResources) {
-            interpret(ci.getCli());
-            interpret("modify \"" + deploymentPackageName + "\" middlewareResources+=\"" + ci.getLabel() + "\"");
+        if (middlewareResources != null) {
+            getLog().info("create Middleware Resources");
+            for (ConfigurationItem ci : middlewareResources) {
+                interpret(ci.getCli());
+                interpret("modify \"" + deploymentPackageName + "\" middlewareResources+=\"" + ci.getLabel() + "\"");
+            }
         }
 
         if (commands != null) {
@@ -232,8 +233,8 @@ public class DeployitMojo extends AbstractMojo {
         interpret(depCmd.toString());
 
         //Go !
+        interpret("changeplan steps");
         if (testmode) {
-            interpret("changeplan steps");
             interpret("deployit_nosteps");
             interpret("export");
         } else {
