@@ -33,7 +33,6 @@
                 <configuration>
                     <port>9090</port>
                     <testmode>true</testmode>
-
                     <environment>
                         <ConfigurationItem type="Host">
                             <label>Host Production Weblogic</label>
@@ -43,6 +42,7 @@
                             <operatingSystemFamily>UNIX</operatingSystemFamily>
                             <accessMethod>SSH_SCP</accessMethod>
                         </ConfigurationItem>
+                        
                         <ConfigurationItem type="WlsDomain">
                             <label>Domain WLS Petshop</label>
                             <activeHost>Host Production Weblogic</activeHost>

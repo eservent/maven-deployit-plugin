@@ -99,7 +99,7 @@ public class DeployitMojo extends AbstractMojo {
     private File jeeArtifact;
 
     /**
-     * @parameter default-value="8080" expression="${deployit.port}"�
+     * @parameter default-value="8888" expression="${deployit.port}"
      */
     private int port;
 
