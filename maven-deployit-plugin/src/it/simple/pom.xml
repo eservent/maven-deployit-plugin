@@ -30,8 +30,7 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <port>9090</port>
+                <configuration>             
                     <testmode>true</testmode>
                     <environment>
                         <ConfigurationItem type="Host">
@@ -50,7 +49,6 @@
                             <name>itest</name>
                         </ConfigurationItem>
                     </environment>
-
                 </configuration>
                 <dependencies>
                     <dependency>

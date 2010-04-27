@@ -26,6 +26,7 @@ import com.xebialabs.deployit.BaseConfigurationItem;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.descriptor.PluginDescriptor;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.component.configurator.converters.AbstractConfigurationConverter;
 import org.springframework.context.ApplicationContext;
@@ -93,7 +94,7 @@ public class DeployitMojo extends AbstractMojo {
 
 
     /**
-     * @parameter default-value="${project.build.outputDirectory}/${project.build.finalName}.${project.packaging}"
+     * @parameter default-value="${project.build.directory}/${project.build.finalName}.${project.packaging}"
      * @required
      */
     private File jeeArtifact;
@@ -131,12 +132,8 @@ public class DeployitMojo extends AbstractMojo {
     private static final String CURRENT_DEPLOYMENT = "DefaultDeployment";
     private String deploymentPackageName;
 
-    private AbstractConfigurationConverter toto;
-
     public void execute() throws MojoExecutionException {
-        getLog().info("Packaging " + this.packaging);
-
-
+        getLog().info("J2EE Artifact "+this.jeeArtifact);
         getLog().info("STARTING DEPLOYIT SERVER");
         DeployItConfiguration context = new DeployItConfiguration();
 
