@@ -1,0 +1,68 @@
+ ------
+ Simple deployment and Clean
+ ------
+ Benoit Moussaud
+ ------
+ 30 April 2010
+ ------
+
+Simple war deployment and Clean
+
+ Show how to deploy the current artifact (ear or war) to a single Tomcat Server running on a remote host and clean the server
+after the integration tests.
+   
+------
+<plugin>
+    <groupId>com.xebialabs.deployit</groupId>
+    <artifactId>maven-deployit-plugin</artifactId>
+    <executions>
+        <execution>
+            <id>deploy-id</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+                <goal>deploy</goal>
+            </goals>
+        </execution>
+        <execution>
+            <id>clean-id</id>
+            <phase>post-integration-test</phase>
+            <goals>
+                <goal>clean</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <environment>
+            <ConfigurationItem type="Host">
+                <label>Tomcat Host</label>
+                <address>ubuntu-tomcat.mydomain.net</address>
+                <username>tomcat</username>
+                <password>12345678</password>
+                <operatingSystemFamily>UNIX</operatingSystemFamily>
+                <accessMethod>SSH_SCP</accessMethod>
+            </ConfigurationItem>
+            <ConfigurationItem type="TomcatServer">
+                <label>Tomcat server</label>
+                <host>Tomcat Host</host>
+                <name>tomcattest</name>
+                <port>8080</port>
+                <accessMethod>http</accessMethod>
+                <tomcatHome>/opt/apache-tomcat-6.0.26</tomcatHome>
+                <startCommand>/opt/apache-tomcat-6.0.26/bin/catalina.sh start</startCommand>
+                <stopCommand>/opt/apache-tomcat-6.0.26/bin/catalina.sh stop</stopCommand>
+            </ConfigurationItem>
+        </environment>
+    </configuration>
+    <dependencies>
+        <dependency>
+            <groupId>com.xebialabs.deployit</groupId>
+            <artifactId>tomcat-plugin</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+    </dependencies>
+</plugin>
+
+------
+
+
+

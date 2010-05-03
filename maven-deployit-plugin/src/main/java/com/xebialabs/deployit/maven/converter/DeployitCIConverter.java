@@ -1,6 +1,6 @@
-package com.xebialabs.experiments.maven.plugin.deployit;
+package com.xebialabs.deployit.maven.converter;
 
-import com.xebialabs.deployit.BaseConfigurationItem;
+import com.xebialabs.deployit.maven.ConfigurationItem;
 import org.codehaus.plexus.component.configurator.ComponentConfigurationException;
 import org.codehaus.plexus.component.configurator.ConfigurationListener;
 import org.codehaus.plexus.component.configurator.converters.AbstractConfigurationConverter;

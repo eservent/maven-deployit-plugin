@@ -24,9 +24,9 @@
                 <executions>
                     <execution>
                         <id>deployit-plugin-test</id>
-                        <phase>install</phase>
+                        <phase>pre-integration-test</phase>
                         <goals>
-                            <goal>deployit</goal>
+                            <goal>deploy</goal>
                         </goals>
                     </execution>
                 </executions>

@@ -23,10 +23,17 @@
                 <artifactId>maven-deployit-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>deployit-plugin-test</id>
+                        <id>deploy-id</id>
                         <phase>pre-integration-test</phase>
                         <goals>
                             <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>clean-id</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>clean</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -50,6 +57,7 @@
                         </ConfigurationItem>
                     </environment>
                 </configuration>
+
                 <dependencies>
                     <dependency>
                         <groupId>com.xebialabs.deployit</groupId>

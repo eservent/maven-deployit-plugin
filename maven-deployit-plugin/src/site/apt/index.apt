@@ -1,0 +1,63 @@
+ ------
+ Introduction
+ ------
+ Benoit Moussaud
+ ------
+ 2010-04-30
+ ------
+
+
+Deployit Plugin
+
+  The Deployit Plugin is used to deploy a Deployment Package to an single environment containing at least an Application Server.
+  
+  Definition: Deployment is the 'series of activities needed to make an application available to end users'. This includes the full scope of deployment activities: de-installation of the old software packages, installation of the new software packages, updating the data source(s), modifying firewall settings, reconfiguring the web server and restarting all services involved. Or rephrased in more simple terms: deployment is everything needed to ensure that if a developer, tester or end user opens his browser and types in www.my-application.com, he will see the application up and running, fully functional with (live) data.
+
+  This plugin is in particular handy to perform integration tests for other Maven plugins. The Invoker Plugin can be
+  employed to run a set of test projects that have been designed to assert certain features of the plugin under test.
+
+* Goals Overview
+
+  The plugin has two goals meant to participate in the default build lifecycle:
+
+  * {{{./deploy-mojo.html}deployit:deploy}} deploys the main artifact, middleware resources to a single environment.
+
+  * {{{./clean-mojo.html}deployit:clean}} undeploys all what is have been deployed in the  {{{./deployit-deploy-mojo.html}deployit:deploy}} goal.
+
+  []
+  
+* Usage
+
+  General instructions on how to use the Deployit Plugin can be found on the {{{./usage.html}usage page}}. Some more
+  specific use cases are described in the examples given below. 
+
+  In case you still have questions regarding the plugin's usage, please have a look at the {{{./faq.html}FAQ}} and feel
+  free to contact the {{{./mail-lists.html}user mailing list}}. The posts to the mailing list are archived and could
+  already contain the answer to your question as part of an older thread. Hence, it is also worth browsing/searching
+  the {{{./mail-lists.html}mail archive}}.
+
+  If you feel like the plugin is missing a feature or has a defect, you can fill a feature request or bug report in our
+  {{{./issue-tracking.html}issue tracker}}. When creating a new issue, please provide a comprehensive description of your
+  concern. Especially for fixing bugs it is crucial that the developers can reproduce your problem. For this reason,
+  entire debug logs, POMs or most preferably little demo projects attached to the issue are very much appreciated.
+  Of course, patches are welcome, too. Contributors can check out the project from our
+  {{{./source-repository.html}source repository}} and will find supplementary information in the
+  {{{http://maven.apache.org/guides/development/guide-helping.html}guide to helping with Maven}}.
+
+* Examples
+
+  The following example configurations are available to illustrate selected use cases in more detail:
+
+  * {{{examples/simple-deployment.html}Simple deployment}} to a Tomcat Server.
+
+  * {{{examples/simple-deployment-and-clean.html}Simple deployment and Clean}} to a Tomcat Server and clean after the integration-test phase.
+
+  * {{{examples/examples/add-additional-artifacts.html}Adding additional Maven artifacts}}
+
+  * {{{examples/middleware-resources.html}Define middleware resources }} such as Datasources or JMS Queues.
+
+  * {{{examples/manifest.html}Generate Manifest based deployment packages}} to import it into an Enterprise Deployit instance.
+
+  * {{{examples/test-configuration.html}Testing the configurationn}} to test the plugin configuration by skipping the executions of the deployment's steps.
+
+  []

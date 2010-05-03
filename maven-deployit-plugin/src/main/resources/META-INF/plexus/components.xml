@@ -49,7 +49,7 @@ under the License.
         <component>
             <role>org.codehaus.plexus.component.configurator.converters.ConfigurationConverter</role>
             <role-hint>DeployitCI</role-hint>
-            <implementation>com.xebialabs.experiments.maven.plugin.deployit.DeployitCIConverter</implementation>
+            <implementation>com.xebialabs.deployit.maven.converter.DeployitCIConverter</implementation>
         </component>
     </components>
 

@@ -1,0 +1,73 @@
+ ------
+ Add middleware resources
+ ------
+ Benoit Moussaud
+ ------
+ 30 April 2010
+ ------
+
+Add middleware resources
+
+ Show how to associate middleware resources such as JDBC Datasource or JMS Queues to the deployment.
+
+------
+<plugins>
+    ....
+    <plugin>
+        <groupId>com.xebialabs.deployit</groupId>
+        <artifactId>maven-deployit-plugin</artifactId>
+        <executions>
+            <execution>
+                <id>deploy-id</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                    <goal>deploy</goal>
+                </goals>
+            </execution>
+        </executions>
+        <configuration>
+            <environment>
+                <ConfigurationItem type="Host">
+                    <label>Tomcat Host</label>
+                    <address>ubuntu-tomcat.mydomain.net</address>
+                    <username>tomcat</username>
+                    <password>12345678</password>
+                    <operatingSystemFamily>UNIX</operatingSystemFamily>
+                    <accessMethod>SSH_SCP</accessMethod>
+                </ConfigurationItem>
+                <ConfigurationItem type="TomcatServer">
+                    <label>Tomcat server</label>
+                    <host>Tomcat Host</host>
+                    <name>tomcattest</name>
+                    <port>8080</port>
+                    <accessMethod>http</accessMethod>
+                    <tomcatHome>/opt/apache-tomcat-6.0.26</tomcatHome>
+                    <startCommand>/opt/apache-tomcat-6.0.26/bin/catalina.sh start</startCommand>
+                    <stopCommand>/opt/apache-tomcat-6.0.26/bin/catalina.sh stop</stopCommand>
+                </ConfigurationItem>
+            </environment>
+            <middlewareResources>
+                <ConfigurationItem type="TomcatDataSource">
+                    <label>My application datasource</label>
+                    <jndiName>jdbc/myDataSource</jndiName>
+                    <driverClass>org.hsqldb.jdbcDriver</driverClass>
+                    <connectionUrl>jdbc:hsqldb:file:/tmp/database.hdb</connectionUrl>
+                    <maxActive>10</maxActive>
+                </ConfigurationItem>
+            </middlewareResources>
+            </configuration>
+        </configuration>
+        <dependencies>
+            <dependency>
+                <groupId>com.xebialabs.deployit</groupId>
+                <artifactId>tomcat-plugin</artifactId>
+                <version>1.2.2</version>
+            </dependency>
+        </dependencies>
+    </plugin>
+    ...
+</plugins>
+------
+
+
+

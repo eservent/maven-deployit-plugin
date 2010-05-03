@@ -1,0 +1,19 @@
+ ------
+ Usage
+ ------
+ Benoit Moussaud
+ ------
+ 2010-04-30
+ ------
+
+Usage
+
+  This page provides general usage information along with a basic example.  The plugin
+  is used to deploy a set of artifacts (war, ear, static contents, sql files ...) to an environment in order to
+  run a set of tests (functional tests, technical tests, performance tests). This is done using the
+  run and verify integration tests for a project, say a Maven plugin.  This is done using <<<{{{run-mojo.html} deployit:deploy }}>>> goal.
+  The  <<<{{{run-mojo.html} deployit:clean }}>>> undeploys all what has been deployed in the <<<{{{run-mojo.html} deployit:deploy }}>>> goal.
+ 
+* Basic Example
+
+  TODO....

@@ -1,6 +1,4 @@
-package com.xebialabs.experiments.maven.plugin.deployit;
-
-import com.xebialabs.deployit.BaseConfigurationItem;
+package com.xebialabs.deployit.maven;
 
 /**
  * Created by IntelliJ IDEA.

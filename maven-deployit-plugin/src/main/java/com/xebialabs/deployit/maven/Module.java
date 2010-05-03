@@ -1,4 +1,4 @@
-package com.xebialabs.experiments.maven.plugin.deployit;
+package com.xebialabs.deployit.maven;
 
 /**
  * Created by IntelliJ IDEA.
