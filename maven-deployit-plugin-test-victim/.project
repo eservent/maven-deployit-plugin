@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>mojo-victim</name>
+	<name>maven-deployit-plugin-test-victim</name>
 	<comment></comment>
 	<projects>
+		<project>maven-deployit-plugin</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

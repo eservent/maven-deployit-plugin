@@ -2,6 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xebialabs.deployit</groupId>
+    
     <artifactId>maven-deployit-plugin-test-victim</artifactId>
     <packaging>ear</packaging>
     <version>1.2.2</version>
@@ -50,19 +51,29 @@
                         </ConfigurationItem>
                     </environment>
 
+                      <!--
                     <middlewareResources>
+
                         <ConfigurationItem type="JbossasQueue">
                             <label>The resource</label>
                             <name>maven-generated-queue</name>
                             <maxDepth>768</maxDepth>
                             <jndiName>jms/maven-generated-q</jndiName>
                         </ConfigurationItem>
+
                     </middlewareResources>
+                    -->
+
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>com.xebialabs.deployit</groupId>
                         <artifactId>jbossas-plugin</artifactId>
+                        <version>1.2.2</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.xebialabs.deployit</groupId>
+                        <artifactId>apache-httpd-plugin</artifactId>
                         <version>1.2.2</version>
                     </dependency>
                 </dependencies>
@@ -107,5 +118,29 @@
             <artifactId>plugin-api</artifactId>
             <version>1.2.2</version>
         </dependency>
+      
     </dependencies>
+
+    <pluginRepositories>
+        <pluginRepository>
+             <id>xebialabs-releases</id>
+            <name>Dexter Plugin Repository</name>
+            <url>http://dexter.xebialabs.com/nexus/content/repositories/releases/</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <repositories>
+        <repository>
+              <id>xebialabs-releases</id>
+            <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+        </repository>
+    </repositories>
+
 </project>
