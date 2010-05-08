@@ -88,6 +88,11 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
     /**
      * @parameter
      */
+    protected List<ConfigurationItem> mappings;
+
+    /**
+     * @parameter
+     */
     protected List<ConfigurationItem> environment;
 
     /**
@@ -96,6 +101,8 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
      * @parameter
      */
     protected Module[] additionalArtifacts;
+
+
 
     /**
      * Tell if building a Deployit Importable Package (instead use direct cli interface)

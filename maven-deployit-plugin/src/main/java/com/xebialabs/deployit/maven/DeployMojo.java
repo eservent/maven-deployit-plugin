@@ -72,6 +72,8 @@ public class DeployMojo extends AbstractDeployitMojo {
             }
         }
 
+
+
         if (commands != null) {
             getLog().info("Handle additional commands");
             for (String each : commands) {
@@ -87,6 +89,14 @@ public class DeployMojo extends AbstractDeployitMojo {
         depCmd.append("target=" + DEFAULT_ENVIRONMENT);
         interpret(depCmd.toString());
 
+        if (mappings != null) {
+            getLog().info("create Mappings");
+            for (ConfigurationItem ci : mappings) {
+                interpret(ci.getCli());
+                interpret("modify \"" + DEFAULT_DEPLOYMENT + "\" mappings+=\"" + ci.getLabel() + "\"");
+            }
+        }
+
         //Go !
         interpret("changeplan steps");
         if (testmode) {
@@ -95,40 +105,10 @@ public class DeployMojo extends AbstractDeployitMojo {
         } else {
             interpret("deployit");
         }
+        interpret("changeplan changes");
 
         getLog().info("end of deploy:deploy");
     }
-
-
-    private void XXXXcreateJeeArchiveCI(File archiveFile, String type) throws MojoExecutionException {
-
-        /*
-        String ciType = null;
-        if (type.compareToIgnoreCase("ear") == 0) {
-            ciType = "Ear";
-        } else if (type.compareToIgnoreCase("war") == 0) {
-            ciType = "War";
-        } else {
-            getLog().warn("Not supported type [" + ciType + "], skit it");
-            return;
-        }
-
-        String ciLabel = deploymentPackageName + "/" + archiveFile.getName();
-
-        interpret("create " + ciType + " label=\"" + ciLabel + "\" name=\""
-                + FilenameUtils.getBaseName(archiveFile.getName()) + "\" location=\"" + archiveFile.getAbsolutePath() + "\"");
-        interpret("modify \"" + deploymentPackageName + "\" deployableArtifacts+=\"" + ciLabel + "\"");
-        */
-        /*
-        final Map<String,Attributes> entries = m.getEntries();
-        Attributes attributes = new Attributes();
-        attributes.putValue("Deployit-Type",ciType);
-        attributes.putValue("Deployit-Name", artifactId + " - " + version);
-        entries.put(packaging+"/"+FilenameUtils.getName(archiveFile.getName()) , attributes);
-        */
-
-    }
-
 
     private Artifact getArtifact(final Module module)
             throws MojoExecutionException {

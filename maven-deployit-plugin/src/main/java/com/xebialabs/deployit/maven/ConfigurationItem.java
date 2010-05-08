@@ -18,6 +18,9 @@ public class ConfigurationItem {
     }
 
     public String getLabel() {
+        if (label == null) {
+            label = "autogen-label-"+mainType;
+        }
         return label;
     }
 
@@ -33,6 +36,9 @@ public class ConfigurationItem {
     }
 
     public String getCli() {
+        if (label == null) {
+             return "create " + mainType + " " + parameters; // RAJOUTER !!!!            
+        }
         return "create " + mainType + " " + parameters;
     }
 
