@@ -266,6 +266,11 @@
             <name>SpringSource Enterprise Bundle Repository - Snapshot Releases</name>
             <url>http://repository.springsource.com/maven/bundles/snapshot</url>
         </repository>
+        <repository>
+            <id>nexus-dexter-releases</id>			
+            <name>Xebialabs - Deployit Releases</name>
+            <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+        </repository>        
     </repositories>
     <build>
         <plugins>
