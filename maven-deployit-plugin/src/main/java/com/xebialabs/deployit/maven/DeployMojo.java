@@ -10,7 +10,9 @@ import org.apache.maven.plugin.MojoFailureException;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Deploy artifacts to the target environment.
@@ -55,10 +57,12 @@ public class DeployMojo extends AbstractDeployitMojo {
         //Create Environment
         getLog().info("Create the environment");
         List<String> members = new ArrayList<String>();
-        for (ConfigurationItem each : environment) {
-            members.add(each.getLabel());
+        for (ConfigurationItem each : environment) {           
             interpret(each.getCli());
+            if (each.isAddedToEnvironment())
+                members.add(each.getLabel());
         }
+
         interpret("create Environment label=" + DEFAULT_ENVIRONMENT);
         for (String member : members) {
             interpret("modify " + DEFAULT_ENVIRONMENT + " members += \"" + member + "\" ");
@@ -109,6 +113,7 @@ public class DeployMojo extends AbstractDeployitMojo {
 
         getLog().info("end of deploy:deploy");
     }
+
 
     private Artifact getArtifact(final Module module)
             throws MojoExecutionException {
