@@ -114,8 +114,17 @@
 	 -     http://localhost:8080/static/images/pets.png
 	 -     http://localhost:8080/static/styles/petclinic.css
 	-->
+    <servlet>
+        <servlet-name>staticServlet</servlet-name>
+        <servlet-class>com.xebialabs.servlets.StaticContentServlet</servlet-class>
+        <init-param>
+			<param-name>listings</param-name>
+			<param-value>false</param-value>
+		</init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 	<servlet-mapping>
-		<servlet-name>default</servlet-name>
+		<servlet-name>staticServlet</servlet-name>
 		<url-pattern>/static/*</url-pattern>
 	</servlet-mapping>
 	

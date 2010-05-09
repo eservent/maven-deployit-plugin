@@ -464,7 +464,7 @@
                                 <goals>
                                     <goal>deploy</goal>
                                 </goals>
-                            </execution>
+                            </execution>                            
                             <execution>
                                 <id>clean-id</id>
                                 <phase>post-integration-test</phase>
@@ -472,51 +472,94 @@
                                     <goal>clean</goal>
                                 </goals>
                             </execution>
-
                         </executions>
                         <configuration>
                             <testmode>false</testmode>
                             <useImportablePackage>false</useImportablePackage>
                             <environment>
                                 <ConfigurationItem type="Host">
-                                    <label>Tomcat Host</label>
-                                    <address>ubuntu-oss.local</address>
-                                    <username>ubuntu</username>
-                                    <password>ubuntu</password>
+                                    <label>Host Production Weblogic</label>
+                                    <address>ubuntu-weblogic-1.local</address>
+                                    <username>weblogic</username>
+                                    <password>weblogic</password>
                                     <operatingSystemFamily>UNIX</operatingSystemFamily>
                                     <accessMethod>SSH_SCP</accessMethod>
                                 </ConfigurationItem>
 
-                                <ConfigurationItem type="TomcatServer">
-                                    <label>Tomcat server</label>
-                                    <host>Tomcat Host</host>
-                                    <name>tomcattest</name>
-                                    <port>8080</port>
-                                    <accessMethod>http</accessMethod>
-                                    <tomcatHome>/opt/apache-tomcat-6.0.26</tomcatHome>
-                                    <startCommand>/opt/apache-tomcat-6.0.26/bin/catalina.sh start</startCommand>
-                                    <stopCommand>/opt/apache-tomcat-6.0.26/bin/catalina.sh stop</stopCommand>
-                                    <appBase>/opt/apache-tomcat-6.0.26/mywebapps</appBase>
+                                <ConfigurationItem type="WlsDomain">
+                                    <label>Domain WLS Petshop</label>
+                                    <name>petshop</name>
+                                    <activeHost>Host Production Weblogic</activeHost>
+                                    <port>7001</port>
+                                    <username>weblogic</username>
+                                    <password>weblogic10</password>
+                                    <adminServerName>AdminServer</adminServerName>
+                                    <wlHome>/opt/oracle/wls10.3.1.0/wlserver_10.3</wlHome>
+                                    <wlJavaHome>/opt/oracle/wls10.3.1.0/jdk160_11</wlJavaHome>                                                                      
+                                </ConfigurationItem>
+
+                                <ConfigurationItem type="WlsServer">
+                                    <label>Petshop Server 1</label>
+                                    <name>Server-1</name>
+                                    <host>Host Production Weblogic</host>
+                                    <domain>Domain WLS Petshop</domain>
+                                    <port>8001</port>
+                                    <addedToEnvironment>false</addedToEnvironment>
+                                </ConfigurationItem>
+                                
+                                <ConfigurationItem type="WlsServer">
+                                    <label>Petshop Server 2</label>
+                                    <name>Server-2</name>
+                                    <host>Host Production Weblogic</host>
+                                    <domain>Domain WLS Petshop</domain>
+                                    <port>9001</port>
+                                    <addedToEnvironment>false</addedToEnvironment>
+                                </ConfigurationItem>
+
+                                <ConfigurationItem type="WlsCluster">
+                                    <label>Petshop Cluster</label>
+                                    <domain>Domain WLS Petshop</domain>
+                                    <name>Cluster-0</name>
+                                    <servers>[Petshop Server 1,Petshop Server 2]</servers>
+                                </ConfigurationItem>
+
+                                <ConfigurationItem type="Host">
+                                    <label>Host Production Apache</label>
+                                    <address>ubuntu-weblogic-1.local</address>
+                                    <username>weblogic</username>
+                                    <password>weblogic</password>
+                                    <sudoUsername>root</sudoUsername>
+                                    <operatingSystemFamily>UNIX</operatingSystemFamily>
+                                    <accessMethod>SSH_SUDO</accessMethod>
+                                </ConfigurationItem>
+
+
+                                <ConfigurationItem type="ApacheHttpdServer">
+                                    <label>ApacheWeb Server</label>
+                                    <host>Host Production Apache</host>                                    
+                                    <htdocsLocation>/home/weblogic/www</htdocsLocation>
+                                    <errorLogLocation>/var/log/apache2/error.log</errorLogLocation>
+                                    <configurationLocation>/etc/apache2/mods-enabled</configurationLocation>
+                                    <apachectlPath>/usr/sbin/apache2ctl</apachectlPath>
+                                    <accessLogLocation>/var/log/apache2/access.log</accessLogLocation>                                    
                                 </ConfigurationItem>
                             </environment>
-
+                            
                             <middlewareResources>
-                                <ConfigurationItem type="TomcatDataSource">
-                                    <label>My application datasource</label>
-                                    <jndiName>jdbc/petclinicHSQL</jndiName>
-                                    <driverClass>org.hsqldb.jdbcDriver</driverClass>
-                                    <connectionUrl>jdbc:hsqldb:file:/tmp/database.hdb</connectionUrl>
-                                    <maxActive>10</maxActive>
+                                <ConfigurationItem type="ApacheHttpdWlsPluginConfiguration">
+                                    <label>ApacheWlsplugin Configuration</label>
+                                    <mimeMatchExpressions>*</mimeMatchExpressions>
                                 </ConfigurationItem>
                             </middlewareResources>
+
                             <mappings>
-                                <ConfigurationItem type="WarMapping">
-                                    <label>WarMapping pocweb</label>
-                                    <source>org.springframework.samples.petclinic - 1.0.0-SNAPSHOT/petclinic.war
-                                    </source>
-                                    <target>Tomcat server</target>
-                                    <contextRoot>petclinic</contextRoot>
-                                    <keyvaluepairs>[]</keyvaluepairs>
+                                <ConfigurationItem type="ApacheHttpdWlsPluginConfigurationMapping">
+                                    <label>MyApacheWlsPlugin</label>
+                                    <source>ApacheWlsplugin Configuration</source>
+                                    <target>ApacheWeb Server</target>
+                                    <clusters>[Petshop Cluster]</clusters>
+                                    <virtualHost>my.petclinic.local:8888</virtualHost>
+                                    <sourcePropertyOverrides>[]</sourcePropertyOverrides>
                                 </ConfigurationItem>
                             </mappings>
 
@@ -524,13 +567,18 @@
                         <dependencies>
                             <dependency>
                                 <groupId>com.xebialabs.deployit</groupId>
-                                <artifactId>tomcat-plugin</artifactId>
+                                <artifactId>wls-plugin</artifactId>
+                                <version>1.2.2</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>com.xebialabs.deployit</groupId>
+                                <artifactId>apache-httpd-plugin</artifactId>
                                 <version>1.2.2</version>
                             </dependency>
                         </dependencies>
                     </plugin>
 
-                    <!-- JMeter plugin -->
+                    <!-- JMeter plugin  -->
                     <plugin>
                         <groupId>org.apache.jmeter</groupId>
                         <artifactId>maven-jmeter-plugin</artifactId>
@@ -547,7 +595,7 @@
                         <configuration>
                             <reportDir>${project.build.directory}/jmeter-reports</reportDir>
                             <jmeterUserProperties>
-                                <!-- for user properites -->
+
                             </jmeterUserProperties>
                         </configuration>
                         <dependencies>
@@ -559,6 +607,7 @@
 
                         </dependencies>
                     </plugin>
+                   
                 </plugins>
             </build>
         </profile>
