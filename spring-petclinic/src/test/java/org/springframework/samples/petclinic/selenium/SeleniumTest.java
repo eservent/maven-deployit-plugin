@@ -44,7 +44,7 @@ public class SeleniumTest {
     public void testPetClinic() throws Exception {
         System.out.println("---PET CLINIC SELENIUM TEST ---");
         try {
-            selenium.open("http://ubuntu-oss.local:8080/petclinic/");
+            selenium.open("http://ubuntu-functional.local:8080/petclinic/");
             final String text = selenium.getText("//h2");
             //System.out.println("---- " + text);
             //Thread.sleep(1000 * 60);
