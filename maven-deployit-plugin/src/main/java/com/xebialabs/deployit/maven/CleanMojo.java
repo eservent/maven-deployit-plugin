@@ -20,14 +20,10 @@ public class CleanMojo extends AbstractDeployitMojo {
         interpret("delete " + DEFAULT_DEPLOYMENT);
 
         //Go !
-        interpret("changeplan steps");
-        if (testmode) {
-            interpret("deployit_nosteps");
-            interpret("export");
-        } else {
-            interpret("deployit");
-        }
+        deployit();
 
         interpret("shutdown");
+        
+        getLog().info("end of deployit:clean");
     }
 }

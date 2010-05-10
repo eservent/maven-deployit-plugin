@@ -102,14 +102,7 @@ public class DeployMojo extends AbstractDeployitMojo {
         }
 
         //Go !
-        interpret("changeplan steps");
-        if (testmode) {
-            interpret("deployit_nosteps");
-            interpret("export");
-        } else {
-            interpret("deployit");
-        }
-        interpret("changeplan changes");
+        deployit();
 
         getLog().info("end of deploy:deploy");
     }

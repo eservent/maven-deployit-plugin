@@ -128,5 +128,22 @@
         </developer>
 
     </developers>
-    
+
+    <distributionManagement>
+        <repository>
+            <id>nexus-dexter-releases</id>
+            <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-dexter-snapshots</id>
+            <url>http://dexter.xebialabs.com/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <!--
+        <site>
+            <id>www-on-tech</id>
+            <url>scpexe://tech.xebialabs.com/home/tech.xebialabs.com/www/deployit/${project.version}</url>
+        </site>
+        -->
+    </distributionManagement>
+
 </project>

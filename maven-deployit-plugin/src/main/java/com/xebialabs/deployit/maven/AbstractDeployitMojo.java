@@ -175,4 +175,26 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
         }
         return interpreter;
     }
+
+    protected void deployit() throws MojoExecutionException {
+        getLog().info(" ");
+        getLog().info(" ");
+        getLog().info("------------------------------------------------------------------");
+        getLog().info("--- DEPLOYIT CHANGE PLAN  ----------------------------------------");
+        getLog().info("------------------------------------------------------------------");
+        interpret("changeplan steps");
+        getLog().info("------------------------------------------------------------------");
+        getLog().info("------------------------------------------------------------------");
+        getLog().info("------------------------------------------------------------------");
+        getLog().info(" ");
+        getLog().info(" ");
+
+        if (testmode) {
+            interpret("deployit_nosteps");
+            interpret("export");
+        } else {
+            interpret("deployit");
+        }
+        interpret("changeplan changes");
+    }
 }
