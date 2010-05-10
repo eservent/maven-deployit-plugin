@@ -3,6 +3,12 @@
 
 <h2>Veterinarians:</h2>
 
+<%
+ try {
+    Thread.sleep(1000);
+ } catch (Exception e) {
+ }
+%>
 <table>
   <thead>
     <th>Name</th>
