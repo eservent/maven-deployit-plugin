@@ -345,9 +345,9 @@
                             <environment>
                                 <ConfigurationItem type="Host">
                                     <label>Tomcat Host</label>
-                                    <address>ubuntu-oss.local</address>
-                                    <username>ubuntu</username>
-                                    <password>ubuntu</password>
+                                    <address>ubuntu-weblogic-1.local</address>
+                                    <username>weblogic</username>
+                                    <password>weblogic</password>
                                     <operatingSystemFamily>UNIX</operatingSystemFamily>
                                     <accessMethod>SSH_SCP</accessMethod>
                                 </ConfigurationItem>
@@ -374,6 +374,7 @@
                                     <maxActive>10</maxActive>
                                 </ConfigurationItem>
                             </middlewareResources>
+                            
                             <mappings>
                                 <ConfigurationItem type="WarMapping">
                                     <label>WarMapping pocweb</label>
