@@ -337,7 +337,6 @@
                                     <goal>clean</goal>
                                 </goals>
                             </execution>
-
                         </executions>
                         <configuration>
                             <testmode>false</testmode>
@@ -351,7 +350,6 @@
                                     <operatingSystemFamily>UNIX</operatingSystemFamily>
                                     <accessMethod>SSH_SCP</accessMethod>
                                 </ConfigurationItem>
-
                                 <ConfigurationItem type="TomcatServer">
                                     <label>Tomcat server</label>
                                     <host>Tomcat Host</host>
@@ -364,7 +362,7 @@
                                     <appBase>/opt/apache-tomcat-6.0.26/mywebapps</appBase>
                                 </ConfigurationItem>
                             </environment>
-
+                            
                             <middlewareResources>
                                 <ConfigurationItem type="TomcatDataSource">
                                     <label>My application datasource</label>
@@ -378,8 +376,7 @@
                             <mappings>
                                 <ConfigurationItem type="WarMapping">
                                     <label>WarMapping pocweb</label>
-                                    <source>org.springframework.samples.petclinic - 1.0.0-SNAPSHOT/petclinic.war
-                                    </source>
+                                    <source>org.springframework.samples.petclinic - 1.0.0-SNAPSHOT/petclinic.war</source>
                                     <target>Tomcat server</target>
                                     <contextRoot>petclinic</contextRoot>
                                     <keyvaluepairs>[]</keyvaluepairs>
@@ -548,8 +545,7 @@
                                     <operatingSystemFamily>UNIX</operatingSystemFamily>
                                     <accessMethod>SSH_SUDO</accessMethod>
                                 </ConfigurationItem>
-
-
+                                
                                 <ConfigurationItem type="ApacheHttpdServer">
                                     <label>ApacheWeb Server</label>
                                     <host>Host Production Apache</host>                                    
