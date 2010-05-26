@@ -57,31 +57,94 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>com.agilejava.docbkx</groupId>
+                <artifactId>docbkx-maven-plugin</artifactId>
+                <configuration>
+                    <xincludeSupported>true</xincludeSupported>
+                    <!--
+                    <preProcess>
+                        <echo>Replacing '@deployit.version@' with '${project.version}' in source files...</echo>
+                        <replace dir="${docbook.sourceDirectory}" token="@deployit.version@" value="${project.version}">
+                            <include name="**/*.xml" />
+                        </replace>
+                    </preProcess>
+                    <postProcess>
+                        <echo>Undoing replacement of '@deployit.version@' in source files...</echo>
+                        <replace dir="${docbook.sourceDirectory}" token="${project.version}" value="@deployit.version@">
+                            <include name="**/*.xml" />
+                        </replace>
+                    </postProcess>
+                    -->
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-documentation</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate-html</goal>
+                            <goal>generate-pdf</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.docbook</groupId>
+                        <artifactId>docbook-xml</artifactId>
+                        <version>4.4</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+
         </plugins>
     </build>
 
+    <properties>
+        <mavenVersion>2.0.6</mavenVersion>
+    </properties>
+
+
     <dependencies>
 
+        <!-- Maven -->
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-artifact</artifactId>
+            <version>${mavenVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-artifact-manager</artifactId>
+            <version>${mavenVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-model</artifactId>
+            <version>${mavenVersion}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <version>2.4.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-plugin-plugin</artifactId>
-            <version>2.5.1</version>
+            <version>${mavenVersion}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
-            <artifactId>maven-archiver</artifactId>
-            <version>2.2</version>
+            <artifactId>maven-project</artifactId>
+            <version>${mavenVersion}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-settings</artifactId>
+            <version>${mavenVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.reporting</groupId>
+            <artifactId>maven-reporting-api</artifactId>
+            <version>${mavenVersion}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>junit</groupId>

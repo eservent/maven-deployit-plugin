@@ -17,7 +17,7 @@ import java.io.File;
 import java.util.List;
 
 /**
- * Provides common code for mojos
+ * Provides common code for deployit mojos
  * @author Benoit Moussaud
  */
 public abstract class AbstractDeployitMojo extends AbstractMojo {
@@ -59,23 +59,27 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
     protected String packaging;
 
     /**
+     * Activate the test mode, the steps are not executed.
      * @parameter default-value=false
      */
     protected boolean testmode;
 
 
     /**
+     * The main JEE artifact to deploy
      * @parameter default-value="${project.build.directory}/${project.build.finalName}.${project.packaging}"
      * @required
      */
     protected File jeeArtifact;
 
     /**
+     * Deployit Listen port
      * @parameter default-value="8888" expression="${deployit.port}"
      */
     private int port;
 
     /**
+     * Extra CLI commands.
      * @parameter
      */
     protected String[] commands;
@@ -86,11 +90,13 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
     protected List<ConfigurationItem> middlewareResources;
 
     /**
+     * List of the Mapping
      * @parameter
      */
     protected List<ConfigurationItem> mappings;
 
     /**
+     * The target environment.
      * @parameter
      */
     protected List<ConfigurationItem> environment;

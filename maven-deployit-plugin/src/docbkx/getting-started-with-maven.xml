@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+
+		Copyright (c) 2010 XebiaLabs B.V. All rights reserved. Your use of XebiaLabs Software and Documentation is subject to the Personal License Agreement.
+
+		http://www.xebialabs.com/deployit-personal-edition-license-agreement You are granted a personal license (i) to use the Software for your own personal purposes
+		which may be used in a production environment and/or (ii) to use the Documentation to develop your own plugins to the Software. "Documentation" means the how
+		to's and instructions (instruction videos) provided with the Software and/or available on the XebiaLabs website or other websites as well as the provided API
+		documentation, tutorial and access to the source code of the XebiaLabs plugins. You agree not to (i) lease, rent or sublicense the Software or Documentation
+		to any third party, or otherwise use it except as permitted in this agreement; (ii) reverse engineer, decompile, disassemble, or otherwise attempt to
+		determine source code or protocols from the Software, and/or to (iii) copy the Software or Documentation (which includes the source code of the XebiaLabs
+		plugins). You shall not create or attempt to create any derivative works from the Software except and only to the extent permitted by law. You will preserve
+		XebiaLabs' copyright and legal notices on the Software and Documentation. XebiaLabs retains all rights not expressly granted to You in the Personal License
+		Agreement.
+	-->
+
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0"
+         id="mavengettingstarted" >
+    <title>Getting started with Deployit Maven plugin</title>
+    <sect1>
+        <title>Add the xebialabs plugin repository</title>
+        <para>
+            Edit your <filename>pom.xml</filename> file to add a new pluginRepository markup.
+<screen>
+<pluginRepositories>
+    ....
+    <pluginRepository>
+        <id>xebialabs-releases</id>
+        <name>Xebialabs - Deployit Releases</name>
+        <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+    </pluginRepository>
+    ...
+</pluginRepositories>
+</screen>
+        </para>
+    </sect1>
+    <sect1>
+        <title>Add your credentials</title>
+        <para>
+            Edit your <filename>.~/.m2/settings.xml</filename> and add a server entry. Example:
+            <screen>
+<server>
+    <id>xebialabs-releases</id>
+    <username>see license email</username>
+    <password>see license email</password>
+</server>
+            </screen>
+        </para>
+    </sect1>
+
+    <sect1>
+        <title>Check the documentation</title>
+        <para>You will find many sample on the <ulink url="http://dexter.xebialabs.com/deployit/maven-deployit-plugin/site/">maven generated site</ulink></para>
+    </sect1>
+</chapter>

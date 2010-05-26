@@ -20,9 +20,9 @@ Deployit Plugin
 
   The plugin has two goals meant to participate in the default build lifecycle:
 
-  * {{{./deploy-mojo.html}deployit:deploy}} deploys the main artifact, middleware resources to a single environment.
+  * {{{deploy-mojo.html}deployit:deploy}} Deploy the main artifact, middleware resources to a single environment.
 
-  * {{{./clean-mojo.html}deployit:clean}} undeploys all what is have been deployed in the  {{{./deployit-deploy-mojo.html}deployit:deploy}} goal.
+  * {{{clean-mojo.html}deployit:clean}} Undeploy all what is have been deployed in the  {{{deploy-mojo.html}deployit:deploy}} goal.
 
   []
   
