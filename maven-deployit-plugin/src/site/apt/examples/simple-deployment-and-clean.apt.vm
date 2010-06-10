@@ -1,12 +1,12 @@
  ------
- Simple deployment and Clean
+ Simple deployment and clean
  ------
  Benoit Moussaud
  ------
  30 April 2010
  ------
 
-Simple war deployment and Clean
+Simple war deployment and clean
 
  Show how to deploy the current artifact (ear or war) to a single Tomcat Server running on a remote host and clean the server
 after the integration tests.
@@ -57,7 +57,7 @@ after the integration tests.
         <dependency>
             <groupId>com.xebialabs.deployit</groupId>
             <artifactId>tomcat-plugin</artifactId>
-            <version>1.2.2</version>
+            <version>1.3</version>
         </dependency>
     </dependencies>
 </plugin>
