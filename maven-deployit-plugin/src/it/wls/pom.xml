@@ -21,6 +21,7 @@
             <plugin>
                 <groupId>com.xebialabs.deployit</groupId>
                 <artifactId>maven-deployit-plugin</artifactId>
+                <version>2.0-SNAPSHOT</version>
                 <executions>
                     <execution>
                         <id>deployit-plugin-test</id>
@@ -53,6 +54,7 @@
                             <username>weblogic</username>
                             <name>petshop</name>
                             <port>7001</port>
+                            <usenodemanager>true</usenodemanager>
                         </ConfigurationItem>
                         <!--
                         <ConfigurationItem type="WlsServer">
@@ -79,12 +81,12 @@
                     <dependency>
                         <groupId>com.xebialabs.deployit</groupId>
                         <artifactId>wls-plugin</artifactId>
-                        <version>1.2.2</version>
+                        <version>2.0-SNAPSHOT</version>
                     </dependency>
                     <dependency>
                         <groupId>com.xebialabs.deployit</groupId>
                         <artifactId>apache-httpd-plugin</artifactId>
-                        <version>1.2.2</version>
+                        <version>2.0-SNAPSHOT</version>
                     </dependency>
                 </dependencies>
             </plugin>

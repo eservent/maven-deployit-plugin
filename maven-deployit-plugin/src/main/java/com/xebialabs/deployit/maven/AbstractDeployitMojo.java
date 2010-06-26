@@ -18,6 +18,7 @@ import java.util.List;
 
 /**
  * Provides common code for deployit mojos
+ *
  * @author Benoit Moussaud
  */
 public abstract class AbstractDeployitMojo extends AbstractMojo {
@@ -60,6 +61,7 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
 
     /**
      * Activate the test mode, the steps are not executed.
+     *
      * @parameter default-value=false
      */
     protected boolean testmode;
@@ -67,6 +69,7 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
 
     /**
      * The main JEE artifact to deploy
+     *
      * @parameter default-value="${project.build.directory}/${project.build.finalName}.${project.packaging}"
      * @required
      */
@@ -74,12 +77,14 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
 
     /**
      * Deployit Listen port
+     *
      * @parameter default-value="8888" expression="${deployit.port}"
      */
     private int port;
 
     /**
      * Extra CLI commands.
+     *
      * @parameter
      */
     protected String[] commands;
@@ -91,12 +96,14 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
 
     /**
      * List of the Mapping
+     *
      * @parameter
      */
-    protected List<ConfigurationItem> mappings;                       
+    protected List<ConfigurationItem> mappings;
 
     /**
      * The target environment.
+     *
      * @parameter
      */
     protected List<ConfigurationItem> environment;
@@ -109,13 +116,15 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
     protected Module[] additionalArtifacts;
 
 
-
     /**
      * Tell if building a Deployit Importable Package (instead use direct cli interface)
      *
      * @parameter defaultvalue="false"
      */
     protected boolean useImportablePackage;
+
+
+    private final StringBuffer fullScript = new StringBuffer();
 
 
     protected Interpreter interpreter;
@@ -157,8 +166,13 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
         }
     }
 
+    public void stopServer() {
+        Server.shutdown();
+    }
+
     protected void interpret(String line) throws MojoExecutionException {
         getLog().info("Interpret [" + line + "]");
+        fullScript.append(line).append('\n');
         // getInterpreter().interpret(line);
         getInterpreter().interpretAndThrowExceptions(line);
     }
@@ -197,7 +211,7 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
 
         if (testmode) {
             interpret("deployit_nosteps");
-            interpret("export");
+            //interpret("export");
         } else {
             interpret("deployit");
         }
@@ -314,5 +328,9 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
 
     public void setUseImportablePackage(boolean useImportablePackage) {
         this.useImportablePackage = useImportablePackage;
+    }
+
+    public String getScript() {
+        return fullScript.toString();
     }
 }
