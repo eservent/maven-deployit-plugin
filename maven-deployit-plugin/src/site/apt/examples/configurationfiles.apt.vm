@@ -1,0 +1,81 @@
+ ------
+ Test Deployment Configuration
+ ------
+ Benoit Moussaud
+ ------
+ 28 June 2010
+ ------
+
+Include configuration files to the deployment
+
+ Fill in the mapping with the remote location.
+
+------
+<plugins>
+    ....
+        <plugin>
+        <groupId>com.xebialabs.deployit</groupId>
+        <artifactId>maven-deployit-plugin</artifactId>
+        <version>2.0-SNAPSHOT</version>
+         <executions>
+            <execution>
+                <id>deployit-plugin-test</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                    <goal>deploy</goal>
+                </goals>
+            </execution>
+        </executions>
+        <configuration>
+            
+            <environment>
+                <ConfigurationItem type="Host">
+                    <label>APBIVM02-VM06</label>
+                    <address>ip-address</address>
+                    <username>username</username>
+                    <password>password</password>
+                    <operatingSystemFamily>UNIX</operatingSystemFamily>
+                    <accessMethod>SSH_SCP</accessMethod>
+                </ConfigurationItem>
+                <ConfigurationItem type="JbossasServer">
+                    <label>AS02-VM06-JBOSS5</label>
+                    <host>APBIVM02-VM06</host>
+                    <version>JBOSSAS_50</version>
+                    <home>/usr/local/bin/jboss-5.1.0.GA/</home>
+                    <name>autotest</name>
+                </ConfigurationItem>
+            </environment>
+
+            <additionalConfigurationItems>
+                <ConfigurationItem type="ConfigurationFiles">
+                    <label>ConfigurationFilesMapping resources</label>
+                    <location>${project.build.directory}/package/resources.dir</location>
+                </ConfigurationItem>
+            </additionalConfigurationItems>
+
+            <!-- edit the mapping with key value pair and the target directory
+            <mappings>
+                <MappingItem type="ConfigurationFilesMapping">
+                    <source>ConfigurationFilesMapping resources</source>
+                    <target>APBIVM02-VM06</target>
+                    <keyvaluepairs>[[key=database.connection.url value=a ][key=database.driver.class value=b][key=database.password value=c ]]</keyvaluepairs>
+                    <targetdirectory>/data/autotest</targetdirectory>
+                </MappingItem>
+            </mappings>
+
+        </configuration>
+        <dependencies>
+            <dependency>
+                <groupId>com.xebialabs.deployit</groupId>
+                <artifactId>jbossas-plugin</artifactId>
+                <version>2.0-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+        </plugin>
+
+    ...
+</plugins>
+------
+
+
+

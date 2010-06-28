@@ -1,5 +1,6 @@
 package com.xebialabs.deployit.maven.packager;
 
+import com.xebialabs.deployit.maven.ConfigurationItem;
 import org.apache.maven.artifact.Artifact;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface ApplicationDeploymentPackager {
     String getDeploymentPackageName();
 
     List<String> getCliCommands();
+
+    void addCI(ConfigurationItem configurationItem);
 }

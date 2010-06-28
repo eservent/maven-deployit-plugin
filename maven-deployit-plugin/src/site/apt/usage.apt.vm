@@ -14,6 +14,3 @@ Usage
   run and verify integration tests for a project, say a Maven plugin.  This is done using <<<{{{deploy-mojo.html} deployit:deploy }}>>> goal.
   The  <<<{{{clean-mojo.html} deployit:clean }}>>> undeploys all what has been deployed in the <<<{{{deploy-mojo.html} deployit:deploy }}>>> goal.
  
-* Basic Example
-
-  TODO....

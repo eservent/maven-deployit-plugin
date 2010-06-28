@@ -1,5 +1,6 @@
 package com.xebialabs.deployit.maven.packager;
 
+import com.xebialabs.deployit.maven.ConfigurationItem;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.maven.artifact.Artifact;
 
@@ -8,11 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
- * User: bmoussaud
- * Date: 29 avr. 2010
- * Time: 18:36:28
- * To change this template use File | Settings | File Templates.
+ * Packager using CLI interface
  */
 public class CliPackager implements ApplicationDeploymentPackager {
     private final String artifactId;
@@ -66,6 +63,12 @@ public class CliPackager implements ApplicationDeploymentPackager {
 
     public List<String> getCliCommands() {
         return cliCommands;
+    }
+
+    public void addCI(ConfigurationItem configurationItem) {
+        addCommand(configurationItem.getCli());
+        addCommand("modify \"" + getDeploymentPackageName() + "\" deployableArtifacts+=\"" + configurationItem.getLabel() + "\"");
+
     }
 
     private void addCommand(String cmdLine) {

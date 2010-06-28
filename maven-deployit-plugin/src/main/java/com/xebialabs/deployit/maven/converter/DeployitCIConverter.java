@@ -1,6 +1,7 @@
 package com.xebialabs.deployit.maven.converter;
 
 import com.xebialabs.deployit.maven.ConfigurationItem;
+import com.xebialabs.deployit.maven.MappingItem;
 import org.codehaus.plexus.component.configurator.ComponentConfigurationException;
 import org.codehaus.plexus.component.configurator.ConfigurationListener;
 import org.codehaus.plexus.component.configurator.converters.AbstractConfigurationConverter;
@@ -8,6 +9,7 @@ import org.codehaus.plexus.component.configurator.converters.ConfigurationConver
 import org.codehaus.plexus.component.configurator.converters.lookup.ConverterLookup;
 import org.codehaus.plexus.component.configurator.expression.ExpressionEvaluator;
 import org.codehaus.plexus.configuration.PlexusConfiguration;
+import org.codehaus.plexus.configuration.PlexusConfigurationException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -21,6 +23,8 @@ public class DeployitCIConverter extends AbstractConfigurationConverter {
     public static final String MAVEN_EXPRESSION_EVALUATOR_ID = "maven.expressionEvaluator";
 
     public static final String ROLE = ConfigurationConverter.class.getName();
+    static final String TYPE = "type";
+    static final String ADD_TO_ENV = "addToEnv";
 
     public boolean canConvert(Class type) {
         return ConfigurationItem.class.isAssignableFrom(type);
@@ -34,25 +38,71 @@ public class DeployitCIConverter extends AbstractConfigurationConverter {
                                     ConfigurationListener listener)
             throws ComponentConfigurationException {
 
-        ConfigurationItem ci = new ConfigurationItem();
+        System.out.println("type " + type);
+        System.out.println("basetype " + baseType);
+        System.out.println("configuration " + configuration);
 
-        try {
-            ci.setMainType(configuration.getAttribute("type"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        PlexusConfiguration[] children = configuration.getChildren();
+        if (type.equals(ConfigurationItem.class)) {
 
-        for (PlexusConfiguration plexusConfiguration : children) {
+            ConfigurationItem ci = new ConfigurationItem();
+
             try {
-                String name = plexusConfiguration.getName();
-                String c = plexusConfiguration.getValue();
-                ci.addParameter(name, c);
+                ci.setMainType(configuration.getAttribute(TYPE));
+                final String add2Env = configuration.getAttribute(ADD_TO_ENV);
+                if (add2Env != null)
+                    ci.setAddedToEnvironment(Boolean.parseBoolean(add2Env));
+            } catch (Exception e) {
+               throw new ComponentConfigurationException("getValue error",e);
+            }
+
+            for (PlexusConfiguration plexusConfiguration : configuration.getChildren()) {
+                try {
+                    String name = plexusConfiguration.getName();
+                    String c = plexusConfiguration.getValue();
+                    ci.addParameter(name, c);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return ci;
+        }
+
+        if (type.equals(MappingItem.class)) {
+
+            MappingItem ci = new MappingItem();
+            final PlexusConfiguration source = configuration.getChild("source");
+            final PlexusConfiguration target = configuration.getChild("target");
+
+            try {
+                ci.setSource(source.getValue());
+                ci.setTarget(target.getValue());
+            } catch (PlexusConfigurationException e) {
+               throw new ComponentConfigurationException("getValue error",e);
+            }
+
+            try {
+                ci.setMainType(configuration.getAttribute(TYPE));
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            PlexusConfiguration[] children = configuration.getChildren();
+
+            for (PlexusConfiguration plexusConfiguration : children) {
+                try {
+                    String name = plexusConfiguration.getName();
+                    String c = plexusConfiguration.getValue();
+                    ci.addParameter(name, c);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return ci;
         }
-        return ci;
+
+
+        throw new ComponentConfigurationException("type not handled ("+type+")");
+
+
     }
 
 }

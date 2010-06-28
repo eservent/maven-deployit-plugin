@@ -8,11 +8,8 @@ import org.apache.maven.artifact.ArtifactUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Deploy artifacts to the target environment.
@@ -47,6 +44,14 @@ public class DeployMojo extends AbstractDeployitMojo {
                 Artifact additional = getArtifact(additionalArtifact);
                 packager.addMavenArtifact(additional);
             }
+        }
+
+        if (additionalConfigurationItems != null) {
+            getLog().info("create the additional Configuration Items");
+            for(ConfigurationItem ci : additionalConfigurationItems) {
+                packager.addCI(ci);
+            }
+
         }
 
         packager.perform();
@@ -97,7 +102,6 @@ public class DeployMojo extends AbstractDeployitMojo {
             getLog().info("create Mappings");
             for (ConfigurationItem ci : mappings) {
                 interpret(ci.getCli());
-                interpret("modify \"" + DEFAULT_DEPLOYMENT + "\" mappings+=\"" + ci.getLabel() + "\"");
             }
         }
 

@@ -24,6 +24,7 @@
             <item name="Define middleware resources" href="examples/middleware-resources.html"/>
             <item name="Generate Manifest based deployment packages" href="examples/manifest.html"/>
             <item name="Testing the configuration" href="examples/test-configuration.html"/>
+            <item name="Adding configuration files" href="examples/configuration-files.html"/>
         </menu>
 
 

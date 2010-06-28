@@ -1,0 +1,101 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.xebialabs.deployit</groupId>
+
+    <artifactId>maven-deployit-plugin-test-victim-bug</artifactId>
+    <packaging>ear</packaging>
+    <version>1.0</version>
+    <name>simple</name>
+    <url>http://maven.apache.org</url>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+<plugin>
+    <groupId>com.xebialabs.deployit</groupId>
+    <artifactId>maven-deployit-plugin</artifactId>
+    <version>2.0-SNAPSHOT</version>
+     <executions>
+        <execution>
+            <id>deployit-plugin-test</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+                <goal>deploy</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <testmode>true</testmode>
+        <useImportablePackage>false</useImportablePackage>
+        <environment>
+            <ConfigurationItem type="Host">
+                <label>APBIVM02-VM06</label>
+                <address>ip-address</address>
+                <username>username</username>
+                <password>password</password>
+                <operatingSystemFamily>UNIX</operatingSystemFamily>
+                <accessMethod>SSH_SCP</accessMethod>
+            </ConfigurationItem>
+            <ConfigurationItem type="JbossasServer">
+                <label>AS02-VM06-JBOSS5</label>
+                <host>APBIVM02-VM06</host>
+                <version>JBOSSAS_50</version>
+                <home>/usr/local/bin/jboss-5.1.0.GA/</home>
+                <name>autotest</name>
+            </ConfigurationItem>
+        </environment>
+
+        <additionalConfigurationItems>
+            <ConfigurationItem type="ConfigurationFiles">
+                <label>ConfigurationFilesMapping resources</label>
+                <location>${project.build.directory}/package/resources.dir</location>
+            </ConfigurationItem>
+        </additionalConfigurationItems>
+
+        <mappings>
+            <MappingItem type="ConfigurationFilesMapping">
+                <source>ConfigurationFilesMapping resources</source>
+                <target>APBIVM02-VM06</target>
+                <keyvaluepairs>[[key=database.connection.url value=a ][key=database.driver.class value=b][key=database.password value=c ]]</keyvaluepairs>
+                <targetdirectory>/data/autotest</targetdirectory>
+            </MappingItem>
+        </mappings>
+
+    </configuration>
+    <dependencies>
+        <dependency>
+            <groupId>com.xebialabs.deployit</groupId>
+            <artifactId>jbossas-plugin</artifactId>
+            <version>2.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+</plugin>
+
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    <repositories>
+        <repository>
+            <id>xebialabs-releases</id>
+            <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+        </repository>
+    </repositories>
+
+</project>

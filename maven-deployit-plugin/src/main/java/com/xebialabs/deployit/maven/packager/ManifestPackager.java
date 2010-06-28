@@ -1,5 +1,6 @@
 package com.xebialabs.deployit.maven.packager;
 
+import com.xebialabs.deployit.maven.ConfigurationItem;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.maven.artifact.Artifact;
@@ -93,5 +94,9 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
         a.add("show_type DeploymentPackage");
         return a;
         //return Collections.singletonList("import location="+targetDirectory);
+    }
+
+    public void addCI(ConfigurationItem configurationItem) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

@@ -95,6 +95,11 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
     protected List<ConfigurationItem> middlewareResources;
 
     /**
+     * @parameter
+     */
+    protected List<ConfigurationItem> additionalConfigurationItems;
+
+    /**
      * List of the Mapping
      *
      * @parameter
@@ -128,8 +133,9 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
 
 
     protected Interpreter interpreter;
-    protected static final String DEFAULT_ENVIRONMENT = "DefaultEnvironment";
-    protected static final String DEFAULT_DEPLOYMENT = "DefaultDeployment";
+
+    public static final String DEFAULT_ENVIRONMENT = "DefaultEnvironment";
+    public static final String DEFAULT_DEPLOYMENT = "DefaultDeployment";
 
     private static boolean SERVER_STARTED = false;
 
@@ -153,6 +159,8 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
             context.setMinThreads(10);
             context.setMaxThreads(50);
             context.setSecured(false);
+            context.setExtensionsDirectoryPath("");
+
             context.save();
 
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("ad-repository", context
@@ -166,8 +174,9 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
         }
     }
 
-    public void stopServer() {
+    public static void stopServer() {
         Server.shutdown();
+        SERVER_STARTED = false;
     }
 
     protected void interpret(String line) throws MojoExecutionException {

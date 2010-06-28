@@ -56,7 +56,7 @@
                             <port>7001</port>
                             <usenodemanager>true</usenodemanager>
                         </ConfigurationItem>
-                        <!--
+
                         <ConfigurationItem type="WlsServer">
                             <label>Petshop Server 1</label>
                             <host>Host Production Weblogic</host>
@@ -64,8 +64,8 @@
                             <port>8001</port>
                             <name>Server-1</name>
                         </ConfigurationItem>
-                        -->
-                        <ConfigurationItem type="WlsServer">
+                        
+                        <ConfigurationItem type="WlsServer" addToEnv="false">
                             <label>AdminServer</label>
                             <host>Host Production Weblogic</host>
                             <domain>Domain WLS Petshop</domain>
