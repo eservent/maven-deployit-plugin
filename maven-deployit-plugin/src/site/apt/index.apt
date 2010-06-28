@@ -60,6 +60,6 @@ Deployit Plugin
 
   * {{{examples/test-configuration.html}Testing the configurationn}} to test the plugin configuration by skipping the executions of the deployment's steps.
 
-  * {{{examples/configuration-files.html}Add configurationn file }} to the current deployment.
+  * {{{examples/configurationfiles.html}Add configurationn file }} to the current deployment.
 
   []

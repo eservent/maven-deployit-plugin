@@ -49,7 +49,7 @@ Include configuration files to the deployment
             <additionalConfigurationItems>
                 <ConfigurationItem type="ConfigurationFiles">
                     <label>ConfigurationFilesMapping resources</label>
-                    <location>${project.build.directory}/package/resources.dir</location>
+                    <location>package/resources.dir</location>
                 </ConfigurationItem>
             </additionalConfigurationItems>
 
@@ -58,7 +58,7 @@ Include configuration files to the deployment
                 <MappingItem type="ConfigurationFilesMapping">
                     <source>ConfigurationFilesMapping resources</source>
                     <target>APBIVM02-VM06</target>
-                    <keyvaluepairs>[[key=database.connection.url value=a ][key=database.driver.class value=b][key=database.password value=c ]]</keyvaluepairs>
+                    <keyvaluepairs>[[key=database.connection.url value=a ][key=database.driver.class value=b]]</keyvaluepairs>
                     <targetdirectory>/data/autotest</targetdirectory>
                 </MappingItem>
             </mappings>

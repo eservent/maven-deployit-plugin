@@ -38,10 +38,6 @@ public class DeployitCIConverter extends AbstractConfigurationConverter {
                                     ConfigurationListener listener)
             throws ComponentConfigurationException {
 
-        System.out.println("type " + type);
-        System.out.println("basetype " + baseType);
-        System.out.println("configuration " + configuration);
-
         if (type.equals(ConfigurationItem.class)) {
 
             ConfigurationItem ci = new ConfigurationItem();
