@@ -3,10 +3,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xebialabs.deployit</groupId>
 
-    <artifactId>maven-deployit-plugin-test-victim-wls</artifactId>
+    <artifactId>maven-deployit-plugin-test-victim-configuration-files-2</artifactId>
     <packaging>ear</packaging>
-    <version>1.2.2</version>
-    <name>wls</name>
+    <version>1.0</version>
+    <name>simple</name>
     <url>http://maven.apache.org</url>
     <build>
         <plugins>
@@ -32,64 +32,54 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <port>9090</port>
                     <testmode>true</testmode>
+                    <useImportablePackage>false</useImportablePackage>
                     <environment>
                         <ConfigurationItem type="Host">
-                            <label>Host Production Weblogic</label>
-                            <address>ubuntu-weblogic-1.local</address>
-                            <username>weblogic</username>
-                            <password>weblogic</password>
+                            <label>APBIVM02-VM06</label>
+                            <address>ip-address</address>
+                            <username>username</username>
+                            <password>password</password>
                             <operatingSystemFamily>UNIX</operatingSystemFamily>
                             <accessMethod>SSH_SCP</accessMethod>
                         </ConfigurationItem>
-
-                        <ConfigurationItem type="WlsDomain">
-                            <label>Domain WLS Petshop</label>
-                            <activeHost>Host Production Weblogic</activeHost>
-                            <password>weblogic10</password>
-                            <wlHome>/opt/oracle/wls10.3.1.0/wlserver_10.3</wlHome>
-                            <adminServerName>AdminServer</adminServerName>
-                            <wlJavaHome>/opt/oracle/wls10.3.1.0/jdk160_11</wlJavaHome>
-                            <username>weblogic</username>
-                            <name>petshop</name>
-                            <port>7001</port>
-                            <usenodemanager>true</usenodemanager>
+                        <ConfigurationItem type="JbossasServer">
+                            <label>AS02-VM06-JBOSS5</label>
+                            <host>APBIVM02-VM06</host>
+                            <version>JBOSSAS_50</version>
+                            <home>/usr/local/bin/jboss-5.1.0.GA/</home>
+                            <name>autotest</name>
                         </ConfigurationItem>
-
-                        <ConfigurationItem type="WlsServer">
-                            <label>Petshop Server 1</label>
-                            <host>Host Production Weblogic</host>
-                            <domain>Domain WLS Petshop</domain>
-                            <port>8001</port>
-                            <name>Server-1</name>
-                        </ConfigurationItem>
-                        
-                        <ConfigurationItem type="WlsServer" addToEnv="false">
-                            <label>AdminServer</label>
-                            <host>Host Production Weblogic</host>
-                            <domain>Domain WLS Petshop</domain>
-                            <port>7001</port>
-                            <name>AdminServer</name>
-                        </ConfigurationItem>
-
                     </environment>
 
+                    <deployableArtifacts>
+                        <DeployableArtifactItem type="ConfigurationFiles">
+                            <type>ConfigurationFiles</type>
+                            <label>ConfigurationFilesMapping resources</label>
+                            <location>package/resources.dir</location>
+                        </DeployableArtifactItem>
+                    </deployableArtifacts>
+
+                    <mappings>
+                        <MappingItem type="ConfigurationFilesMapping">
+                            <source>ConfigurationFilesMapping resources</source>
+                            <target>APBIVM02-VM06</target>
+                            <keyvaluepairs>[[key=database.connection.url value=a][key=database.driver.class value=b][key=database.password value=c]]
+                            </keyvaluepairs>
+                            <targetdirectory>/data/autotest</targetdirectory>
+                        </MappingItem>
+                    </mappings>
 
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>com.xebialabs.deployit</groupId>
-                        <artifactId>wls-plugin</artifactId>
-                        <version>2.0-SNAPSHOT</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>com.xebialabs.deployit</groupId>
-                        <artifactId>apache-httpd-plugin</artifactId>
+                        <artifactId>jbossas-plugin</artifactId>
                         <version>2.0-SNAPSHOT</version>
                     </dependency>
                 </dependencies>
             </plugin>
+
         </plugins>
     </build>
 

@@ -24,16 +24,26 @@
                 <version>2.0-SNAPSHOT</version>
                 <executions>
                     <execution>
+                        <id>generate-id</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>generate-deployment-package</goal>
+                        </goals>
+                    </execution>
+                    <execution>
                         <id>deployit-plugin-test</id>
                         <phase>pre-integration-test</phase>
                         <goals>
                             <goal>deploy</goal>
                         </goals>
+
                     </execution>
+
                 </executions>
                 <configuration>
                     <port>9090</port>
                     <testmode>true</testmode>
+                    <useImportablePackage>true</useImportablePackage>
                     <environment>
                         <ConfigurationItem type="Host">
                             <label>JBoss Host</label>

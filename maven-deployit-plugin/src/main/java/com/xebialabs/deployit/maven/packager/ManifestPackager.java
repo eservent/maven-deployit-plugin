@@ -1,6 +1,6 @@
 package com.xebialabs.deployit.maven.packager;
 
-import com.xebialabs.deployit.maven.ConfigurationItem;
+import com.xebialabs.deployit.maven.DeployableArtifactItem;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.maven.artifact.Artifact;
@@ -29,6 +29,8 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
     private final Manifest manifest = new Manifest();
     private static final String DEPLOYMENT_PACKAGE_DIR = "deployment-package";
 
+    private boolean generateManifestOnly = false;
+
 
     public ManifestPackager(String artifactId, String version, File targetDirectory) {
         this.targetDirectory = new File(targetDirectory, DEPLOYMENT_PACKAGE_DIR + File.separator + artifactId + File.separator + version);
@@ -50,7 +52,7 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
         } else if (type.compareToIgnoreCase("war") == 0) {
             ciType = "War";
         } else {
-            System.out.println("Not supported type [" + ciType + "], skit it");
+            System.out.println("Not supported type [" + ciType + "], skip it");
             return;
         }
 
@@ -58,13 +60,26 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
         Attributes attributes = new Attributes();
         attributes.putValue("CI-Type", ciType);
         attributes.putValue("CI-Name", artifact.getArtifactId() + "-" + artifact.getVersion());
-        entries.put(type + "/" + FilenameUtils.getName(artifact.getFile().getName()), attributes);
 
 
-        try {
-            FileUtils.copyFileToDirectory(artifact.getFile(), new File(targetDirectory, type));
-        } catch (IOException e) {
-            throw new RuntimeException("Fail to copy of " + artifact.getFile() + " to " + new File(targetDirectory, type), e);
+        System.out.println("artifact " + artifact);
+        final File file = artifact.getFile();
+        System.out.println("file : " + file);
+
+
+        final String name = file.getName();
+        System.out.println("name:" + name);
+        entries.put(type + "/" + FilenameUtils.getName(name), attributes);
+
+
+        if (generateManifestOnly) {
+            System.out.println("Skip copying artifact " + artifact.getFile() + " to " + new File(targetDirectory, type));
+        } else {
+            try {
+                FileUtils.copyFileToDirectory(artifact.getFile(), new File(targetDirectory, type));
+            } catch (IOException e) {
+                throw new RuntimeException("Fail to copy of " + artifact.getFile() + " to " + new File(targetDirectory, type), e);
+            }
         }
     }
 
@@ -96,7 +111,54 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
         //return Collections.singletonList("import location="+targetDirectory);
     }
 
-    public void addCI(ConfigurationItem configurationItem) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public void addDeployableArtifact(DeployableArtifactItem item) {
+
+        final Map<String, Attributes> entries = manifest.getEntries();
+        Attributes attributes = new Attributes();
+        final String type = item.getType();
+        final File location = new File(item.getLocation());
+
+        attributes.putValue("CI-Type", type);
+
+        entries.put(type + "/" + item.getLocation(), attributes);
+
+
+        final File targetDir = new File(targetDirectory, type);
+        if (generateManifestOnly) {
+            System.out.println("Skip copying artifact " + item.getLabel() + " to " + targetDir);
+        } else {
+            targetDir.mkdirs();
+            try {
+                if (location.isDirectory())
+                    FileUtils.copyDirectoryToDirectory(getParent(location), targetDir);
+                else
+                    FileUtils.copyFileToDirectory(location, targetDir);
+            } catch (IOException e) {
+                throw new RuntimeException("Fail to copy of " + location + " to " + targetDir, e);
+            }
+        }
+    }
+
+    /**
+     * Return root parent 
+     */
+    private File getParent(File location) {              
+        final File parentFile = location.getParentFile();
+        if (parentFile == null)
+            return location;
+        return getParent(parentFile);
+    }
+
+
+    public boolean isGenerateManifestOnly() {
+        return generateManifestOnly;
+    }
+
+    public void setGenerateManifestOnly(boolean generateManifestOnly) {
+        this.generateManifestOnly = generateManifestOnly;
+    }
+
+    public String getManifestFilePath() {
+        return new File(targetDirectory, "META-INF").getAbsolutePath();
     }
 }

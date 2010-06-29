@@ -3,8 +3,6 @@ package com.xebialabs.deployit.maven;
 import com.xebialabs.deployit.maven.packager.ApplicationDeploymentPackager;
 import com.xebialabs.deployit.maven.packager.CliPackager;
 import com.xebialabs.deployit.maven.packager.ManifestPackager;
-import org.apache.maven.artifact.Artifact;
-import org.apache.maven.artifact.ArtifactUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
@@ -14,10 +12,10 @@ import java.util.List;
 /**
  * Deploy artifacts to the target environment.
  *
+ * @author Benoit Moussaud
  * @goal deploy
  * @phase pre-integration-test
  * @configurator override
- * @author Benoit Moussaud
  */
 
 public class DeployMojo extends AbstractDeployitMojo {
@@ -37,22 +35,18 @@ public class DeployMojo extends AbstractDeployitMojo {
         getLog().info("create the main artifact");
         packager.addMavenArtifact(project.getArtifact());
         //Handle additionnal maven artifacts
-        if (additionalArtifacts != null) {
+        if (deployableArtifacts != null) {
             getLog().info("create the additional artifacts");
-            for (int i = 0; i < additionalArtifacts.length; i++) {
-                final Module additionalArtifact = additionalArtifacts[i];
-                Artifact additional = getArtifact(additionalArtifact);
-                packager.addMavenArtifact(additional);
-            }
-        }
 
-        if (additionalConfigurationItems != null) {
-            getLog().info("create the additional Configuration Items");
-            for(ConfigurationItem ci : additionalConfigurationItems) {
-                packager.addCI(ci);
+            for (DeployableArtifactItem item : deployableArtifacts) {
+                if (item.getLocation().contains(":"))
+                    packager.addMavenArtifact(getArtifact(item));
+                else
+                    packager.addDeployableArtifact(item);
             }
 
         }
+
 
         packager.perform();
 
@@ -62,7 +56,7 @@ public class DeployMojo extends AbstractDeployitMojo {
         //Create Environment
         getLog().info("Create the environment");
         List<String> members = new ArrayList<String>();
-        for (ConfigurationItem each : environment) {           
+        for (ConfigurationItem each : environment) {
             interpret(each.getCli());
             if (each.isAddedToEnvironment())
                 members.add(each.getLabel());
@@ -80,7 +74,6 @@ public class DeployMojo extends AbstractDeployitMojo {
                 interpret("modify \"" + packager.getDeploymentPackageName() + "\" middlewareResources+=\"" + ci.getLabel() + "\"");
             }
         }
-
 
 
         if (commands != null) {
@@ -111,20 +104,5 @@ public class DeployMojo extends AbstractDeployitMojo {
         getLog().info("end of deploy:deploy");
     }
 
-
-    private Artifact getArtifact(final Module module)
-            throws MojoExecutionException {
-        getLog().debug("-translateIntoPath- " + module);
-        String key = ArtifactUtils.versionlessKey(module.getGroupId(), module
-                .getArtifactId());
-        Artifact artifact = (Artifact) project.getArtifactMap().get(key);
-        if (artifact == null) {
-            throw new MojoExecutionException(
-                    "The artifact "
-                            + key
-                            + " referenced in plugin as is not found the project dependencies");
-        }
-        return artifact;
-    }
 
 }

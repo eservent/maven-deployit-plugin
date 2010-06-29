@@ -62,6 +62,7 @@ public class DeployitCIConverter extends AbstractConfigurationConverter {
             }
             return ci;
         }
+        
 
         if (type.equals(MappingItem.class)) {
 

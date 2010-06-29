@@ -37,6 +37,7 @@ Include configuration files to the deployment
                     <operatingSystemFamily>UNIX</operatingSystemFamily>
                     <accessMethod>SSH_SCP</accessMethod>
                 </ConfigurationItem>
+                
                 <ConfigurationItem type="JbossasServer">
                     <label>AS02-VM06-JBOSS5</label>
                     <host>APBIVM02-VM06</host>
@@ -46,14 +47,15 @@ Include configuration files to the deployment
                 </ConfigurationItem>
             </environment>
 
-            <additionalConfigurationItems>
-                <ConfigurationItem type="ConfigurationFiles">
+            <deployableArtifacts>
+                <DeployableArtifactItem type="ConfigurationFiles">
+                    <type>ConfigurationFiles</type>
                     <label>ConfigurationFilesMapping resources</label>
                     <location>package/resources.dir</location>
-                </ConfigurationItem>
-            </additionalConfigurationItems>
+                </DeployableArtifactItem>
+            </deployableArtifacts>
 
-            <!-- edit the mapping with key value pair and the target directory
+            <!-- edit the mapping with key value pairs and the target directory -->
             <mappings>
                 <MappingItem type="ConfigurationFilesMapping">
                     <source>ConfigurationFilesMapping resources</source>

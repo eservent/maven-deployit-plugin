@@ -18,7 +18,7 @@ public class DeployitMojoTest extends AbstractMojoTestCase {
     private DeployMojo mojo;
     private ConfigurationItem host;
     private ConfigurationItem tomcatServer;
-    private ConfigurationItem configurationFiles;
+    private DeployableArtifactItem configurationFiles;
 
 
     public void setUp() throws Exception {
@@ -55,10 +55,10 @@ public class DeployitMojoTest extends AbstractMojoTestCase {
         tomcatServer.addParameter("ajpport", "8009");
 
 
-        configurationFiles = new ConfigurationItem();
-        configurationFiles.setMainType("ConfigurationFiles");
-        configurationFiles.addParameter("label", "ConfigurationFilesCI");
-        configurationFiles.addParameter("location", "src/main/resources");
+        configurationFiles = new DeployableArtifactItem();
+        configurationFiles.setType("ConfigurationFiles");
+        configurationFiles.setLabel("ConfigurationFilesCI");
+        configurationFiles.setLocation("src/main/resources");
 
 
         mojo = new DeployMojo();
@@ -144,7 +144,7 @@ public class DeployitMojoTest extends AbstractMojoTestCase {
 
         setVariableValueToObject(mojo, "testmode", true);
         setVariableValueToObject(mojo, "environment", env);
-        setVariableValueToObject(mojo, "additionalConfigurationItems", Collections.singletonList(configurationFiles));
+        setVariableValueToObject(mojo, "deployableArtifacts", Collections.singletonList(configurationFiles));
         setVariableValueToObject(mojo, "mappings", Collections.singletonList(mapping));
         setVariableValueToObject(mojo, "project", project);
         setVariableValueToObject(mojo, "artifactId", "com.test.tomcat");

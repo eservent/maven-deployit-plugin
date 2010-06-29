@@ -5,6 +5,7 @@ import com.xebia.ad.ReleaseInfo;
 import com.xebia.ad.Server;
 import com.xebia.ad.cli.Interpreter;
 import com.xebia.ad.setup.SetupDatabaseType;
+import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
@@ -94,10 +95,6 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
      */
     protected List<ConfigurationItem> middlewareResources;
 
-    /**
-     * @parameter
-     */
-    protected List<ConfigurationItem> additionalConfigurationItems;
 
     /**
      * List of the Mapping
@@ -113,12 +110,12 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
      */
     protected List<ConfigurationItem> environment;
 
+
     /**
-     * the additionnal Deployments
-     *
+     * Additional deployables artifacts
      * @parameter
      */
-    protected Module[] additionalArtifacts;
+    protected List<DeployableArtifactItem> deployableArtifacts;
 
 
     /**
@@ -323,13 +320,7 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
         this.environment = environment;
     }
 
-    public Module[] getAdditionalArtifacts() {
-        return additionalArtifacts;
-    }
-
-    public void setAdditionalArtifacts(Module[] additionalArtifacts) {
-        this.additionalArtifacts = additionalArtifacts;
-    }
+  
 
     public boolean isUseImportablePackage() {
         return useImportablePackage;
@@ -341,5 +332,19 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
 
     public String getScript() {
         return fullScript.toString();
+    }
+
+    protected Artifact getArtifact(final DeployableArtifactItem item)
+            throws MojoExecutionException {
+        getLog().debug("-translateIntoPath- " + item.getLocation());
+        String key = item.getLocation();
+        Artifact artifact = (Artifact) project.getArtifactMap().get(key);
+        if (artifact == null) {
+            throw new MojoExecutionException(
+                    "The artifact "
+                            + key
+                            + " referenced in plugin as is not found the project dependencies");
+        }
+        return artifact;
     }
 }

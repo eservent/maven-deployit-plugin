@@ -1,6 +1,6 @@
 package com.xebialabs.deployit.maven.packager;
 
-import com.xebialabs.deployit.maven.ConfigurationItem;
+import com.xebialabs.deployit.maven.DeployableArtifactItem;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.maven.artifact.Artifact;
 
@@ -43,14 +43,13 @@ public class CliPackager implements ApplicationDeploymentPackager {
 
         final File archiveFile = artifact.getFile();
         if (archiveFile == null)
-            throw new RuntimeException("No file found for "+artifact);
-        
+            throw new RuntimeException("No file found for " + artifact);
+
         String ciLabel = getDeploymentPackageName() + "/" + archiveFile.getName();
 
         addCommand("create " + ciType + " label=\"" + ciLabel + "\" name=\""
                 + FilenameUtils.getBaseName(archiveFile.getName()) + "\" location=\"" + archiveFile.getAbsolutePath() + "\"");
         addCommand("modify \"" + getDeploymentPackageName() + "\" deployableArtifacts+=\"" + ciLabel + "\"");
-
     }
 
     public void perform() {
@@ -65,10 +64,9 @@ public class CliPackager implements ApplicationDeploymentPackager {
         return cliCommands;
     }
 
-    public void addCI(ConfigurationItem configurationItem) {
-        addCommand(configurationItem.getCli());
-        addCommand("modify \"" + getDeploymentPackageName() + "\" deployableArtifacts+=\"" + configurationItem.getLabel() + "\"");
-
+    public void addDeployableArtifact(DeployableArtifactItem item) {
+        addCommand("create \"" + item.getType() + "\" label=\"" + item.getLabel() + "\" location=\"" + item.getLocation()+"\"");
+        addCommand("modify \"" + getDeploymentPackageName() + "\" deployableArtifacts+=\"" + item.getLabel() + "\"");
     }
 
     private void addCommand(String cmdLine) {
