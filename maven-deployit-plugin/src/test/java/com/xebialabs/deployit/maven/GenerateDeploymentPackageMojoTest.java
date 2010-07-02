@@ -3,6 +3,7 @@ package com.xebialabs.deployit.maven;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
 import org.apache.maven.plugin.testing.stubs.ArtifactStub;
 import org.apache.maven.plugin.testing.stubs.MavenProjectStub;
+import org.codehaus.plexus.archiver.jar.JarArchiver;
 import org.junit.Test;
 
 import java.io.File;
@@ -50,7 +51,10 @@ public class GenerateDeploymentPackageMojoTest extends AbstractMojoTestCase {
         setVariableValueToObject(mojo, "outputDirectory", new File("target/"));
         setVariableValueToObject(mojo, "artifactId", "com.test.tomcat");
         setVariableValueToObject(mojo, "version", "1.0");
+        setVariableValueToObject(mojo, "jarArchiver", new JarArchiver());
         setVariableValueToObject(mojo, "generateManifestOnly", true);
+        setVariableValueToObject(mojo, "finalName","test1");
+
         try {
             mojo.execute();
         } finally {
@@ -75,7 +79,7 @@ public class GenerateDeploymentPackageMojoTest extends AbstractMojoTestCase {
         setVariableValueToObject(mojo, "outputDirectory", new File("target/"));
         setVariableValueToObject(mojo, "artifactId", "com.test.tomcat.configurationsfiles");
         setVariableValueToObject(mojo, "deployableArtifacts", Collections.singletonList(configurationFiles));
-
+                          setVariableValueToObject(mojo, "jarArchiver", new JarArchiver());
         setVariableValueToObject(mojo, "version", "1.0");
         setVariableValueToObject(mojo, "generateManifestOnly", true);
 
@@ -90,7 +94,8 @@ public class GenerateDeploymentPackageMojoTest extends AbstractMojoTestCase {
     }
 
 
-      @Test
+
+    @Test
     public void testPackageOneWithConfigurationFilesAndSqlFiles() throws Exception {
         MavenProjectStub project = new MavenProjectStub();
         ArtifactStub mainArtifact = new ArtifactStub();
@@ -101,15 +106,15 @@ public class GenerateDeploymentPackageMojoTest extends AbstractMojoTestCase {
         mainArtifact.setFile(new File("main.war"));
         project.setArtifact(mainArtifact);
 
-          List<DeployableArtifactItem> daitem = new ArrayList<DeployableArtifactItem>();
-          daitem.add(configurationFiles);
-          daitem.add(sqlFiles);
+        List<DeployableArtifactItem> daitem = new ArrayList<DeployableArtifactItem>();
+        daitem.add(configurationFiles);
+        daitem.add(sqlFiles);
 
         setVariableValueToObject(mojo, "project", project);
         setVariableValueToObject(mojo, "outputDirectory", new File("target/"));
         setVariableValueToObject(mojo, "artifactId", "com.test.tomcat.configurationsfiles");
         setVariableValueToObject(mojo, "deployableArtifacts", daitem);
-
+                     setVariableValueToObject(mojo, "jarArchiver", new JarArchiver());
         setVariableValueToObject(mojo, "version", "1.0");
         setVariableValueToObject(mojo, "generateManifestOnly", true);
 

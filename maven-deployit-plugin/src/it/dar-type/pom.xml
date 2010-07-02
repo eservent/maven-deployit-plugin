@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <!--
+    <parent>
+        <groupId>com.xebialabs.deployit</groupId>
+        <artifactId>maven-deployit-plugin-integration-test</artifactId>
+        <relativePath>../pom.xml</relativePath>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    -->
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.xebialabs.deployit</groupId>
+
+    <artifactId>maven-deployit-plugin-test-victim-dar-format</artifactId>
+    <packaging>dar</packaging>
+    <version>1.0</version>
+    <name>Dar Format</name>
+    <url>http://maven.apache.org</url>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.xebialabs.deployit</groupId>
+                <artifactId>maven-deployit-plugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <extensions>true</extensions>
+
+                <configuration>
+                    <useImportablePackage>true</useImportablePackage>
+                    <deployableArtifacts>
+
+                        <DeployableArtifactItem>
+                            <type>Ear</type>
+                            <label>PetClinic-Ear</label>
+                            <location>com.xebialabs.deployit.petclinic.petclinic-ear:PetClinic</location>
+                        </DeployableArtifactItem>
+
+                        <DeployableArtifactItem>
+                            <type>ConfigurationFiles</type>
+                            <label>ConfigurationFilesMapping resources</label>
+                            <location>package/resources.dir</location>
+                        </DeployableArtifactItem>
+
+                        <DeployableArtifactItem>
+                            <type>SqlFiles</type>
+                            <label>SQL resources</label>
+                            <location>package/sql.dir</location>
+                        </DeployableArtifactItem>
+                    </deployableArtifacts>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xebialabs.deployit.petclinic.petclinic-ear</groupId>
+            <artifactId>PetClinic</artifactId>
+            <version>1.0</version>
+            <type>ear</type>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+
+    <repositories>
+        <repository>
+            <id>xebialabs-releases</id>
+            <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+        </repository>
+    </repositories>
+
+    <properties>
+        <deployitPluginVersion>1.0-SNAPSHOT</deployitPluginVersion>
+        <deployitVersion>2.0-SNAPSHOT</deployitVersion>
+    </properties>
+
+</project>

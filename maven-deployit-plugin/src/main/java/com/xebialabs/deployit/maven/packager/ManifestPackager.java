@@ -32,6 +32,10 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
     private boolean generateManifestOnly = false;
 
 
+    public File getTargetDirectory() {
+        return targetDirectory;
+    }
+
     public ManifestPackager(String artifactId, String version, File targetDirectory) {
         this.targetDirectory = new File(targetDirectory, DEPLOYMENT_PACKAGE_DIR + File.separator + artifactId + File.separator + version);
         this.targetDirectory.mkdirs();
@@ -52,14 +56,14 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
         } else if (type.compareToIgnoreCase("war") == 0) {
             ciType = "War";
         } else {
-            System.out.println("Not supported type [" + ciType + "], skip it");
+            //System.out.println("Not supported type [" + ciType + "], skip it");
             return;
         }
 
         final Map<String, Attributes> entries = manifest.getEntries();
         Attributes attributes = new Attributes();
         attributes.putValue("CI-Type", ciType);
-        attributes.putValue("CI-Name", artifact.getArtifactId() + "-" + artifact.getVersion());
+        attributes.putValue("CI-Name", artifact.getArtifactId());
 
         final File file = artifact.getFile();
         final String name = file.getName();
@@ -155,4 +159,5 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
     public String getManifestFilePath() {
         return new File(targetDirectory, "META-INF").getAbsolutePath();
     }
+
 }

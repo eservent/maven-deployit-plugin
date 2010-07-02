@@ -22,6 +22,13 @@
 
     <url>http://www.xebialabs.com</url>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -45,7 +52,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>2.6</version>
                 <executions>
                     <execution>
                         <id>help-mojo</id>
@@ -56,26 +62,13 @@
                 </executions>
             </plugin>
 
-
+            <!--
+            TODO: create a profile
             <plugin>
                 <groupId>com.agilejava.docbkx</groupId>
                 <artifactId>docbkx-maven-plugin</artifactId>
                 <configuration>
                     <xincludeSupported>true</xincludeSupported>
-                    <!--
-                    <preProcess>
-                        <echo>Replacing '@deployit.version@' with '${project.version}' in source files...</echo>
-                        <replace dir="${docbook.sourceDirectory}" token="@deployit.version@" value="${project.version}">
-                            <include name="**/*.xml" />
-                        </replace>
-                    </preProcess>
-                    <postProcess>
-                        <echo>Undoing replacement of '@deployit.version@' in source files...</echo>
-                        <replace dir="${docbook.sourceDirectory}" token="${project.version}" value="@deployit.version@">
-                            <include name="**/*.xml" />
-                        </replace>
-                    </postProcess>
-                    -->
                 </configuration>
                 <executions>
                     <execution>
@@ -96,13 +89,13 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
+            -->
 
         </plugins>
     </build>
 
     <properties>
-        <mavenVersion>2.0.6</mavenVersion>
+        <mavenVersion>2.2.1</mavenVersion>
         <deployitVersion>2.0-SNAPSHOT</deployitVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.java.target>1.5</project.build.java.target>
@@ -114,33 +107,21 @@
 
         <!-- Maven -->
         <dependency>
+            <groupId>org.apache.maven.shared</groupId>
+            <artifactId>maven-plugin-testing-harness</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-archiver</artifactId>
+            <version>2.3</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
             <version>${mavenVersion}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-settings</artifactId>
-            <version>${mavenVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-project</artifactId>
-            <version>${mavenVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-utils</artifactId>
-            <version>1.5.8</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>org.apache.maven.shared</groupId>
-            <artifactId>maven-filtering</artifactId>
-            <version>1.0-beta-3</version>
-        </dependency>
-
 
         <dependency>
             <groupId>com.xebialabs.deployit</groupId>
@@ -165,24 +146,12 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.maven.shared</groupId>
-            <artifactId>maven-plugin-testing-harness</artifactId>
-            <version>1.1</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.4</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymockclassextension</artifactId>
-            <version>2.4</version>
-            <scope>test</scope>
-        </dependency>
+
 
     </dependencies>
 
@@ -231,7 +200,7 @@
                                 <pomInclude>**/pom.xml</pomInclude>
                             </pomIncludes>
                             <preBuildHookScript>setup</preBuildHookScript>
-                            <postBuildHookScript>verify</postBuildHookScript>                        
+                            <postBuildHookScript>verify</postBuildHookScript>
                             <localRepositoryPath>${project.build.testOutputDirectory}/m2repo</localRepositoryPath>
                             <settingsFile>src/it/settings.xml</settingsFile>
 
