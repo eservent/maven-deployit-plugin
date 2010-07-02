@@ -11,9 +11,9 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xebialabs.deployit</groupId>
 
-    <artifactId>maven-deployit-plugin-test-victim-simple</artifactId>
+    <artifactId>maven-deployit-plugin-test-victim-generate-dar</artifactId>
     <packaging>ear</packaging>
-    <version>1.2.2</version>
+    <version>1.0</version>
     <name>simple</name>
     <url>http://maven.apache.org</url>
     <build>
@@ -33,40 +33,30 @@
                 <executions>
                     <execution>
                         <id>deployit-plugin-test</id>
-                        <phase>pre-integration-test</phase>
+                        <phase>package</phase>
                         <goals>
-                            <goal>deploy</goal>
+                            <goal>generate-deployment-package</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
-                    <testmode>true</testmode>
-                    <environment>
-                        <ConfigurationItem type="Host">
-                            <label>JBoss Host</label>
-                            <address>jboss-51</address>
-                            <username>root</username>
-                            <password>centos</password>
-                            <operatingSystemFamily>UNIX</operatingSystemFamily>
-                            <accessMethod>SSH_SFTP</accessMethod>
-                        </ConfigurationItem>
-                        <ConfigurationItem type="JbossasServer">
-                            <label>JBoss server</label>
-                            <host>JBoss Host</host>
-                            <home>/opt/jboss/5.1.0.GA</home>
-                            <version>JBOSSAS_50</version>
-                            <name>itest</name>
-                        </ConfigurationItem>
-                    </environment>
+                    <useImportablePackage>true</useImportablePackage>
+                    <deployableArtifacts>
+                        <DeployableArtifactItem>
+                            <type>ConfigurationFiles</type>
+                            <label>ConfigurationFilesMapping resources</label>
+                            <location>package/resources.dir</location>
+                        </DeployableArtifactItem>
+
+                        <DeployableArtifactItem>
+                            <type>SqlFiles</type>
+                            <label>SQL resources</label>
+                            <location>package/sql.dir</location>
+                        </DeployableArtifactItem>
+                    </deployableArtifacts>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.xebialabs.deployit</groupId>
-                        <artifactId>jbossas-plugin</artifactId>
-                        <version>${deployitVersion}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
+
         </plugins>
     </build>
 
@@ -79,12 +69,12 @@
         </dependency>
     </dependencies>
 
-    <!--
+
     <repositories>
         <repository>
             <id>xebialabs-releases</id>
             <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
         </repository>
     </repositories>
-    -->
+
 </project>

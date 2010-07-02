@@ -31,17 +31,21 @@ public class GenerateDeploymentPackageMojo extends AbstractDeployitMojo {
         packager.setGenerateManifestOnly(generateManifestOnly);
         getLog().info("Generate Deployment Package...");
 
-        getLog().info(" create the main artifact");
+        getLog().info("create the main artifact");
         packager.addMavenArtifact(project.getArtifact());
          //Handle additionnal maven artifacts
         if (deployableArtifacts != null) {
             getLog().info("create the additional artifacts");
 
             for (DeployableArtifactItem item : deployableArtifacts) {
-                if (item.getLocation().contains(":"))
+                if (item.getLocation().contains(":")) {
+                    getLog().info(" add a dependency deployable artifact "+item);
                     packager.addMavenArtifact(getArtifact(item));
-                else
+                }
+                else  {
+                    getLog().info(" add a deployable artifact "+item);
                     packager.addDeployableArtifact(item);
+                }
             }
 
         }

@@ -42,4 +42,13 @@ public class DeployableArtifactItem {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "DeployableArtifactItem{" +
+                "label='" + label + '\'' +
+                ", type='" + type + '\'' +
+                ", location='" + location + '\'' +
+                '}';
+    }
 }

@@ -14,7 +14,7 @@
     <artifactId>maven-deployit-plugin</artifactId>
     <packaging>maven-plugin</packaging>
 
-    <version>2.0-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <name>Deployit Maven Mojo</name>
     <prerequisites>
         <maven>${mavenVersion}</maven>
@@ -103,6 +103,7 @@
 
     <properties>
         <mavenVersion>2.0.6</mavenVersion>
+        <deployitVersion>2.0-SNAPSHOT</deployitVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.java.target>1.5</project.build.java.target>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -144,13 +145,14 @@
         <dependency>
             <groupId>com.xebialabs.deployit</groupId>
             <artifactId>core-java</artifactId>
-            <version>2.0-SNAPSHOT</version>
+            <version>${deployitVersion}</version>
         </dependency>
 
         <dependency>
             <groupId>com.xebialabs.deployit</groupId>
             <artifactId>tomcat-plugin</artifactId>
-            <version>2.0-SNAPSHOT</version>
+            <version>${deployitVersion}</version>
+            <scope>test</scope>
         </dependency>
 
 
@@ -218,15 +220,15 @@
             <id>run-its</id>
             <build>
                 <plugins>
+                    <!--
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-invoker-plugin</artifactId>
                         <configuration>
                             <debug>true</debug>
-                            <projectsDirectory>src/it</projectsDirectory>
-
-                            <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
-
+                            <projectsDirectory>src/it/generate-dar-pom</projectsDirectory>
+                            
+                            <localRepositoryPath>${project.build.testOutputDirectory}/m2repo</localRepositoryPath>
                             <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
                             <settingsFile>src/it/settings.xml</settingsFile>
 
@@ -234,11 +236,12 @@
                                 <pomInclude>**/pom.xml</pomInclude>
                             </pomIncludes>
                             <goals>
-                                <goal>install</goal>
                                 <goal>clean</goal>
+                                <goal>install</goal>
+                                
                             </goals>
                             <showErrors>true</showErrors>
-                            <streamLogs>false</streamLogs>
+                            <streamLogs>true</streamLogs>
 
                         </configuration>
                         <executions>
@@ -249,6 +252,38 @@
                                 </goals>
                             </execution>
 
+                        </executions>
+                    </plugin>
+                    -->
+                    <plugin>
+                        <artifactId>maven-invoker-plugin</artifactId>
+                        <version>1.4</version>
+                        <configuration>
+                            <debug>true</debug>
+                            <projectsDirectory>src/it/generate-dar-pom</projectsDirectory>
+                            <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
+                            <pomIncludes>
+                                <pomInclude>**/pom.xml</pomInclude>
+                            </pomIncludes>
+                            <preBuildHookScript>setup</preBuildHookScript>
+                            <postBuildHookScript>verify</postBuildHookScript>
+                            <!-- NOTE: Must be synced with the repo path used by AbstractEarPluginIT -->
+                            <localRepositoryPath>${project.build.testOutputDirectory}/m2repo</localRepositoryPath>
+                            <settingsFile>src/it/settings.xml</settingsFile>
+
+                            <goals>
+                                <goal>clean</goal>
+                                <goal>package</goal>
+                            </goals>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>integration-test</id>
+                                <goals>
+                                    <goal>install</goal>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
                         </executions>
                     </plugin>
                 </plugins>

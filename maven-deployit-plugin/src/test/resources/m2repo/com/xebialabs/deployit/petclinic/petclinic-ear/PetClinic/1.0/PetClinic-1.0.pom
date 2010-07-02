@@ -1,0 +1,13 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.xebialabs.deployit.petclinic.petclinic-ear</groupId>
+    <groupId>com.xebialabs.deployit.petclinic.petclinic-ear</groupId>
+    <artifactId>PetClinic</artifactId>
+    <artifactId>PetClinic</artifactId>
+    <packaging>ear</packaging>
+    <version>1.0</version>
+    <distributionManagement>
+        <status>verified</status>
+    </distributionManagement>
+</project>
+

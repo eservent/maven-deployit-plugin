@@ -1,0 +1,10 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.xebialabs.deployit.petclinic.petclinic-war</groupId>
+  <artifactId>PetClinic</artifactId>
+  <packaging>war</packaging>
+  <version>1.0</version>
+  <distributionManagement>
+    <status>verified</status>
+  </distributionManagement>
+</project>

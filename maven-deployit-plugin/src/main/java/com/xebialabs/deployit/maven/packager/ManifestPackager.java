@@ -61,14 +61,9 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
         attributes.putValue("CI-Type", ciType);
         attributes.putValue("CI-Name", artifact.getArtifactId() + "-" + artifact.getVersion());
 
-
-        System.out.println("artifact " + artifact);
         final File file = artifact.getFile();
-        System.out.println("file : " + file);
-
-
         final String name = file.getName();
-        System.out.println("name:" + name);
+
         entries.put(type + "/" + FilenameUtils.getName(name), attributes);
 
 
@@ -114,12 +109,11 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
     public void addDeployableArtifact(DeployableArtifactItem item) {
 
         final Map<String, Attributes> entries = manifest.getEntries();
-        Attributes attributes = new Attributes();
+        final Attributes attributes = new Attributes();
         final String type = item.getType();
         final File location = new File(item.getLocation());
 
         attributes.putValue("CI-Type", type);
-
         entries.put(type + "/" + item.getLocation(), attributes);
 
 
