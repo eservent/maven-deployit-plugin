@@ -16,6 +16,9 @@
     <version>1.0</version>
     <name>simple</name>
     <url>http://maven.apache.org</url>
+    <properties>
+        <jboss.home.dir>/usr/local/bin/jboss-5.1.0.GA/</jboss.home.dir>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -55,7 +58,7 @@
                             <label>AS02-VM06-JBOSS5</label>
                             <host>APBIVM02-VM06</host>
                             <version>JBOSSAS_50</version>
-                            <home>/usr/local/bin/jboss-5.1.0.GA/</home>
+                            <home>${jboss.home.dir}</home>
                             <name>autotest</name>
                         </ConfigurationItem>
                     </environment>
@@ -69,6 +72,7 @@
                     </deployableArtifacts>
 
                     <mappings>
+                        
                         <MappingItem type="ConfigurationFilesMapping">
                             <source>ConfigurationFilesMapping resources</source>
                             <target>APBIVM02-VM06</target>

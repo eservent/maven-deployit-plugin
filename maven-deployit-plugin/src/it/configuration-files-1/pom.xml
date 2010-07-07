@@ -63,8 +63,7 @@
 
                     <deployableArtifacts>
                         <DeployableArtifactItem>
-                            <type>ConfigurationFiles</type>
-                            <label>ConfigurationFilesMapping resources</label>
+                            <type>ConfigurationFiles</type>                         
                             <location>package/resources.dir</location>
                         </DeployableArtifactItem>
                     </deployableArtifacts>

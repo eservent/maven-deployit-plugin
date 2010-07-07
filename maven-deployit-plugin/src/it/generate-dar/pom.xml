@@ -40,7 +40,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <useImportablePackage>true</useImportablePackage>
                     <deployableArtifacts>
                         <DeployableArtifactItem>
                             <type>ConfigurationFiles</type>
