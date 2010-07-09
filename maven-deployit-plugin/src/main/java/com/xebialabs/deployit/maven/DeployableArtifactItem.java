@@ -1,5 +1,7 @@
 package com.xebialabs.deployit.maven;
 
+import org.apache.commons.lang.StringUtils;
+
 
 public class DeployableArtifactItem {
 
@@ -9,14 +11,11 @@ public class DeployableArtifactItem {
     
     private String location;
 
+    private String name;
+
     public DeployableArtifactItem() {
     }
 
-    public DeployableArtifactItem(String label, String type, String location) {
-        this.label = label;
-        this.type = type;
-        this.location = location;
-    }
 
     public String getLabel() {
         return label;
@@ -43,12 +42,26 @@ public class DeployableArtifactItem {
         this.type = type;
     }
 
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "DeployableArtifactItem{" +
                 "label='" + label + '\'' +
                 ", type='" + type + '\'' +
                 ", location='" + location + '\'' +
+                ", name='" + name + '\'' +
                 '}';
+    }
+
+    public boolean hasName() {
+        return !StringUtils.isBlank(name);
     }
 }

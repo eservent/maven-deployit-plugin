@@ -14,7 +14,7 @@
     <artifactId>maven-deployit-plugin</artifactId>
     <packaging>maven-plugin</packaging>
 
-    <version>2.0-SNAPSHOT</version>
+    <version>1.3-beta-2-SNAPSHOT</version>
     <name>Deployit Maven Mojo</name>
     <prerequisites>
         <maven>${mavenVersion}</maven>
@@ -64,6 +64,7 @@
 
             <!--
             TODO: create a profile
+            -->
             <plugin>
                 <groupId>com.agilejava.docbkx</groupId>
                 <artifactId>docbkx-maven-plugin</artifactId>
@@ -89,14 +90,14 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            -->
+            
 
         </plugins>
     </build>
 
     <properties>
         <mavenVersion>2.2.1</mavenVersion>
-        <deployitVersion>2.0-SNAPSHOT</deployitVersion>
+        <deployitVersion>1.3-beta-2-SNAPSHOT</deployitVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.java.target>1.5</project.build.java.target>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

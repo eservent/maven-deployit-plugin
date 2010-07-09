@@ -79,12 +79,4 @@
         </dependency>
     </dependencies>
 
-    <!--
-    <repositories>
-        <repository>
-            <id>xebialabs-releases</id>
-            <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
-        </repository>
-    </repositories>
-    -->
 </project>

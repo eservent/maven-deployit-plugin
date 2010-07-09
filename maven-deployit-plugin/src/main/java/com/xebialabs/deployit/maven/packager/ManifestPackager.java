@@ -117,7 +117,11 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
         final String type = item.getType();
         final File location = new File(item.getLocation());
 
+
         attributes.putValue("CI-Type", type);
+        if (item.hasName()) 
+            attributes.putValue("CI-Name", item.getName());
+
         entries.put(type + "/" + item.getLocation(), attributes);
 
 

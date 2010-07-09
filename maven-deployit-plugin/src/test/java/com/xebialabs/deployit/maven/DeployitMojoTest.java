@@ -58,6 +58,7 @@ public class DeployitMojoTest extends AbstractMojoTestCase {
         configurationFiles = new DeployableArtifactItem();
         configurationFiles.setType("ConfigurationFiles");
         configurationFiles.setLabel("ConfigurationFilesCI");
+        configurationFiles.setName("ConfigurationFilesCIName");
         configurationFiles.setLocation("src/main/resources");
 
 

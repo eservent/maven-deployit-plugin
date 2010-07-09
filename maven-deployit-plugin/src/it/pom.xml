@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <deployitPluginVersion>2.0-SNAPSHOT</deployitPluginVersion>
-        <deployitVersion>2.0-SNAPSHOT</deployitVersion>
+        <deployitPluginVersion>1.3-beta-2-SNAPSHOT</deployitPluginVersion>
+        <deployitVersion>1.3-beta-2-SNAPSHOT</deployitVersion>
     </properties>
 </project>

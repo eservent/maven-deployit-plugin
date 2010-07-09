@@ -65,7 +65,11 @@ public class CliPackager implements ApplicationDeploymentPackager {
     }
 
     public void addDeployableArtifact(DeployableArtifactItem item) {
-        addCommand("create \"" + item.getType() + "\" label=\"" + item.getLabel() + "\" location=\"" + item.getLocation()+"\"");
+        String createCI = "create \"" + item.getType() + "\" label=\"" + item.getLabel() + "\" location=\"" + item.getLocation() + "\"";
+        if (item.hasName()) {
+            createCI += " name=\"" + item.getName() + "\"";
+        }
+        addCommand(createCI);
         addCommand("modify \"" + getDeploymentPackageName() + "\" deployableArtifacts+=\"" + item.getLabel() + "\"");
     }
 
