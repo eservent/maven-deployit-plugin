@@ -20,6 +20,8 @@
         <maven>${mavenVersion}</maven>
     </prerequisites>
 
+   
+
     <url>http://www.xebialabs.com</url>
     <build>
         <resources>
@@ -62,6 +64,38 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.5.0</version>
+                <inherited>false</inherited>
+                <configuration>
+                    <encoding>${sourceEncoding}</encoding>
+                    <aggregate>true</aggregate>
+                    <header>src/etc/gpl-header.txt</header>
+                    <excludes>
+                        <exclude>**/package/**</exclude>
+                        <exclude>.idea/**</exclude>
+                        <exclude>deployit*</exclude>
+                        <exclude>**/*.ear</exclude>
+                        <exclude>**/*.war</exclude>
+
+                        <!-- skip XML Velocity templates because the plugin adds a blank line
+                      after the comment, and that doesn't work if first line is supposed to
+                      be <?xml...> -->
+                        <exclude>**/*.xml.vm</exclude>
+                    </excludes>
+                    <mapping>
+                        <!-- use "standard" instead of Javadoc comments -->
+                        <java>SLASHSTAR_STYLE</java>
+                    </mapping>
+                    <properties>
+                        <year>${project.inceptionYear}</year>
+                    </properties>
+                </configuration>
+            </plugin>
+
+
             <!--
             TODO: create a profile
             -->
@@ -90,7 +124,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            
+
 
         </plugins>
     </build>
@@ -101,6 +135,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.java.target>1.5</project.build.java.target>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <sourceEncoding>UTF-8</sourceEncoding>
+        <year>2010</year>
     </properties>
 
 
@@ -225,5 +261,56 @@
         </profile>
 
     </profiles>
+
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>http://dexter.xebialabs.com/nexus/content/groups/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>nexus-dexter-thirdparty</id>
+            <url>http://dexter.xebialabs.com/nexus/content/repositories/hidden-thirdparty</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>snapshots</id>
+            <url>http://dexter.xebialabs.com/nexus/content/groups/public-snapshots</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>releases</id>
+            <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>http://dexter.xebialabs.com/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
 
 </project>
