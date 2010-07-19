@@ -40,145 +40,152 @@ import java.util.jar.Manifest;
  */
 public class ManifestPackager implements ApplicationDeploymentPackager {
 
-    private final File targetDirectory;
-    private final String deploymentPackageName;
+	private final File targetDirectory;
+	private final String deploymentPackageName;
 
-    private final Manifest manifest = new Manifest();
-    private static final String DEPLOYMENT_PACKAGE_DIR = "deployment-package";
+	private final Manifest manifest = new Manifest();
+	private static final String DEPLOYMENT_PACKAGE_DIR = "deployment-package";
 
-    private boolean generateManifestOnly = false;
-
-
-    public File getTargetDirectory() {
-        return targetDirectory;
-    }
-
-    public ManifestPackager(String artifactId, String version, File targetDirectory) {
-        this.targetDirectory = new File(targetDirectory, DEPLOYMENT_PACKAGE_DIR + File.separator + artifactId + File.separator + version);
-        this.targetDirectory.mkdirs();
-
-        this.deploymentPackageName = artifactId + "/" + version;
-        final Attributes mainAttributes = manifest.getMainAttributes();
-        mainAttributes.putValue("Manifest-Version", "1.0");
-        mainAttributes.putValue("Deployit-Package-Format-Version", "1.1");
-        mainAttributes.putValue("CI-Application", artifactId);
-        mainAttributes.putValue("CI-Version", version);
-    }
-
-    public void addMavenArtifact(Artifact artifact) {
-        String ciType = null;
-        String type = artifact.getType();
-        if (type.compareToIgnoreCase("ear") == 0) {
-            ciType = "Ear";
-        } else if (type.compareToIgnoreCase("war") == 0) {
-            ciType = "War";
-        } else {
-            //System.out.println("Not supported type [" + ciType + "], skip it");
-            return;
-        }
-
-        final Map<String, Attributes> entries = manifest.getEntries();
-        Attributes attributes = new Attributes();
-        attributes.putValue("CI-Type", ciType);
-        attributes.putValue("CI-Name", artifact.getArtifactId());
-
-        final File file = artifact.getFile();
-        final String name = file.getName();
-
-        entries.put(type + "/" + FilenameUtils.getName(name), attributes);
+	private boolean generateManifestOnly = false;
 
 
-        if (generateManifestOnly) {
-            System.out.println("Skip copying artifact " + artifact.getFile() + " to " + new File(targetDirectory, type));
-        } else {
-            try {
-                FileUtils.copyFileToDirectory(artifact.getFile(), new File(targetDirectory, type));
-            } catch (IOException e) {
-                throw new RuntimeException("Fail to copy of " + artifact.getFile() + " to " + new File(targetDirectory, type), e);
-            }
-        }
-    }
+	public File getTargetDirectory() {
+		return targetDirectory;
+	}
 
-    public void perform() {
-        final File meta_inf = new File(targetDirectory, "META-INF");
-        meta_inf.mkdirs();
+	public ManifestPackager(String artifactId, String version, File targetDirectory) {
+		this.targetDirectory = new File(targetDirectory, DEPLOYMENT_PACKAGE_DIR + File.separator + artifactId + File.separator + version);
+		this.targetDirectory.mkdirs();
 
-        File manifestFile = new File(meta_inf, "MANIFEST.MF");
-        try {
-            FileOutputStream fos = new FileOutputStream(manifestFile);
-            manifest.write(fos);
-            fos.close();
-        } catch (IOException e) {
-            new RuntimeException("perform failed", e);
-        }
-    }
+		this.deploymentPackageName = artifactId + "/" + version;
+		final Attributes mainAttributes = manifest.getMainAttributes();
+		mainAttributes.putValue("Manifest-Version", "1.0");
+		mainAttributes.putValue("Deployit-Package-Format-Version", "1.1");
+		mainAttributes.putValue("CI-Application", artifactId);
+		mainAttributes.putValue("CI-Version", version);
+	}
 
-    public String getDeploymentPackageName() {
-        return deploymentPackageName;
-    }
+	public void addMavenArtifact(Artifact artifact) {
+		String ciType = null;
+		String type = artifact.getType();
+		if (type.compareToIgnoreCase("ear") == 0) {
+			ciType = "Ear";
+		} else if (type.compareToIgnoreCase("war") == 0) {
+			ciType = "War";
+		} else {
+			//System.out.println("Not supported type [" + ciType + "], skip it");
+			return;
+		}
 
-    public List<String> getCliCommands() {
-        List<String> a = new ArrayList<String>();
-        a.add("import location=" + targetDirectory);
-        a.add("show");
-        a.add("show_type");
-        a.add("show_type DeploymentPackage");
-        return a;
-        //return Collections.singletonList("import location="+targetDirectory);
-    }
+		final Map<String, Attributes> entries = manifest.getEntries();
+		Attributes attributes = new Attributes();
+		attributes.putValue("CI-Type", ciType);
+		attributes.putValue("CI-Name", artifact.getArtifactId());
 
-    public void addDeployableArtifact(DeployableArtifactItem item) {
+		final File file = artifact.getFile();
+		final String name = file.getName();
 
-        final Map<String, Attributes> entries = manifest.getEntries();
-        final Attributes attributes = new Attributes();
-        final String type = item.getType();
-        final File location = new File(item.getLocation());
+		entries.put(type + "/" + FilenameUtils.getName(name), attributes);
 
 
-        attributes.putValue("CI-Type", type);
-        if (item.hasName()) 
-            attributes.putValue("CI-Name", item.getName());
+		if (generateManifestOnly) {
+			System.out.println("Skip copying artifact " + artifact.getFile() + " to " + new File(targetDirectory, type));
+		} else {
+			try {
+				FileUtils.copyFileToDirectory(artifact.getFile(), new File(targetDirectory, type));
+			} catch (IOException e) {
+				throw new RuntimeException("Fail to copy of " + artifact.getFile() + " to " + new File(targetDirectory, type), e);
+			}
+		}
+	}
 
-        entries.put(type + "/" + item.getLocation(), attributes);
+	public void perform() {
+		final File meta_inf = new File(targetDirectory, "META-INF");
+		meta_inf.mkdirs();
+
+		File manifestFile = new File(meta_inf, "MANIFEST.MF");
+		try {
+			FileOutputStream fos = new FileOutputStream(manifestFile);
+			manifest.write(fos);
+			fos.close();
+		} catch (IOException e) {
+			new RuntimeException("perform failed", e);
+		}
+	}
+
+	public String getDeploymentPackageName() {
+		return deploymentPackageName;
+	}
+
+	public List<String> getCliCommands() {
+		List<String> a = new ArrayList<String>();
+		a.add("import location=" + targetDirectory);
+		a.add("show");
+		a.add("show_type");
+		a.add("show_type DeploymentPackage");
+		return a;
+		//return Collections.singletonList("import location="+targetDirectory);
+	}
+
+	public void addDeployableArtifact(DeployableArtifactItem item) {
+
+		final Map<String, Attributes> entries = manifest.getEntries();
+		final Attributes attributes = new Attributes();
+		final String type = item.getType();
+		final File location = new File(item.getLocation());
 
 
-        final File targetDir = new File(targetDirectory, type);
-        if (generateManifestOnly) {
-            System.out.println("Skip copying artifact " + item.getLabel() + " to " + targetDir);
-        } else {
-            targetDir.mkdirs();
-            try {
-                if (location.isDirectory())
-                    FileUtils.copyDirectoryToDirectory(getParent(location), targetDir);
-                else
-                    FileUtils.copyFileToDirectory(location, targetDir);
-            } catch (IOException e) {
-                throw new RuntimeException("Fail to copy of " + location + " to " + targetDir, e);
-            }
-        }
-    }
+		attributes.putValue("CI-Type", type);
+		if (item.hasName())
+			attributes.putValue("CI-Name", item.getName());
 
-    /**
-     * Return root parent 
-     */
-    private File getParent(File location) {              
-        final File parentFile = location.getParentFile();
-        if (parentFile == null)
-            return location;
-        return getParent(parentFile);
-    }
+		entries.put(type + "/" + item.getLocation(), attributes);
 
 
-    public boolean isGenerateManifestOnly() {
-        return generateManifestOnly;
-    }
+		final File targetDir = new File(targetDirectory, type);
+		if (generateManifestOnly) {
+			System.out.println("Skip copying artifact " + item.getLabel() + " to " + targetDir);
+			return;
+		}
+		targetDir.mkdirs();
 
-    public void setGenerateManifestOnly(boolean generateManifestOnly) {
-        this.generateManifestOnly = generateManifestOnly;
-    }
+		final File locationTargetDirs = new File(targetDir, location.getParent());
+		locationTargetDirs.mkdirs();
 
-    public String getManifestFilePath() {
-        return new File(targetDirectory, "META-INF").getAbsolutePath();
-    }
+		try {
+			if (location.isDirectory()) {
+				FileUtils.copyDirectoryToDirectory(location, locationTargetDirs);
+			} else {
+				FileUtils.copyFileToDirectory(location, locationTargetDirs);
+			}
+		} catch (IOException e) {
+			throw new RuntimeException("Fail to copy of " + location + " to " + targetDir, e);
+
+		}
+
+	}
+
+	/**
+	 * Return root parent
+	 */
+	private File getParent(File location) {
+		final File parentFile = location.getParentFile();
+		if (parentFile == null)
+			return location;
+		return getParent(parentFile);
+	}
+
+
+	public boolean isGenerateManifestOnly() {
+		return generateManifestOnly;
+	}
+
+	public void setGenerateManifestOnly(boolean generateManifestOnly) {
+		this.generateManifestOnly = generateManifestOnly;
+	}
+
+	public String getManifestFilePath() {
+		return new File(targetDirectory, "META-INF").getAbsolutePath();
+	}
 
 }

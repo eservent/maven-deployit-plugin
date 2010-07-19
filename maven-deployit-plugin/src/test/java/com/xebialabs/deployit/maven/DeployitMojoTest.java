@@ -58,7 +58,7 @@ public class DeployitMojoTest extends AbstractMojoTestCase {
         host.addParameter("accessMethod", "SSH_SCP");
 
         tomcatServer = new ConfigurationItem();
-        tomcatServer.setMainType("TomcatServer");
+        tomcatServer.setMainType("TomcatUnmanagedServer");
         tomcatServer.addParameter("host", "Tomcat Host");
         tomcatServer.addParameter("label", "tomcat server");
         tomcatServer.addParameter("port", "8080");
