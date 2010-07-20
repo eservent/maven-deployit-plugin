@@ -44,7 +44,7 @@ def m = new Manifest(manifest.newInputStream())
 
 def entries = m.getEntries();
 assert entries.size() == 3, "3 entries";
-def earEntries = entries.findAll { key, value -> key == 'ear/PetClinic-1.0.ear'};
+def earEntries = entries.findAll { key, value -> key == 'Ear/PetClinic-1.0.ear'};
 
 assert earEntries.size() == 1
 def earEntry = earEntries.iterator().next();

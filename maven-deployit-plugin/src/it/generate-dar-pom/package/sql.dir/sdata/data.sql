@@ -1,0 +1,1 @@
+delete from infos where x=1;

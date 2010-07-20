@@ -66,7 +66,11 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
 	}
 
 	public void addMavenArtifact(Artifact artifact) {
+
 		String ciType = capitalize(artifact.getType());
+
+		if ("Dar".equals(ciType))
+			return;
 
 		final Map<String, Attributes> entries = manifest.getEntries();
 		Attributes attributes = new Attributes();
@@ -91,12 +95,10 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
 	}
 
 	private String capitalize(String inputWord) {
-		String firstLetter = inputWord.substring(0,1);  // Get first letter
-		String remainder   = inputWord.substring(1);    // Get remainder of word.
+		String firstLetter = inputWord.substring(0, 1);  // Get first letter
+		String remainder = inputWord.substring(1);    // Get remainder of word.
 		String capitalized = firstLetter.toUpperCase() + remainder.toLowerCase();
 		return capitalized;
-
-
 	}
 
 	public void perform() {
@@ -124,10 +126,16 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
 		a.add("show_type");
 		a.add("show_type DeploymentPackage");
 		return a;
-		//return Collections.singletonList("import location="+targetDirectory);
 	}
 
 	public void addDeployableArtifact(DeployableArtifactItem item) {
+		System.out.println("Add "+item);
+		if ("Dar".equals(item.getType()))
+			return;
+
+		if ("Pom".equals(item.getType()))
+			return;
+
 
 		final Map<String, Attributes> entries = manifest.getEntries();
 		final Attributes attributes = new Attributes();
@@ -139,7 +147,11 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
 		if (item.hasName())
 			attributes.putValue("CI-Name", item.getName());
 
-		entries.put(type + "/" + item.getLocation(), attributes);
+		if (location.isAbsolute())
+			entries.put(type + "/" + location.getName(), attributes);
+		else
+			entries.put(type + "/" + item.getLocation(), attributes);
+
 
 
 		final File targetDir = new File(targetDirectory, type);
@@ -150,11 +162,12 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
 		targetDir.mkdirs();
 
 		File locationTargetDirs;
-		if (location.getParent() != null) {
+		//do not create missing directories is there are no parents or if the file is absolute
+		if (location.isAbsolute() || location.getParent() == null) {
+			locationTargetDirs = targetDir;
+		} else {
 			locationTargetDirs = new File(targetDir, location.getParent());
 			locationTargetDirs.mkdirs();
-		} else {
-			locationTargetDirs = targetDir;
 		}
 
 

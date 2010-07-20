@@ -73,8 +73,6 @@ Deployit Plugin
 
   * {{{examples/middleware-resources.html}Define middleware resources }} such as Datasources or JMS Queues.
 
-  * {{{examples/manifest.html}Generate Manifest based deployment packages}} to import it into an Enterprise Deployit instance.
-
   * {{{examples/test-configuration.html}Testing the configurationn}} to test the plugin configuration by skipping the executions of the deployment's steps.
 
   * {{{examples/configurationfiles.html}Add configurationn file }} to the current deployment.

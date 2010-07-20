@@ -25,11 +25,11 @@
 							<location>com.xebialabs.deployit.petclinic.petclinic-war:PetClinic</location>
 						</DeployableArtifactItem>
 
-						<DeployableArtifactItems>
+						<DeployableArtifactItem>
 							<type>Library</type>
 							<label>MySQL JDBC Driver</label>
 							<location>mysql:mysql-connector-java</location>
-						</DeployableArtifactItems>
+						</DeployableArtifactItem>
 
 						<DeployableArtifactItem>
 							<type>ConfigurationFiles</type>
