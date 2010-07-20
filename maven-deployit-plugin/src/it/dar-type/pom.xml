@@ -29,32 +29,26 @@
 
 						<DeployableArtifactItem>
 							<type>Ear</type>
-							<label>PetClinic-Ear</label>
 							<location>com.xebialabs.deployit.petclinic.petclinic-ear:PetClinic</location>
 						</DeployableArtifactItem>
 
 						<DeployableArtifactItem>
 							<type>ConfigurationFiles</type>
-							<label>ConfigurationFilesMapping resources</label>
 							<location>package/resources.dir</location>
 						</DeployableArtifactItem>
 
 						<DeployableArtifactItem>
-							<type>ConfigurationFiles</type>
-							<label>A single ConfigurationFilesMapping resources</label>
+							<type>ConfigurationFiles</type>							
 							<location>package/other.config.properties</location>
 						</DeployableArtifactItem>
 
-
 						<DeployableArtifactItem>
 							<type>SqlFiles</type>
-							<label>SQL resources</label>
 							<location>package/sql.dir</location>
 						</DeployableArtifactItem>
 
 						<DeployableArtifactItem>
-							<type>SqlScript</type>
-							<label>SQL resources</label>
+							<type>SqlScript</type>							
 							<location>package/single.sql/afile.sql</location>
 						</DeployableArtifactItem>
 					</deployableArtifacts>

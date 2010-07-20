@@ -19,66 +19,75 @@ package com.xebialabs.deployit.maven;
 
 import org.apache.commons.lang.StringUtils;
 
-
 public class DeployableArtifactItem {
 
-    private String label;
+	private String type;
 
-    private String type;
-    
-    private String location;
+	private String location;
 
-    private String name;
+	private String name;
 
-    public DeployableArtifactItem() {
-    }
+	private String darLocation;
 
+	private boolean folder = false;
 
-    public String getLabel() {
-        return label;
-    }
+	public DeployableArtifactItem() {
+	}
 
-    public void setLabel(String label) {
-        this.label = label;
-    }
+	public String getDarLocation() {
+		return darLocation;
+	}
 
-    public String getLocation() {
-        return location;
-    }
+	public void setDarLocation(String darLocation) {
+		this.darLocation = darLocation;
+	}
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+	public String getLocation() {
+		return location;
+	}
 
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
 
-    public String getName() {
-        return name;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    @Override
-    public String toString() {
-        return "DeployableArtifactItem{" +
-                "label='" + label + '\'' +
-                ", type='" + type + '\'' +
-                ", location='" + location + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
 
-    public boolean hasName() {
-        return !StringUtils.isBlank(name);
-    }
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean isFolder() {		
+		return folder || "Libraries".equals(type);
+	}
+
+	public void setFolder(boolean folder) {
+		this.folder = folder;
+	}
+
+	@Override
+	public String toString() {
+		return "DeployableArtifactItem{" +
+				"type='" + type + '\'' +
+				", location='" + location + '\'' +
+				", name='" + name + '\'' +
+				", darLocation='" + darLocation + '\'' +
+				", folder=" + isFolder() +
+				'}';
+	}
+
+	public boolean hasName() {
+		return !StringUtils.isBlank(name);
+	}
 }

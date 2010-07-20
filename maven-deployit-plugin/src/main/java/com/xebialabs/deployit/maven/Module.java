@@ -17,13 +17,6 @@
 
 package com.xebialabs.deployit.maven;
 
-/**
- * Created by IntelliJ IDEA.
- * User: bmoussaud
- * Date: 20 avr. 2010
- * Time: 18:02:31
- * To change this template use File | Settings | File Templates.
- */
 public class Module {
     private String artifactId;
     private String groupId;

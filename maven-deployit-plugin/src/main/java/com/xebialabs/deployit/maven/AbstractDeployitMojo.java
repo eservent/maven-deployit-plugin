@@ -350,7 +350,7 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
 			return item;
 		}
 
-		getLog().info(" add a dependency deployable artifact " + item);
+		getLog().info(" add a maven deployable artifact " + item);
 		getLog().debug("-translateIntoPath- " + item.getLocation());
 		String key = item.getLocation();
 		Artifact artifact = (Artifact) project.getArtifactMap().get(key);
@@ -363,12 +363,12 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
 
 		DeployableArtifactItem mavenDeployableArtifact = new DeployableArtifactItem();
 		mavenDeployableArtifact.setLocation(artifact.getFile().toString());
-		mavenDeployableArtifact.setLabel(item.getLabel());
 		if (item.hasName())
 			mavenDeployableArtifact.setName(item.getName());
 		else
 			mavenDeployableArtifact.setName(artifact.getArtifactId());
 		mavenDeployableArtifact.setType(item.getType());
+		mavenDeployableArtifact.setDarLocation(item.getDarLocation());
 		return mavenDeployableArtifact;
 
 	}
@@ -381,7 +381,6 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
 		mavenDeployableArtifact.setName(artifact.getArtifactId());
 		mavenDeployableArtifact.setType(capitalize(artifact.getType()));
 		return mavenDeployableArtifact;
-
 	}
 
 	private String capitalize(String inputWord) {

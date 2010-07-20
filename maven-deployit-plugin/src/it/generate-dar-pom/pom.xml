@@ -43,20 +43,18 @@
                     
                     <deployableArtifacts>
                         <DeployableArtifactItem>
-                            <type>Ear</type>
-                            <label>PetClinic-Ear</label>
+                            <type>Ear</type>                          
                             <location>com.xebialabs.deployit.petclinic.petclinic-ear:PetClinic</location>
                         </DeployableArtifactItem>
 
                         <DeployableArtifactItem>
                             <type>ConfigurationFiles</type>
-                            <label>ConfigurationFilesMapping resources</label>
+                           
                             <location>package/resources.dir</location>
                         </DeployableArtifactItem>
 
                         <DeployableArtifactItem>
-                            <type>SqlFiles</type>
-                            <label>SQL resources</label>
+                            <type>SqlFiles</type>                            
                             <location>package/sql.dir</location>
                         </DeployableArtifactItem>
                     </deployableArtifacts>

@@ -1,79 +1,111 @@
-	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <parent>
-        <groupId>com.xebialabs.deployit</groupId>
-        <artifactId>maven-deployit-plugin-integration-test</artifactId>
-        <relativePath>../pom.xml</relativePath>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
+	<parent>
+		<groupId>com.xebialabs.deployit</groupId>
+		<artifactId>maven-deployit-plugin-integration-test</artifactId>
+		<relativePath>../pom.xml</relativePath>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.xebialabs.deployit</groupId>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.xebialabs.deployit</groupId>
 
-    <artifactId>maven-deployit-plugin-test-victim-generate-dar</artifactId>
-    <packaging>ear</packaging>
-    <version>1.0</version>
-    <name>simple</name>
-    <url>http://maven.apache.org</url>
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.xebialabs.deployit</groupId>
-                <artifactId>maven-deployit-plugin</artifactId>
-                <version>${deployitPluginVersion}</version>
-                <executions>
-                    <execution>
-                        <id>deployit-plugin-test</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>generate-deployment-package</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <deployableArtifacts>
-                        <DeployableArtifactItem>
-                            <type>ConfigurationFiles</type>
-                            <label>ConfigurationFilesMapping resources</label>
-                            <location>package/resources.dir</location>
-                        </DeployableArtifactItem>
+	<artifactId>maven-deployit-plugin-test-victim-generate-dar</artifactId>
+	<packaging>ear</packaging>
+	<version>1.0</version>
+	<name>simple</name>
+	<url>http://maven.apache.org</url>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.xebialabs.deployit</groupId>
+				<artifactId>maven-deployit-plugin</artifactId>
+				<version>${deployitPluginVersion}</version>
+				<executions>
+					<execution>
+						<id>deployit-plugin-test</id>
+						<phase>package</phase>
+						<goals>
+							<goal>generate-deployment-package</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<deployableArtifacts>
 
-                        <DeployableArtifactItem>
-                            <type>SqlFiles</type>
-                            <label>SQL resources</label>
-                            <location>package/sql.dir</location>
-                        </DeployableArtifactItem>
-                    </deployableArtifacts>
-                </configuration>
-            </plugin>
+						<DeployableArtifactItem>
+							<type>ConfigurationFiles</type>
+							<location>package/resources.dir</location>
+							<darLocation>appconfig</darLocation>
+						</DeployableArtifactItem>
 
-        </plugins>
-    </build>
+						<DeployableArtifactItem>
+							<type>SqlFiles</type>
+							<location>package/sql.dir</location>
+						</DeployableArtifactItem>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+						<DeployableArtifactItem>
+							<type>Libraries</type>
+							<location>junit:junit</location>
+							<darLocation>extlib</darLocation>
+						</DeployableArtifactItem>
+
+						<DeployableArtifactItem>
+							<type>Libraries</type>
+							<location>org.hibernate:hibernate</location>
+							<darLocation>extlib</darLocation>
+						</DeployableArtifactItem>
+
+						<DeployableArtifactItem>
+							<type>Libraries</type>
+							<location>mysql:mysql-connector-java</location>
+							<darLocation>jdbc</darLocation>
+						</DeployableArtifactItem>
+
+					</deployableArtifacts>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate</artifactId>
+			<version>3.2.4.ga</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.13</version>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
 
 
-    <repositories>
-        <repository>
-            <id>xebialabs-releases</id>
-            <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
-        </repository>
-    </repositories>
+	<repositories>
+		<repository>
+			<id>xebialabs-releases</id>
+			<url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+		</repository>
+	</repositories>
 
 </project>

@@ -19,8 +19,6 @@ package com.xebialabs.deployit.maven.packager;
 
 import com.xebialabs.deployit.maven.DeployableArtifactItem;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.maven.artifact.Artifact;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,13 +29,6 @@ import java.util.Map;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
-/**
- * Created by IntelliJ IDEA.
- * User: bmoussaud
- * Date: 29 avr. 2010
- * Time: 18:18:57
- * To change this template use File | Settings | File Templates.
- */
 public class ManifestPackager implements ApplicationDeploymentPackager {
 
 	private final File targetDirectory;
@@ -63,42 +54,6 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
 		mainAttributes.putValue("Deployit-Package-Format-Version", "1.1");
 		mainAttributes.putValue("CI-Application", artifactId);
 		mainAttributes.putValue("CI-Version", version);
-	}
-
-	public void addMavenArtifact(Artifact artifact) {
-
-		String ciType = capitalize(artifact.getType());
-
-		if ("Dar".equals(ciType))
-			return;
-
-		final Map<String, Attributes> entries = manifest.getEntries();
-		Attributes attributes = new Attributes();
-		attributes.putValue("CI-Type", ciType);
-		attributes.putValue("CI-Name", artifact.getArtifactId());
-
-		final File file = artifact.getFile();
-		final String name = file.getName();
-
-		entries.put(ciType + "/" + FilenameUtils.getName(name), attributes);
-
-
-		if (generateManifestOnly) {
-			System.out.println("Skip copying artifact " + artifact.getFile() + " to " + new File(targetDirectory, ciType));
-		} else {
-			try {
-				FileUtils.copyFileToDirectory(artifact.getFile(), new File(targetDirectory, ciType));
-			} catch (IOException e) {
-				throw new RuntimeException("Fail to copy of " + artifact.getFile() + " to " + new File(targetDirectory, ciType), e);
-			}
-		}
-	}
-
-	private String capitalize(String inputWord) {
-		String firstLetter = inputWord.substring(0, 1);  // Get first letter
-		String remainder = inputWord.substring(1);    // Get remainder of word.
-		String capitalized = firstLetter.toUpperCase() + remainder.toLowerCase();
-		return capitalized;
 	}
 
 	public void perform() {
@@ -128,35 +83,36 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
 		return a;
 	}
 
-	public void addDeployableArtifact(DeployableArtifactItem item) {
-		System.out.println("Add "+item);
+	public void addDeployableArtifact(DeployableArtifactItem item) {		
 		if ("Dar".equals(item.getType()))
 			return;
 
 		if ("Pom".equals(item.getType()))
 			return;
 
-
 		final Map<String, Attributes> entries = manifest.getEntries();
 		final Attributes attributes = new Attributes();
 		final String type = item.getType();
 		final File location = new File(item.getLocation());
 
-
 		attributes.putValue("CI-Type", type);
 		if (item.hasName())
 			attributes.putValue("CI-Name", item.getName());
 
-		if (location.isAbsolute())
-			entries.put(type + "/" + location.getName(), attributes);
-		else
-			entries.put(type + "/" + item.getLocation(), attributes);
+		String darLocation = (item.getDarLocation() == null ? type : item.getDarLocation());
 
+		if (item.isFolder()) {
+		   entries.put(darLocation, attributes);
+		} else {
+			if (location.isAbsolute())
+				entries.put(darLocation + "/" + location.getName(), attributes);
+			else
+				entries.put(darLocation + "/" + item.getLocation(), attributes);
+		}
 
-
-		final File targetDir = new File(targetDirectory, type);
+		final File targetDir = new File(targetDirectory, darLocation);
 		if (generateManifestOnly) {
-			System.out.println("Skip copying artifact " + item.getLabel() + " to " + targetDir);
+			System.out.println("Skip copying artifact " + item.getName() + " to " + targetDir);
 			return;
 		}
 		targetDir.mkdirs();
@@ -184,17 +140,6 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
 
 	}
 
-	/**
-	 * Return root parent
-	 */
-	private File getParent(File location) {
-		final File parentFile = location.getParentFile();
-		if (parentFile == null)
-			return location;
-		return getParent(parentFile);
-	}
-
-
 	public boolean isGenerateManifestOnly() {
 		return generateManifestOnly;
 	}
@@ -203,8 +148,8 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
 		this.generateManifestOnly = generateManifestOnly;
 	}
 
-	public String getManifestFilePath() {
-		return new File(targetDirectory, "META-INF").getAbsolutePath();
+	public File getManifestFile() {
+		return new File(targetDirectory, "META-INF/MANIFEST.MF");
 	}
 
 }

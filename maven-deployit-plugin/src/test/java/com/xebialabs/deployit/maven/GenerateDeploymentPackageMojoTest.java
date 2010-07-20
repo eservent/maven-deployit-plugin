@@ -40,13 +40,13 @@ public class GenerateDeploymentPackageMojoTest extends AbstractMojoTestCase {
 
         configurationFiles = new DeployableArtifactItem();
         configurationFiles.setType("ConfigurationFiles");
-        configurationFiles.setLabel("ConfigurationFilesCI");
+
         configurationFiles.setLocation("src/main/resources");
 
 
         sqlFiles = new DeployableArtifactItem();
         sqlFiles.setType("SqlFiles");
-        sqlFiles.setLabel("SqlFiles");
+        
         sqlFiles.setLocation("src/main/sql");
 
 

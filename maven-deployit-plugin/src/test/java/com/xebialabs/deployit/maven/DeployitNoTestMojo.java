@@ -31,7 +31,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class DeployitMojoTest extends AbstractMojoTestCase {
+public class DeployitNoTestMojo extends AbstractMojoTestCase {
 
 	private DeployMojo mojo;
 	private ConfigurationItem host;
@@ -76,7 +76,7 @@ public class DeployitMojoTest extends AbstractMojoTestCase {
 
 		configurationFiles = new DeployableArtifactItem();
 		configurationFiles.setType("ConfigurationFiles");
-		configurationFiles.setLabel("ConfigurationFilesCI");
+
 		configurationFiles.setName("ConfigurationFilesCIName");
 		configurationFiles.setLocation("src/main/resources");
 
@@ -151,7 +151,7 @@ public class DeployitMojoTest extends AbstractMojoTestCase {
 		MappingItem mapping = new MappingItem();
 		mapping.setMainType("ConfigurationFilesMapping");
 		mapping.setTarget(host.getLabel());
-		mapping.setSource(configurationFiles.getLabel());
+		mapping.setSource(configurationFiles.getName());
 		mapping.addParameter("targetdirectory", "/tmp/remoteproperties");
 
 

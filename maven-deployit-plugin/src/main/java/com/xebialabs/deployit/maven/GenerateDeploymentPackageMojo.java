@@ -94,7 +94,7 @@ public class GenerateDeploymentPackageMojo extends AbstractDeployitMojo {
 			}
 		}
 		packager.perform();
-		getLog().info("Manifest file generated in " + packager.getManifestFilePath());
+		getLog().info("Manifest file generated in " + packager.getManifestFile());
 
 		if (generateManifestOnly) {
 			getLog().info("Do not seal the dar file, return");
@@ -106,14 +106,18 @@ public class GenerateDeploymentPackageMojo extends AbstractDeployitMojo {
 			File darFile = getDarFile(outputDirectory, finalName, classifier);
 			getLog().info("Seal the archive in " + darFile);
 
-			final MavenArchiver archiver = new MavenArchiver();
-			final JarArchiver jarArchiver = getJarArchiver();
+			final MavenArchiver mvnArchiver = new MavenArchiver();
 			getLog().debug("Jar archiver implementation[" + jarArchiver.getClass().getName() + "]");
-			archiver.setArchiver(jarArchiver);
-			archiver.setOutputFile(darFile);
+			mvnArchiver.setArchiver(jarArchiver);
+			mvnArchiver.setOutputFile(darFile);
 
-			archiver.getArchiver().addDirectory(packager.getTargetDirectory());
-			archiver.createArchive(getProject(), archive);
+			mvnArchiver.getArchiver().addDirectory(packager.getTargetDirectory());
+
+			final File manifestFile = packager.getManifestFile();
+			getLog().debug("set Manifest file of the archive "+manifestFile);
+			mvnArchiver.getArchiver().setManifest(manifestFile);
+
+			mvnArchiver.createArchive(getProject(), archive);
 
 			if (classifier != null) {
 				projectHelper.attachArtifact(getProject(), "dar", classifier, darFile);
@@ -130,12 +134,12 @@ public class GenerateDeploymentPackageMojo extends AbstractDeployitMojo {
 
 
 	/**
-	 * Returns the EAR file to generate, based on an optional classifier.
+	 * Returns the DAR file to generate, based on an optional classifier.
 	 *
 	 * @param basedir    the output directory
 	 * @param finalName  the name of the ear file
 	 * @param classifier an optional classifier
-	 * @return the EAR file to generate
+	 * @return the DAR file to generate
 	 */
 	private static File getDarFile(File basedir, String finalName, String classifier) {
 		if (classifier == null) {

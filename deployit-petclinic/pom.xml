@@ -21,25 +21,23 @@
 
 						<DeployableArtifactItem>
 							<type>War</type>
-							<label>PetClinic-war</label>
+							<name>petclinic.war</name>
 							<location>com.xebialabs.deployit.petclinic.petclinic-war:PetClinic</location>
 						</DeployableArtifactItem>
 
 						<DeployableArtifactItem>
-							<type>Library</type>
-							<label>MySQL JDBC Driver</label>
+							<type>Libraries</type>							
 							<location>mysql:mysql-connector-java</location>
+							<darLocation>commonlibs</darLocation>
 						</DeployableArtifactItem>
 
 						<DeployableArtifactItem>
-							<type>ConfigurationFiles</type>
-							<label>ConfigurationFilesMapping resources</label>
+							<type>ConfigurationFiles</type>	
 							<location>config</location>
 						</DeployableArtifactItem>
 
 						<DeployableArtifactItem>
 							<type>SqlScript</type>
-							<label>SQL scripts</label>
 							<location>sql/data.sql</location>
 						</DeployableArtifactItem>
 					</deployableArtifacts>
