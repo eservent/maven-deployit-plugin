@@ -149,8 +149,14 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
 		}
 		targetDir.mkdirs();
 
-		final File locationTargetDirs = new File(targetDir, location.getParent());
-		locationTargetDirs.mkdirs();
+		File locationTargetDirs;
+		if (location.getParent() != null) {
+			locationTargetDirs = new File(targetDir, location.getParent());
+			locationTargetDirs.mkdirs();
+		} else {
+			locationTargetDirs = targetDir;
+		}
+
 
 		try {
 			if (location.isDirectory()) {
