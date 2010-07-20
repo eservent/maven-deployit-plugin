@@ -1,0 +1,26 @@
+create Host label="Host at mysql.vm" description="" operatingsystemfamily=UNIX accessmethod=SSH_SCP address=mysql.vm username=ubuntu password={b64}dWJ1bnR1
+
+create Host label="Host at tomcat6.vm" description="" operatingsystemfamily=UNIX accessmethod=SSH_SCP address=tomcat6.vm username=ubuntu password={b64}dWJ1bnR1
+
+create Host label="Host at tomcat6.vm (root)" description="" operatingsystemfamily=UNIX accessmethod=SSH_SUDO address=tomcat6.vm username=ubuntu password={b64}dWJ1bnR1 sudousername=root
+
+create Host label="Host at apache2.vm" description="" operatingsystemfamily=UNIX accessmethod=SSH_SUDO address=apache2.vm username=ubuntu password={b64}dWJ1bnR1 sudousername=root
+
+create TomcatUnmanagedServer label="Tomcat6-1" description="" host="Host at tomcat6.vm" tomcathome=/home/ubuntu/tomcat/tomcat6-1 ajpport=8009 baseurl=http://tomcat6.vm:8080 startcommand=/home/ubuntu/tomcat/tomcat6-1/bin/startup.sh stopcommand=/home/ubuntu/tomcat/tomcat6-1/bin/shutdown.sh
+
+create TomcatUnmanagedServer label="Tomcat6-2" description="" host="Host at tomcat6.vm" tomcathome=/home/ubuntu/tomcat/tomcat6-2 ajpport=8010 baseurl=http://tomcat6.vm:8081 startcommand=/home/ubuntu/tomcat/tomcat6-2/bin/startup.sh stopcommand=/home/ubuntu/tomcat/tomcat6-2/bin/shutdown.sh
+
+create TomcatUnmanagedServer label="Tomcat6-dev" description="" host="Host at tomcat6.vm" tomcathome=/home/ubuntu/tomcat/tomcat6-3 ajpport=8011 baseurl=http://tomcat6.vm:8082 startcommand=/home/ubuntu/tomcat/tomcat6-3/bin/startup.sh stopcommand=/home/ubuntu/tomcat/tomcat6-3/bin/shutdown.sh
+
+create ApacheHttpdServer label="Apache2 Web Server" description="" host="Host at apache2.vm" apachectlpath=/usr/sbin/apache2ctl configurationlocation=/etc/apache2/mods-enabled htdocslocation=/home/ubuntu/wwww accessloglocation=/var/log/apache2/access.log errorloglocation=/var/log/apache2/error.log
+
+create ModJKConfiguration label="mod_jk configuration" description="" jkmodulepath=/usr/lib/apache2/modules/mod_jk.so jkworkerfile=/etc/apache2/workers.properties jklogfile=/var/log/apache2/mod_jk.log jkshmfile=/var/log/apache2 jkstatus=true jkloglevel=Warn jklogstampformat="[%a %b %d %H:%M:%S %Y] "
+
+create Database label="MySQL database" description="" host="Host at mysql.vm" command=/usr/bin/mysql options="-u ${user} -p${password} ${database}" user=deployit password="xebia2010" database=deployit 
+
+create Environment label="Tomcat Apache Environment" description="" members="[Host at tomcat6.vm,Host at tomcat6.vm (root), Tomcat6-2, Tomcat6-1, Apache2 Web Server]"
+
+create TomcatDataSource label="Petclinic DS" description="" jndiname=jdbc/petclinic driverclass=com.mysql.jdbc.Driver connectionurl=jdbc:mysql://localhost:3306/ username=deployit password="{b64}ZGVwbG95aXQ=" maxactive=0 maxidle=0 maxwait=0
+
+
+
