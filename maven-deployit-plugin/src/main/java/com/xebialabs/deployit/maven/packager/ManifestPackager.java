@@ -66,16 +66,7 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
 	}
 
 	public void addMavenArtifact(Artifact artifact) {
-		String ciType = null;
-		String type = artifact.getType();
-		if (type.compareToIgnoreCase("ear") == 0) {
-			ciType = "Ear";
-		} else if (type.compareToIgnoreCase("war") == 0) {
-			ciType = "War";
-		} else {
-			//System.out.println("Not supported type [" + ciType + "], skip it");
-			return;
-		}
+		String ciType = capitalize(artifact.getType());
 
 		final Map<String, Attributes> entries = manifest.getEntries();
 		Attributes attributes = new Attributes();
@@ -85,18 +76,27 @@ public class ManifestPackager implements ApplicationDeploymentPackager {
 		final File file = artifact.getFile();
 		final String name = file.getName();
 
-		entries.put(type + "/" + FilenameUtils.getName(name), attributes);
+		entries.put(ciType + "/" + FilenameUtils.getName(name), attributes);
 
 
 		if (generateManifestOnly) {
-			System.out.println("Skip copying artifact " + artifact.getFile() + " to " + new File(targetDirectory, type));
+			System.out.println("Skip copying artifact " + artifact.getFile() + " to " + new File(targetDirectory, ciType));
 		} else {
 			try {
-				FileUtils.copyFileToDirectory(artifact.getFile(), new File(targetDirectory, type));
+				FileUtils.copyFileToDirectory(artifact.getFile(), new File(targetDirectory, ciType));
 			} catch (IOException e) {
-				throw new RuntimeException("Fail to copy of " + artifact.getFile() + " to " + new File(targetDirectory, type), e);
+				throw new RuntimeException("Fail to copy of " + artifact.getFile() + " to " + new File(targetDirectory, ciType), e);
 			}
 		}
+	}
+
+	private String capitalize(String inputWord) {
+		String firstLetter = inputWord.substring(0,1);  // Get first letter
+		String remainder   = inputWord.substring(1);    // Get remainder of word.
+		String capitalized = firstLetter.toUpperCase() + remainder.toLowerCase();
+		return capitalized;
+
+
 	}
 
 	public void perform() {
