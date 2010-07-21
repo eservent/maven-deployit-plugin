@@ -22,5 +22,9 @@ create Environment label="Tomcat Apache Environment" description="" members="[Ho
 
 create TomcatDataSource label="Petclinic DS" description="" jndiname=jdbc/petclinic driverclass=com.mysql.jdbc.Driver connectionurl=jdbc:mysql://localhost:3306/ username=deployit password="{b64}ZGVwbG95aXQ=" maxactive=0 maxidle=0 maxwait=0
 
+deployit_nosteps
+
+
+
 
 
