@@ -32,13 +32,15 @@
             <item name="Usage" href="usage.html"/>
             <item name="Goals" href="plugin-info.html"/>
 
+	        <!--
             <item name="FAQ" href="faq.html"/>
+            -->
         </menu>
 
         <menu name="Examples">
-            <item name="Simple deployment" href="examples/simple-deployment.html"/>
-            <item name="Simple deployment and clean" href="examples/simple-deployment-and-clean.html"/>
-            <item name="Adding additional Maven artifacts" href="examples/add-additional-artifacts.html"/>
+	        <item name="Simple deployment" href="examples/simple-deployment.html"/>
+	        <item name="Generate DAR" href="examples/generate-dar.html"/>
+	        <item name="Simple deployment and clean" href="examples/simple-deployment-and-clean.html"/>
             <item name="Define middleware resources" href="examples/middleware-resources.html"/>
             <item name="Generate Manifest based deployment packages" href="examples/manifest.html"/>
             <item name="Testing the configuration" href="examples/test-configuration.html"/>

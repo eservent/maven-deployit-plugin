@@ -16,7 +16,7 @@
  *#
 
  ------
- Simple war deployment
+ Add additional artifacts
  ------
  Benoit Moussaud
  ------
@@ -44,6 +44,7 @@ Add additional artifacts
     <plugin>
         <groupId>com.xebialabs.deployit</groupId>
         <artifactId>maven-deployit-plugin</artifactId>
+        <version>${project.version}</version>
         <executions>
             <execution>
                 <id>deploy-id</id>
@@ -74,12 +75,16 @@ Add additional artifacts
                     <stopCommand>/opt/apache-tomcat-6.0.26/bin/catalina.sh stop</stopCommand>
                 </ConfigurationItem>
             </environment>
-            <additionalArtifacts>
-                <additionalArtifact>
-                    <groupId>com.xebialabs.sample</groupId>
-                    <artifactId>the-dependency-app</artifactId>
-                </additionalArtifact>
-            </additionalArtifacts>
+
+            <!-- add an additional war defined as Maven dependency -->
+			<deployableArtifacts>
+				<DeployableArtifactItem>
+					<type>War</type>
+					<name>myapp</name>
+					<location>com.xebialabs.sample:the-dependency-app</location>
+				</DeployableArtifactItem>
+            </deployableArtifacts>
+
         </configuration>
         <dependencies>
             <dependency>

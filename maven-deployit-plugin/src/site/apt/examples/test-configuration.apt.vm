@@ -33,6 +33,8 @@ Test Deployment Configuration
     <plugin>
         <groupId>com.xebialabs.deployit</groupId>
         <artifactId>maven-deployit-plugin</artifactId>
+        <version>${project.version}</version>
+
         <executions>
             <execution>
                 <id>deploy-id</id>
@@ -42,8 +44,12 @@ Test Deployment Configuration
                 </goals>
             </execution>
         </executions>
+        
         <configuration>
+            <!-- test mode = true -->
             <testmode>true</testmode>
+
+
             <environment>
                 <ConfigurationItem type="Host">
                     <label>Tomcat Host</label>

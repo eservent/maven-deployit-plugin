@@ -33,7 +33,7 @@
             <plugin>
                 <groupId>com.xebialabs.deployit</groupId>
                 <artifactId>maven-deployit-plugin</artifactId>
-                <version>${deployitPluginVersion}</version>
+                <version>@project.version@</version>
                 <executions>
                     <execution>
                         <id>deployit-plugin-test</id>
@@ -75,8 +75,7 @@
                         <MappingItem type="ConfigurationFilesMapping">
                             <source>ConfigurationFiles/package/resources.dir</source>
                             <target>APBIVM02-VM06</target>
-                            <keyvaluepairs>[[key=database.connection.url value=a][key=database.driver.class
-                                value=b][key=database.password value=c]]
+                            <keyvaluepairs>[[key=database.connection.url value=a][key=database.driver.class value=b][key=database.password value=c]]
                             </keyvaluepairs>
                             <targetdirectory>/data/autotest</targetdirectory>
                         </MappingItem>

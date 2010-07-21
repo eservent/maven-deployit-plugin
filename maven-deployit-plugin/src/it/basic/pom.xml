@@ -30,18 +30,8 @@
             <plugin>
                 <groupId>com.xebialabs.deployit</groupId>
                 <artifactId>maven-deployit-plugin</artifactId>
-                <version>${deployitPluginVersion}</version>
-
-                <executions>
-	                <!--
-                    <execution>
-                        <id>generate-id</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>generate-deployment-package</goal>
-                        </goals>
-                    </execution>
-                    -->
+                <version>@project.version@</version>
+                <executions>	                
                     <execution>
                         <id>deployit-plugin-test</id>
                         <phase>pre-integration-test</phase>

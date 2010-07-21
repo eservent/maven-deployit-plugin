@@ -30,16 +30,17 @@ Deployit Plugin
   
   Definition: Deployment is the 'series of activities needed to make an application available to end users'. This includes the full scope of deployment activities: de-installation of the old software packages, installation of the new software packages, updating the data source(s), modifying firewall settings, reconfiguring the web server and restarting all services involved. Or rephrased in more simple terms: deployment is everything needed to ensure that if a developer, tester or end user opens his browser and types in www.my-application.com, he will see the application up and running, fully functional with (live) data.
 
-  This plugin is in particular handy to perform integration tests for other Maven plugins. The Invoker Plugin can be
-  employed to run a set of test projects that have been designed to assert certain features of the plugin under test.
+  This plugin is in particular handy to perform integration tests for other Maven plugins.
 
 * Goals Overview
 
-  The plugin has two goals meant to participate in the default build lifecycle:
+  The plugin has three goals meant to participate in the default build lifecycle:
 
   * {{{deploy-mojo.html}deployit:deploy}} Deploy the main artifact, middleware resources to a single environment.
 
   * {{{clean-mojo.html}deployit:clean}} Undeploy all what is have been deployed in the  {{{deploy-mojo.html}deployit:deploy}} goal.
+
+  * {{{generate-deployment-package-mojo.html}deployit:generate-deployment-package}} Generate a Deployment Package.
 
   []
   
@@ -67,6 +68,8 @@ Deployit Plugin
 
   * {{{examples/simple-deployment.html}Simple deployment}} to a Tomcat Server.
 
+  * {{{examples/generate-dar.html}Generate DAR}}, the Deployit Archive.
+
   * {{{examples/simple-deployment-and-clean.html}Simple deployment and Clean}} to a Tomcat Server and clean after the integration-test phase.
 
   * {{{examples/examples/add-additional-artifacts.html}Adding additional Maven artifacts}}
@@ -75,6 +78,6 @@ Deployit Plugin
 
   * {{{examples/test-configuration.html}Testing the configurationn}} to test the plugin configuration by skipping the executions of the deployment's steps.
 
-  * {{{examples/configurationfiles.html}Add configurationn file }} to the current deployment.
+  * {{{examples/configuration-files.html}Add configurationn file }} to the current deployment.
 
   []

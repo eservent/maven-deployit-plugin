@@ -108,6 +108,7 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
 	protected String[] commands;
 
 	/**
+	 * Additional resources such as Database, Apache plugin configuration, JMS Queues...
 	 * @parameter
 	 */
 	protected List<ConfigurationItem> middlewareResources;
@@ -121,7 +122,7 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
 	protected List<ConfigurationItem> mappings;
 
 	/**
-	 * The target environment.
+	 * List of ConfigurationItem in the target environment.
 	 *
 	 * @parameter
 	 */
@@ -142,17 +143,14 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
 	 */
 	protected boolean generateManifestOnly;
 
-
-
 	private final StringBuffer fullScript = new StringBuffer();
 
-	protected Interpreter interpreter;
+	private Interpreter interpreter;
 
 	public static final String DEFAULT_ENVIRONMENT = "DefaultEnvironment";
 	public static final String DEFAULT_DEPLOYMENT = "DefaultDeployment";
 
 	private static boolean SERVER_STARTED = false;
-
 
 	protected void startServer() {
 		if (!SERVER_STARTED) {

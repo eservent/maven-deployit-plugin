@@ -29,7 +29,7 @@
             <plugin>
                 <groupId>com.xebialabs.deployit</groupId>
                 <artifactId>maven-deployit-plugin</artifactId>
-                <version>${deployitPluginVersion}</version>
+                <version>@project.version@</version>
                 <executions>
                     <execution>
                         <id>deployit-plugin-test</id>

@@ -47,9 +47,9 @@ public class GenerateDeploymentPackageMojo extends AbstractDeployitMojo {
 
 
 	/**
-	 * The name of the EAR file to generate.
+	 * The name of the DAR file to generate.
 	 *
-	 * @parameter alias="earName" expression="${project.build.finalName}"
+	 * @parameter alias="darName" expression="${project.build.finalName}"
 	 * @required
 	 */
 	private String finalName;

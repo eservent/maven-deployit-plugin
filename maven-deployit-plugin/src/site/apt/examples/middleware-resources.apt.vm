@@ -33,6 +33,7 @@ Add middleware resources
     <plugin>
         <groupId>com.xebialabs.deployit</groupId>
         <artifactId>maven-deployit-plugin</artifactId>
+        <version>${project.version}</version>
         <executions>
             <execution>
                 <id>deploy-id</id>

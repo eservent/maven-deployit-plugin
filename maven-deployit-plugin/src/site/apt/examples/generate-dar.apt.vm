@@ -1,0 +1,102 @@
+#*
+ * This file is part of Maven Deployit plugin.
+ *
+ * Maven Deployit plugin is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Maven Deployit plugin is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Maven Deployit plugin.  If not, see <http://www.gnu.org/licenses/>.
+ *#
+
+ ------
+ Generate DAR
+ ------
+ Benoit Moussaud
+ ------
+ 21 July 2010
+ ------
+
+Generate DAR
+
+ DAR - Deployit Archive - is a new Maven packaging type. It allows to generate a Deployit deployment package with all the necessary artifacts that compose the application and to gather all into an archive (.dar) that could be installed in a Maven repository and later imported into Deployit.
+
+------
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.xebialabs.deployit</groupId>
+	<artifactId>maven-deployit-plugin-dar-format</artifactId>
+
+	<packaging>dar</packaging> <!-- DAR packaging -->
+
+	<version>1.0</version>
+	<name>Dar Format</name>
+	<url>http://www.xebialabs.com</url>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.xebialabs.deployit</groupId>
+				<artifactId>maven-deployit-plugin</artifactId>
+				<version>${project.version}</version>
+
+				<extensions>true</extensions> <!-- tells maven the plugin contains extensions -->
+
+				<configuration>
+					<deployableArtifacts>
+
+						<!-- add an EAR -->
+						<DeployableArtifactItem>
+							<type>Ear</type>
+							<location>com.xebialabs.deployit.petclinic.petclinic-ear:PetClinic</location>
+						</DeployableArtifactItem>
+
+						<!-- add Configuration Files (eg properties) -->
+						<DeployableArtifactItem>
+							<type>ConfigurationFiles</type>
+							<location>package/resources.dir</location>
+						</DeployableArtifactItem>
+
+						<!-- add other Configuration Files (eg properties) -->
+						<DeployableArtifactItem>
+							<type>ConfigurationFiles</type>
+							<location>package/other.config.properties</location>
+						</DeployableArtifactItem>
+
+						<!-- add a SQL Script -->
+						<DeployableArtifactItem>
+							<type>SqlScript</type>
+							<location>package/single.sql/afile.sql</location>
+						</DeployableArtifactItem>
+					</deployableArtifacts>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.xebialabs.deployit.petclinic.petclinic-ear</groupId>
+			<artifactId>PetClinic</artifactId>
+			<version>1.0</version>
+			<type>ear</type>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+
+	
+</project>
+------
+
+
+
