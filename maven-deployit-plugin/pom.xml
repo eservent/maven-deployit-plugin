@@ -209,12 +209,12 @@
 			<id>nexus-dexter-snapshots</id>
 			<url>http://dexter.xebialabs.com/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
-		<!--
-				<site>
-					<id>www-on-tech</id>
-					<url>scpexe://tech.xebialabs.com/home/tech.xebialabs.com/www/deployit/${project.version}</url>
-				</site>
-				-->
+
+		<site>
+			<id>www-on-tech</id>
+			<url>scpexe://tech.xebialabs.com/home/tech.xebialabs.com/www/deployit-maven-plugin/${project.version}</url>
+		</site>
+
 	</distributionManagement>
 
 	<profiles>
