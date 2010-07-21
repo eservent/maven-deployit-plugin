@@ -25,9 +25,9 @@
 	</distributionManagement>
 
 	<scm>
-		<connection>scm:git:git@github.com:bmoussaud/maven-deployit-plugin.git</connection>
-		<url>scm:git:git@github.com:bmoussaud/maven-deployit-plugin.git</url>
-		<developerConnection>scm:git:git@github.com:bmoussaud/maven-deployit-plugin.git</developerConnection>
+		<connection>scm:git://git@github.com:bmoussaud/maven-deployit-plugin.git</connection>
+		<url>scm:git://git@github.com:bmoussaud/maven-deployit-plugin.git</url>
+		<developerConnection>scm:git://git@github.com:bmoussaud/maven-deployit-plugin.git</developerConnection>
 	</scm>
 
 </project>
