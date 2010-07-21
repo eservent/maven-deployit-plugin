@@ -2,306 +2,311 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.xebialabs.deployit</groupId>
-    <artifactId>maven-deployit-plugin</artifactId>
-    <packaging>maven-plugin</packaging>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.xebialabs.deployit</groupId>
+	<artifactId>maven-deployit-plugin</artifactId>
+	<packaging>maven-plugin</packaging>
+	<version>1.3-beta-2-SNAPSHOT</version>
+	<url>http://www.xebialabs.com</url>
 
-    <version>1.3-beta-2-SNAPSHOT</version>
-    <name>Deployit Maven Mojo</name>
-    <prerequisites>
-        <maven>${mavenVersion}</maven>
-    </prerequisites>
+	<name>Deployit Maven Mojo</name>
+	<prerequisites>
+		<maven>${mavenVersion}</maven>
+	</prerequisites>
 
-    <url>http://www.xebialabs.com</url>
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
-                    </archive>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-plugin-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>help-mojo</id>
-                        <goals>
-                            <goal>helpmojo</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>com.mycila.maven-license-plugin</groupId>
-                <artifactId>maven-license-plugin</artifactId>
-                <version>1.5.0</version>
-                <inherited>false</inherited>
-                <configuration>
-                    <encoding>${sourceEncoding}</encoding>
-                    <aggregate>true</aggregate>
-                    <header>src/etc/gpl-header.txt</header>
-                    <excludes>
-                        <exclude>**/package/**</exclude>
-                        <exclude>.idea/**</exclude>
-                        <exclude>deployit*</exclude>
-                        <exclude>**/*.ear</exclude>
-                        <exclude>**/*.war</exclude>
-
-                        <!-- skip XML Velocity templates because the plugin adds a blank line
-                      after the comment, and that doesn't work if first line is supposed to
-                      be <?xml...> -->
-                        <exclude>**/*.xml.vm</exclude>
-                    </excludes>
-                    <mapping>
-                        <!-- use "standard" instead of Javadoc comments -->
-                        <java>SLASHSTAR_STYLE</java>
-                    </mapping>
-                    <properties>
-                        <year>${project.inceptionYear}</year>
-                    </properties>
-                </configuration>
-            </plugin>
+	<properties>
+		<mavenVersion>2.2.1</mavenVersion>
+		<deployitVersion>1.3-beta-2</deployitVersion>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.java.target>1.5</project.build.java.target>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<sourceEncoding>UTF-8</sourceEncoding>
+		<year>2010</year>
+	</properties>
 
 
-            <!--
-            TODO: create a profile
-            -->
-            <plugin>
-                <groupId>com.agilejava.docbkx</groupId>
-                <artifactId>docbkx-maven-plugin</artifactId>
-                <configuration>
-                    <xincludeSupported>true</xincludeSupported>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>generate-documentation</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>generate-html</goal>
-                            <goal>generate-pdf</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.docbook</groupId>
-                        <artifactId>docbook-xml</artifactId>
-                        <version>4.4</version>
-                        <scope>runtime</scope>
-                    </dependency>
-                </dependencies>
-            </plugin>
-        </plugins>
-    </build>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 
-    <properties>
-        <mavenVersion>2.2.1</mavenVersion>
-        <deployitVersion>1.3-beta-2-SNAPSHOT</deployitVersion>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.build.java.target>1.5</project.build.java.target>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <sourceEncoding>UTF-8</sourceEncoding>
-        <year>2010</year>
-    </properties>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+				</configuration>
+			</plugin>
 
-    <dependencies>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>help-mojo</id>
+						<goals>
+							<goal>helpmojo</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
-        <!-- Maven -->
-        <dependency>
-            <groupId>org.apache.maven.shared</groupId>
-            <artifactId>maven-plugin-testing-harness</artifactId>
-            <version>1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-archiver</artifactId>
-            <version>2.3</version>
-        </dependency>
+			<plugin>
+				<groupId>com.mycila.maven-license-plugin</groupId>
+				<artifactId>maven-license-plugin</artifactId>
+				<version>1.5.0</version>
+				<inherited>false</inherited>
+				<configuration>
+					<encoding>${sourceEncoding}</encoding>
+					<aggregate>true</aggregate>
+					<header>src/etc/gpl-header.txt</header>
+					<excludes>
+						<exclude>**/package/**</exclude>
+						<exclude>.idea/**</exclude>
+						<exclude>deployit*</exclude>
+						<exclude>**/*.ear</exclude>
+						<exclude>**/*.war</exclude>
 
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-plugin-api</artifactId>
-            <version>${mavenVersion}</version>
-        </dependency>
-
-	    <!-- deployit -->
-
-        <dependency>
-            <groupId>com.xebialabs.deployit</groupId>
-            <artifactId>core-java</artifactId>
-            <version>${deployitVersion}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.xebialabs.deployit</groupId>
-            <artifactId>tomcat-plugin</artifactId>
-            <version>${deployitVersion}</version>
-            <scope>test</scope>
-        </dependency>
+						<!-- skip XML Velocity templates because the plugin adds a blank line
+											  after the comment, and that doesn't work if first line is supposed to
+											  be <?xml...> -->
+						<exclude>**/*.xml.vm</exclude>
+					</excludes>
+					<mapping>
+						<!-- use "standard" instead of Javadoc comments -->
+						<java>SLASHSTAR_STYLE</java>
+					</mapping>
+					<properties>
+						<year>${project.inceptionYear}</year>
+					</properties>
+				</configuration>
+			</plugin>
 
 
-        <!-- test -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.0</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.4</version>
-            <scope>test</scope>
-        </dependency>
-
-
-    </dependencies>
-
-    <developers>
-        <developer>
-            <id>bmoussaud</id>
-            <name>Benoit Moussaud</name>
-            <email>bmoussaud@xebia.fr</email>
-            <roles>
-                <role>Team member</role>
-            </roles>
-        </developer>
-
-    </developers>
-
-    <distributionManagement>
-        <repository>
-            <id>nexus-dexter-releases</id>
-            <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus-dexter-snapshots</id>
-            <url>http://dexter.xebialabs.com/nexus/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <!--
-        <site>
-            <id>www-on-tech</id>
-            <url>scpexe://tech.xebialabs.com/home/tech.xebialabs.com/www/deployit/${project.version}</url>
-        </site>
-        -->
-    </distributionManagement>
-
-    <profiles>
-        <profile>
-            <id>run-its</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-invoker-plugin</artifactId>
-                        <version>1.4</version>
-                        <configuration>
-                            <debug>true</debug>
-                            <projectsDirectory>src/it/</projectsDirectory>
-                            <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
-                            <pomIncludes>
-                                <pomInclude>**/pom.xml</pomInclude>
-                            </pomIncludes>
-                            <preBuildHookScript>setup</preBuildHookScript>
-                            <postBuildHookScript>verify</postBuildHookScript>
-                            <localRepositoryPath>${project.build.testOutputDirectory}/m2repo</localRepositoryPath>
-                            <settingsFile>src/it/settings.xml</settingsFile>
-
-                            <goals>
-                                <goal>clean</goal>
-                                <goal>package</goal>
-                            </goals>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>integration-test</id>
-                                <goals>
-                                    <goal>install</goal>
-                                    <goal>run</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-    </profiles>
+			<!--
+						TODO: create a profile
+						-->
+			<plugin>
+				<groupId>com.agilejava.docbkx</groupId>
+				<artifactId>docbkx-maven-plugin</artifactId>
+				<configuration>
+					<xincludeSupported>true</xincludeSupported>
+				</configuration>
+				<executions>
+					<execution>
+						<id>generate-documentation</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>generate-html</goal>
+							<goal>generate-pdf</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.docbook</groupId>
+						<artifactId>docbook-xml</artifactId>
+						<version>4.4</version>
+						<scope>runtime</scope>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.0</version>
+			</plugin>
+		</plugins>
+	</build>
 
 
-    <repositories>
-        <repository>
-            <id>central</id>
-            <url>http://dexter.xebialabs.com/nexus/content/groups/public</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>nexus-dexter-thirdparty</id>
-            <url>http://dexter.xebialabs.com/nexus/content/repositories/hidden-thirdparty</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>snapshots</id>
-            <url>http://dexter.xebialabs.com/nexus/content/groups/public-snapshots</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>releases</id>
-            <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>central</id>
-            <url>http://dexter.xebialabs.com/nexus/content/groups/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
+	<dependencies>
+
+		<!-- Maven -->
+		<dependency>
+			<groupId>org.apache.maven.shared</groupId>
+			<artifactId>maven-plugin-testing-harness</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-archiver</artifactId>
+			<version>2.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>${mavenVersion}</version>
+		</dependency>
+
+		<!-- deployit -->
+
+		<dependency>
+			<groupId>com.xebialabs.deployit</groupId>
+			<artifactId>core-java</artifactId>
+			<version>${deployitVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.xebialabs.deployit</groupId>
+			<artifactId>tomcat-plugin</artifactId>
+			<version>${deployitVersion}</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.4</version>
+			<scope>test</scope>
+		</dependency>
+
+
+	</dependencies>
+
+	<developers>
+		<developer>
+			<id>bmoussaud</id>
+			<name>Benoit Moussaud</name>
+			<email>bmoussaud@xebialabs.com</email>
+			<roles>
+				<role>Team member</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<distributionManagement>
+		<repository>
+			<id>nexus-dexter-releases</id>
+			<url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus-dexter-snapshots</id>
+			<url>http://dexter.xebialabs.com/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<!--
+				<site>
+					<id>www-on-tech</id>
+					<url>scpexe://tech.xebialabs.com/home/tech.xebialabs.com/www/deployit/${project.version}</url>
+				</site>
+				-->
+	</distributionManagement>
+
+	<profiles>
+		<profile>
+			<id>run-its</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-invoker-plugin</artifactId>
+						<version>1.4</version>
+						<configuration>
+							<debug>true</debug>
+							<projectsDirectory>src/it/</projectsDirectory>
+							<cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
+							<pomIncludes>
+								<pomInclude>**/pom.xml</pomInclude>
+							</pomIncludes>
+							<preBuildHookScript>setup</preBuildHookScript>
+							<postBuildHookScript>verify</postBuildHookScript>
+							<localRepositoryPath>${project.build.testOutputDirectory}/m2repo</localRepositoryPath>
+							<settingsFile>src/it/settings.xml</settingsFile>
+
+							<goals>
+								<goal>clean</goal>
+								<goal>package</goal>
+							</goals>
+						</configuration>
+						<executions>
+							<execution>
+								<id>integration-test</id>
+								<goals>
+									<goal>install</goal>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+	</profiles>
+
+
+	<repositories>
+		<repository>
+			<id>central</id>
+			<url>http://dexter.xebialabs.com/nexus/content/groups/public</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>nexus-dexter-thirdparty</id>
+			<url>http://dexter.xebialabs.com/nexus/content/repositories/hidden-thirdparty</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>snapshots</id>
+			<url>http://dexter.xebialabs.com/nexus/content/groups/public-snapshots</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>releases</id>
+			<url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<url>http://dexter.xebialabs.com/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<reporting>
 		<plugins>
@@ -423,6 +428,12 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
+	<scm>
+		<connection>scm:git:git@github.com:bmoussaud/maven-deployit-plugin.git</connection>
+		<url>scm:git:git@github.com:bmoussaud/maven-deployit-plugin.git</url>
+		<developerConnection>scm:git:git@github.com:bmoussaud/maven-deployit-plugin.git</developerConnection>
+	</scm>
 
 
 </project>
