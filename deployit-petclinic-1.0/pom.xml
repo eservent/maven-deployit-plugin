@@ -6,7 +6,7 @@
 	<artifactId>deployit-petclinic</artifactId>
 	<packaging>dar</packaging>
 	<version>1.0</version>
-	<name>simple</name>
+	<name>deployit petclinic dar</name>
 	<url>http://maven.apache.org</url>
 	<build>
 		<plugins>
