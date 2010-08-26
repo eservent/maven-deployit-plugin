@@ -13,12 +13,12 @@
 			<plugin>
 				<groupId>com.xebialabs.deployit</groupId>
 				<artifactId>maven-deployit-plugin</artifactId>
-				<version>1.3-beta-2-SNAPSHOT</version>
+				<version>1.3-beta-2</version>
 				<extensions>true</extensions>
 
 				<configuration>
 					<deployableArtifacts>
-						
+
 						<DeployableArtifactItem>
 							<type>War</type>
 							<name>petclinic</name>
@@ -41,7 +41,7 @@
 							<type>ConfigurationFiles</type>
 							<location>config</location>
 						</DeployableArtifactItem>
-						
+
 					</deployableArtifacts>
 				</configuration>
 			</plugin>
@@ -82,10 +82,22 @@
 
 	<repositories>
 		<repository>
+			<id>thirdparty</id>
+			<url>http://dexter.xebialabs.com/nexus/content/groups/public</url>
+		</repository>
+		<repository>
 			<id>xebialabs-releases</id>
 			<url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
 		</repository>
+
 	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>xebialabs-releases</id>
+			<url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<properties>
 		<deployitPluginVersion>1.3-beta-2-SNAPSHOT</deployitPluginVersion>
