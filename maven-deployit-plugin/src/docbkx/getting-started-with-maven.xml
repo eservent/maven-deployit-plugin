@@ -22,23 +22,48 @@
          xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0"
          id="mavengettingstarted" >
     <title>Getting started with Deployit Maven plugin</title>
-    <sect1>
+
+	<sect1>
         <title>Add the xebialabs plugin repository</title>
         <para>
             Edit your <filename>pom.xml</filename> file to add a new pluginRepository markup.
 <screen>
 <pluginRepositories>
-    ....
-    <pluginRepository>
-        <id>xebialabs-releases</id>
-        <name>Xebialabs - Deployit Releases</name>
-        <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
-    </pluginRepository>
-    ...
+
+	<pluginRepository>
+		<id>xebialabs-releases</id>
+		<url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+	</pluginRepository>
 </pluginRepositories>
+	...
 </screen>
         </para>
     </sect1>
+
+<sect1>
+        <title>Add the xebialabs repositories</title>
+        <para>
+            Edit your <filename>pom.xml</filename> file to add 2 new repository markups.
+<screen>
+
+<repositories>
+	...
+	<repository>
+		<id>thirdparty</id>
+		<url>http://dexter.xebialabs.com/nexus/content/groups/public</url>
+	</repository>
+	<repository>
+		<id>xebialabs-releases</id>
+		<url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+	</repository>
+	...
+</repositories>
+
+</screen>
+        </para>
+    </sect1>
+
+
     <sect1>
         <title>Add your credentials</title>
         <para>
