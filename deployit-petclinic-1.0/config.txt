@@ -1,6 +1,6 @@
-create Host label="Host at mysql.vm" description="" operatingsystemfamily=UNIX accessmethod=SSH_SCP address=mysql.vm username=ubuntu password={b64}dWJ1bnR1
+create Host label="Host at mysql.vm" description="" operatingsystemfamily=UNIX accessmethod=SSH_SFTP address=mysql.vm username=ubuntu password={b64}dWJ1bnR1
 
-create Host label="Host at tomcat6.vm" description="" operatingsystemfamily=UNIX accessmethod=SSH_SCP address=tomcat6.vm username=ubuntu password={b64}dWJ1bnR1
+create Host label="Host at tomcat6.vm" description="" operatingsystemfamily=UNIX accessmethod=SSH_SFTP address=tomcat6.vm username=ubuntu password={b64}dWJ1bnR1
 
 create Host label="Host at tomcat6.vm (root)" description="" operatingsystemfamily=UNIX accessmethod=SSH_SUDO address=tomcat6.vm username=ubuntu password={b64}dWJ1bnR1 sudousername=root
 
@@ -16,9 +16,9 @@ create ApacheHttpdServer label="Apache2 Web Server" description="" host="Host at
 
 create ModJKConfiguration label="mod_jk configuration" description="" jkmodulepath=/usr/lib/apache2/modules/mod_jk.so jkworkerfile=/etc/apache2/workers.properties jklogfile=/var/log/apache2/mod_jk.log jkshmfile=/var/log/apache2 jkstatus=true jkloglevel=Warn jklogstampformat="[%a %b %d %H:%M:%S %Y] "
 
-create Database label="MySQL database" description="" host="Host at mysql.vm" command=/usr/bin/mysql options="-u ${user} -p${password} ${database}" user=deployit password="xebia2010" database=deployit 
+create Database label="MySQL database" description="" host="Host at mysql.vm" command=/usr/bin/mysql options="-u ${user} -p${password} ${database} < " user=deployit password="xebia2010" database=deployit 
 
-create Environment label="Tomcat Apache Environment" description="" members="[Host at tomcat6.vm,Host at tomcat6.vm (root), Tomcat6-2, Tomcat6-1, Apache2 Web Server]"
+create Environment label="Tomcat Apache Environment" description="" members="[Tomcat6-2, Tomcat6-1, Apache2 Web Server]"
 
 create TomcatDataSource label="Petclinic DS" description="" jndiname=jdbc/petclinic driverclass=com.mysql.jdbc.Driver connectionurl=jdbc:mysql://localhost:3306/ username=deployit password="{b64}ZGVwbG95aXQ=" maxactive=0 maxidle=0 maxwait=0
 

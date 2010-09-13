@@ -1,0 +1,58 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.xebialabs.deployit</groupId>
+	<artifactId>darformat</artifactId>
+	<version>1.0</version>
+
+	<packaging>dar</packaging>
+
+	<name>Dar Format</name>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.xebialabs.deployit</groupId>
+				<artifactId>maven-deployit-plugin</artifactId>
+				<version>1.3-beta-3</version>
+				<extensions>true</extensions>
+
+				<configuration>
+					<deployableArtifacts>
+						<DeployableArtifactItem>
+							<type>Ear</type>
+							<location>com.xebialabs.deployit.petclinic.petclinic-ear:PetClinic</location>
+						</DeployableArtifactItem>
+
+						<DeployableArtifactItem>
+							<type>ConfigurationFiles</type>
+							<location>package/resources.dir</location>
+						</DeployableArtifactItem>
+
+						<DeployableArtifactItem>
+							<type>ConfigurationFiles</type>
+							<location>package/other.config.properties</location>
+						</DeployableArtifactItem>
+
+						<DeployableArtifactItem>
+							<type>SqlFiles</type>
+							<location>package/sql.dir</location>
+						</DeployableArtifactItem>
+
+					</deployableArtifacts>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.xebialabs.deployit.petclinic.petclinic-ear</groupId>
+			<artifactId>PetClinic</artifactId>
+			<version>1.0</version>
+			<type>ear</type>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+</project>
