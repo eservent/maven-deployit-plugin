@@ -26,45 +26,49 @@ package com.xebialabs.deployit.maven;
  */
 public class MappingItem extends ConfigurationItem {
 
-    private String source;
-    private String target;
+	private String source;
+	private String target;
 
-    public String getSource() {
-        return source;
-    }
+	public String getSource() {
+		return source;
+	}
 
-    public void setSource(String source) {
-        this.source = source;
-    }
+	public void setSource(String source) {
+		this.source = source;
+	}
 
-    public String getTarget() {
-        return target;
-    }
+	public String getTarget() {
+		return target;
+	}
 
-    public void setTarget(String target) {
-        this.target = target;
-    }
+	public void setTarget(String target) {
+		this.target = target;
+	}
 
-    public String getLabel() {
-      return '"'+source + " to "+ target +" for " + DeployMojo.DEFAULT_DEPLOYMENT+'"';
-    }
+	public String getLabel() {
+		return '"' + source + " to " + target + " for " + DeployMojo.DEFAULT_DEPLOYMENT + '"';
+	}
 
-    @Override
-    public void addParameter(String name, Object value) {
-        if ("source".equals(name) )
-            return;
+	@Override
+	public void addParameter(String name, Object value) {
+		if ("source".equals(name))
+			return;
 
-        if ("target".equals(name) )
-            return;
+		if ("target".equals(name))
+			return;
 
-        if ("label".equals(name) )
-            return;
+		if ("label".equals(name))
+			return;
 
-        super.addParameter(name, value);    //To change body of overridden methods use File | Settings | File Templates.
-    }
+		if ("type".equals(name))
+			return;
 
-    @Override
-    public String getCli() {
-        return "modify "+getLabel()+ " "+parameters;
-    }
+
+		super.addParameter(name, value);    //To change body of overridden methods use File | Settings | File Templates.
+	}
+
+	@Override
+	public String getCli() {
+		return "modify " + getLabel() + " " + parameters;
+	}
 }

@@ -49,9 +49,9 @@ Test Deployment Configuration
             <!-- test mode = true -->
             <testmode>true</testmode>
 
-
             <environment>
-                <ConfigurationItem type="Host">
+               <ConfigurationItem>
+                    <type>Host</type>
                     <label>Tomcat Host</label>
                     <address>ubuntu-tomcat.mydomain.net</address>
                     <username>tomcat</username>
@@ -59,7 +59,8 @@ Test Deployment Configuration
                     <operatingSystemFamily>UNIX</operatingSystemFamily>
                     <accessMethod>SSH_SCP</accessMethod>
                 </ConfigurationItem>
-                <ConfigurationItem type="TomcatServer">
+                <ConfigurationItem>
+                    <type>TomcatServer</type>
                     <label>Tomcat server</label>
                     <host>Tomcat Host</host>
                     <name>tomcattest</name>

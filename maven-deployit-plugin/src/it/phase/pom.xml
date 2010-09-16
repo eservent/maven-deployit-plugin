@@ -49,21 +49,23 @@
                 <configuration>
                     <testmode>true</testmode>
                     <environment>
-                        <ConfigurationItem type="Host">
-                            <label>JBoss Host</label>
-                            <address>jboss-51</address>
-                            <username>root</username>
-                            <password>centos</password>
-                            <operatingSystemFamily>UNIX</operatingSystemFamily>
-                            <accessMethod>SSH_SFTP</accessMethod>
-                        </ConfigurationItem>
-                        <ConfigurationItem type="JbossasServer">
-                            <label>JBoss server</label>
-                            <host>JBoss Host</host>
-                            <home>/opt/jboss/5.1.0.GA</home>
-                            <version>JBOSSAS_50</version>
-                            <name>itest</name>
-                        </ConfigurationItem>
+                        <ConfigurationItem>
+							<type>Host</type>
+							<label>JBoss Host</label>
+							<address>jboss-51</address>
+							<username>root</username>
+							<password>centos</password>
+							<operatingSystemFamily>UNIX</operatingSystemFamily>
+							<accessMethod>SSH_SFTP</accessMethod>
+						</ConfigurationItem>
+						<ConfigurationItem>
+							<type>JbossasServer</type>
+							<label>JBoss server</label>
+							<host>JBoss Host</host>
+							<home>/opt/jboss/5.1.0.GA</home>
+							<version>JBOSSAS_50</version>
+							<name>itest</name>
+						</ConfigurationItem>
                     </environment>
                 </configuration>
 

@@ -2,140 +2,143 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 
-    <parent>
-        <groupId>com.xebialabs.deployit</groupId>
-        <artifactId>maven-deployit-plugin-integration-test</artifactId>
-        <relativePath>../pom.xml</relativePath>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
+	<parent>
+		<groupId>com.xebialabs.deployit</groupId>
+		<artifactId>maven-deployit-plugin-integration-test</artifactId>
+		<relativePath>../pom.xml</relativePath>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.xebialabs.deployit</groupId>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.xebialabs.deployit</groupId>
 
-    <artifactId>maven-deployit-plugin-test-victim-basic</artifactId>
-    <packaging>ear</packaging>
-    <version>1.1</version>
-    <name>mojo-victim</name>
-    <url>http://maven.apache.org</url>
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.xebialabs.deployit</groupId>
-                <artifactId>maven-deployit-plugin</artifactId>
-                <version>@project.version@</version>
-                <executions>	                
-                    <execution>
-                        <id>deployit-plugin-test</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <port>9090</port>
-                    <testmode>true</testmode>
-                    <useImportablePackage>true</useImportablePackage>
-                    <environment>
-                        <ConfigurationItem type="Host">
-                            <label>JBoss Host</label>
-                            <address>jboss-51</address>
-                            <username>root</username>
-                            <password>centos</password>
-                            <operatingSystemFamily>UNIX</operatingSystemFamily>
-                            <accessMethod>SSH_SFTP</accessMethod>
-                        </ConfigurationItem>
-                        <ConfigurationItem type="JbossasServer">
-                            <label>JBoss server</label>
-                            <host>JBoss Host</host>
-                            <home>/opt/jboss/5.1.0.GA</home>
-                            <version>JBOSSAS_50</version>
-                            <name>itest</name>
-                        </ConfigurationItem>
-                    </environment>
-
-
-                    <middlewareResources>
-                        <ConfigurationItem type="JbossasQueue">
-                            <label>The resource</label>
-                            <name>maven-generated-queue</name>
-                            <maxDepth>768</maxDepth>
-                            <jndiName>jms/maven-generated-q</jndiName>
-                        </ConfigurationItem>
-                    </middlewareResources>
+	<artifactId>maven-deployit-plugin-test-victim-basic</artifactId>
+	<packaging>ear</packaging>
+	<version>1.1</version>
+	<name>mojo-victim</name>
+	<url>http://maven.apache.org</url>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.xebialabs.deployit</groupId>
+				<artifactId>maven-deployit-plugin</artifactId>
+				<version>@project.version@</version>
+				<executions>
+					<execution>
+						<id>deployit-plugin-test</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<port>9090</port>
+					<testmode>true</testmode>
+					<useImportablePackage>true</useImportablePackage>
+					<environment>
+						<ConfigurationItem>
+							<type>Host</type>
+							<label>JBoss Host</label>
+							<address>jboss-51</address>
+							<username>root</username>
+							<password>centos</password>
+							<operatingSystemFamily>UNIX</operatingSystemFamily>
+							<accessMethod>SSH_SFTP</accessMethod>
+						</ConfigurationItem>
+						<ConfigurationItem>
+							<type>JbossasServer</type>
+							<label>JBoss server</label>
+							<host>JBoss Host</host>
+							<home>/opt/jboss/5.1.0.GA</home>
+							<version>JBOSSAS_50</version>
+							<name>itest</name>
+						</ConfigurationItem>
+					</environment>
 
 
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.xebialabs.deployit</groupId>
-                        <artifactId>jbossas-plugin</artifactId>
-                        <version>${deployitVersion}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>com.xebialabs.deployit</groupId>
-                        <artifactId>apache-httpd-plugin</artifactId>
-                        <version>${deployitVersion}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-        </plugins>
-    </build>
-
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.thoughtworks.xstream</groupId>
-            <artifactId>xstream</artifactId>
-            <version>1.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.xebialabs.deployit</groupId>
-            <artifactId>jbossas-plugin</artifactId>
-            <version>1.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.xebialabs.deployit</groupId>
-            <artifactId>was-plugin</artifactId>
-            <version>2.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.xebialabs.deployit</groupId>
-            <artifactId>wls-plugin</artifactId>
-            <version>2.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.xebialabs.deployit</groupId>
-            <artifactId>tomcat-plugin</artifactId>
-            <version>2.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.xebialabs.deployit</groupId>
-            <artifactId>plugin-api</artifactId>
-            <version>2.0-SNAPSHOT</version>
-        </dependency>
-
-    </dependencies>
+					<middlewareResources>
+						<ConfigurationItem>
+							<type>JbossasQueue</type>
+							<label>The resource</label>
+							<name>maven-generated-queue</name>
+							<maxDepth>768</maxDepth>
+							<jndiName>jms/maven-generated-q</jndiName>
+						</ConfigurationItem>
+					</middlewareResources>
 
 
-    <repositories>
-        <repository>
-            <id>xebialabs-releases</id>
-            <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
-        </repository>
-    </repositories>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.xebialabs.deployit</groupId>
+						<artifactId>jbossas-plugin</artifactId>
+						<version>${deployitVersion}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.xebialabs.deployit</groupId>
+						<artifactId>apache-httpd-plugin</artifactId>
+						<version>${deployitVersion}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xebialabs.deployit</groupId>
+			<artifactId>jbossas-plugin</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xebialabs.deployit</groupId>
+			<artifactId>was-plugin</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xebialabs.deployit</groupId>
+			<artifactId>wls-plugin</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xebialabs.deployit</groupId>
+			<artifactId>tomcat-plugin</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.xebialabs.deployit</groupId>
+			<artifactId>plugin-api</artifactId>
+			<version>2.0-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+
+
+	<repositories>
+		<repository>
+			<id>xebialabs-releases</id>
+			<url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+		</repository>
+	</repositories>
 
 </project>

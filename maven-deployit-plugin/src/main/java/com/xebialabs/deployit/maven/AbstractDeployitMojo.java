@@ -172,7 +172,7 @@ public abstract class AbstractDeployitMojo extends AbstractMojo {
 			context.setMinThreads(10);
 			context.setMaxThreads(50);
 			context.setSecured(false);
-			//Task extension only context.setExtensionsDirectoryPath("");
+			context.setHttpServerName("localhost");
 
 			context.save();
 

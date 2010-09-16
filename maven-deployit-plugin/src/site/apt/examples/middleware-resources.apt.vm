@@ -45,7 +45,8 @@ Add middleware resources
         </executions>
         <configuration>
             <environment>
-                <ConfigurationItem type="Host">
+                <ConfigurationItem>
+                    <type>Host</type>
                     <label>Tomcat Host</label>
                     <address>ubuntu-tomcat.mydomain.net</address>
                     <username>tomcat</username>
@@ -53,7 +54,8 @@ Add middleware resources
                     <operatingSystemFamily>UNIX</operatingSystemFamily>
                     <accessMethod>SSH_SCP</accessMethod>
                 </ConfigurationItem>
-                <ConfigurationItem type="TomcatServer">
+                <ConfigurationItem>
+                    <type>TomcatServer</type>
                     <label>Tomcat server</label>
                     <host>Tomcat Host</host>
                     <name>tomcattest</name>
@@ -65,7 +67,8 @@ Add middleware resources
                 </ConfigurationItem>
             </environment>
             <middlewareResources>
-                <ConfigurationItem type="TomcatDataSource">
+                <ConfigurationItem>
+                    <type>TomcatDataSource</type>
                     <label>My application datasource</label>
                     <jndiName>jdbc/myDataSource</jndiName>
                     <driverClass>org.hsqldb.jdbcDriver</driverClass>

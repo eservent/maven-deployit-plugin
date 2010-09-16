@@ -30,12 +30,12 @@
           <collectionProp name="Arguments.arguments">
             <elementProp name="ROOT_PATH" elementType="Argument">
               <stringProp name="Argument.name">ROOT_PATH</stringProp>
-              <stringProp name="Argument.value">/petclinic</stringProp>
+              <stringProp name="Argument.value">/org.springframework.samples.petclinic</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="HOST_ADDRESS" elementType="Argument">
               <stringProp name="Argument.name">HOST_ADDRESS</stringProp>
-              <stringProp name="Argument.value">my.petclinic.local</stringProp>
+              <stringProp name="Argument.value">my.remote.host</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="HOST_PORT" elementType="Argument">

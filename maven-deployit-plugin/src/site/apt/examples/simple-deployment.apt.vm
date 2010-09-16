@@ -43,24 +43,26 @@ Simple deployment
     </executions>
     <configuration>
         <environment>
-            <ConfigurationItem type="Host">
-                <label>Tomcat Host</label>
-                <address>ubuntu-tomcat.mydomain.net</address>
-                <username>tomcat</username>
-                <password>12345678</password>
-                <operatingSystemFamily>UNIX</operatingSystemFamily>
-                <accessMethod>SSH_SCP</accessMethod>
-            </ConfigurationItem>
-            <ConfigurationItem type="TomcatServer">
-                <label>Tomcat server</label>
-                <host>Tomcat Host</host>
-                <name>tomcattest</name>
-                <port>8080</port>
-                <accessMethod>http</accessMethod>
-                <tomcatHome>/opt/apache-tomcat-6.0.26</tomcatHome>
-                <startCommand>/opt/apache-tomcat-6.0.26/bin/catalina.sh start</startCommand>
-                <stopCommand>/opt/apache-tomcat-6.0.26/bin/catalina.sh stop</stopCommand>
-            </ConfigurationItem>
+            <ConfigurationItem>
+                    <type>Host</type>
+                    <label>Tomcat Host</label>
+                    <address>ubuntu-tomcat.mydomain.net</address>
+                    <username>tomcat</username>
+                    <password>12345678</password>
+                    <operatingSystemFamily>UNIX</operatingSystemFamily>
+                    <accessMethod>SSH_SCP</accessMethod>
+                </ConfigurationItem>
+                <ConfigurationItem>
+                    <type>TomcatServer</type>
+                    <label>Tomcat server</label>
+                    <host>Tomcat Host</host>
+                    <name>tomcattest</name>
+                    <port>8080</port>
+                    <accessMethod>http</accessMethod>
+                    <tomcatHome>/opt/apache-tomcat-6.0.26</tomcatHome>
+                    <startCommand>/opt/apache-tomcat-6.0.26/bin/catalina.sh start</startCommand>
+                    <stopCommand>/opt/apache-tomcat-6.0.26/bin/catalina.sh stop</stopCommand>
+                </ConfigurationItem>
         </environment>
     </configuration>
     <dependencies>

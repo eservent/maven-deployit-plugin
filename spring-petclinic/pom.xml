@@ -1,627 +1,642 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>org.springframework.samples</groupId>
-    <artifactId>org.springframework.samples.petclinic</artifactId>
-    <name>petclinic</name>
-    <packaging>war</packaging>
-    <version>1.0.0-SNAPSHOT</version>
-    <properties>
-        <spring.version>3.0.0.RELEASE</spring.version>
-        <slf4j.version>1.5.6</slf4j.version>
-    </properties>
-    <dependencies>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.springframework.samples</groupId>
+	<artifactId>org.springframework.samples.petclinic</artifactId>
+	<name>petclinic</name>
+	<packaging>war</packaging>
+	<version>1.0.0-SNAPSHOT</version>
+	<properties>
+		<spring.version>3.0.0.RELEASE</spring.version>
+		<slf4j.version>1.5.6</slf4j.version>
+	</properties>
+	<dependencies>
 
-        <!-- Spring -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>org.springframework.context</artifactId>
-            <version>${spring.version}</version>
-            <exclusions>
-                <!-- Exclude Commons Logging in favor of SLF4j -->
-                <exclusion>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>com.springsource.org.apache.commons.logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>org.springframework.orm</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>org.springframework.oxm</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>org.springframework.web.servlet</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>org.springframework.aspects</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <!-- AspectJ -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>com.springsource.org.aspectj.weaver</artifactId>
-            <version>1.6.8.RELEASE</version>
-        </dependency>
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.context</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<!-- Exclude Commons Logging in favor of SLF4j -->
+				<exclusion>
+					<groupId>org.apache.commons</groupId>
+					<artifactId>com.springsource.org.apache.commons.logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.oxm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.web.servlet</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- AspectJ -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>com.springsource.org.aspectj.weaver</artifactId>
+			<version>1.6.8.RELEASE</version>
+		</dependency>
 
-        <!-- Logging -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>com.springsource.slf4j.api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>com.springsource.slf4j.org.apache.commons.logging</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>com.springsource.slf4j.log4j</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.log4j</groupId>
-            <artifactId>com.springsource.org.apache.log4j</artifactId>
-            <version>1.2.15</version>
-            <scope>runtime</scope>
-        </dependency>
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>com.springsource.slf4j.api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>com.springsource.slf4j.org.apache.commons.logging</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>com.springsource.slf4j.log4j</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.log4j</groupId>
+			<artifactId>com.springsource.org.apache.log4j</artifactId>
+			<version>1.2.15</version>
+			<scope>runtime</scope>
+		</dependency>
 
-        <!-- DataSource -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>com.springsource.org.apache.commons.dbcp</artifactId>
-            <version>1.2.2.osgi</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>com.springsource.org.apache.commons.pool</artifactId>
-            <version>1.5.3</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>com.springsource.org.hsqldb</artifactId>
-            <version>1.8.0.9</version>
-            <scope>runtime</scope>
-        </dependency>
-        <!-- MySQL JDBC Connector -->
-        <!--
-              <dependency> <groupId>com.mysql.jdbc</groupId>
-              <artifactId>com.springsource.com.mysql.jdbc</artifactId>
-              <version>5.1.6</version> </dependency>
-          -->
+		<!-- DataSource -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>com.springsource.org.apache.commons.dbcp</artifactId>
+			<version>1.2.2.osgi</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>com.springsource.org.apache.commons.pool</artifactId>
+			<version>1.5.3</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>com.springsource.org.hsqldb</artifactId>
+			<version>1.8.0.9</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- MySQL JDBC Connector -->
+		<!--
+					  <dependency> <groupId>com.mysql.jdbc</groupId>
+					  <artifactId>com.springsource.com.mysql.jdbc</artifactId>
+					  <version>5.1.6</version> </dependency>
+				  -->
 
-        <!-- Hibernate -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>com.springsource.org.hibernate</artifactId>
-            <version>3.3.2.GA</version>
-        </dependency>
+		<!-- Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>com.springsource.org.hibernate</artifactId>
+			<version>3.3.2.GA</version>
+		</dependency>
 
-        <!-- JPA -->
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>com.springsource.javax.persistence</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <!-- Toplink JPA Provider -->
-        <dependency>
-            <groupId>com.oracle.toplink.essentials</groupId>
-            <artifactId>com.springsource.oracle.toplink.essentials</artifactId>
-            <version>2.0.0.b41-beta2</version>
-        </dependency>
-        <!-- Hibernate JPA Provider -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>com.springsource.org.hibernate.ejb</artifactId>
-            <version>3.4.0.GA</version>
-            <exclusions>
-                <!-- Exclude Commons Logging in favor of SLF4j -->
-                <exclusion>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>com.springsource.org.apache.commons.logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>com.springsource.org.hibernate.annotations</artifactId>
-            <version>3.4.0.GA</version>
-            <exclusions>
-                <!-- Exclude Commons Logging in favor of SLF4j -->
-                <exclusion>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>com.springsource.org.apache.commons.logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- Open JPA Provider -->
-        <dependency>
-            <groupId>org.apache.openjpa</groupId>
-            <artifactId>com.springsource.org.apache.openjpa</artifactId>
-            <version>1.1.0</version>
-            <exclusions>
-                <!-- Exclude Commons Logging in favor of SLF4j -->
-                <exclusion>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>com.springsource.org.apache.commons.logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+		<!-- JPA -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>com.springsource.javax.persistence</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!-- Toplink JPA Provider -->
+		<dependency>
+			<groupId>com.oracle.toplink.essentials</groupId>
+			<artifactId>com.springsource.oracle.toplink.essentials</artifactId>
+			<version>2.0.0.b41-beta2</version>
+		</dependency>
+		<!-- Hibernate JPA Provider -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>com.springsource.org.hibernate.ejb</artifactId>
+			<version>3.4.0.GA</version>
+			<exclusions>
+				<!-- Exclude Commons Logging in favor of SLF4j -->
+				<exclusion>
+					<groupId>org.apache.commons</groupId>
+					<artifactId>com.springsource.org.apache.commons.logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>com.springsource.org.hibernate.annotations</artifactId>
+			<version>3.4.0.GA</version>
+			<exclusions>
+				<!-- Exclude Commons Logging in favor of SLF4j -->
+				<exclusion>
+					<groupId>org.apache.commons</groupId>
+					<artifactId>com.springsource.org.apache.commons.logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- Open JPA Provider -->
+		<dependency>
+			<groupId>org.apache.openjpa</groupId>
+			<artifactId>com.springsource.org.apache.openjpa</artifactId>
+			<version>1.1.0</version>
+			<exclusions>
+				<!-- Exclude Commons Logging in favor of SLF4j -->
+				<exclusion>
+					<groupId>org.apache.commons</groupId>
+					<artifactId>com.springsource.org.apache.commons.logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
-        <!-- Servlet -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>com.springsource.javax.servlet</artifactId>
-            <version>2.5.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>com.springsource.javax.servlet.jsp</artifactId>
-            <version>2.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>com.springsource.javax.servlet.jsp.jstl</artifactId>
-            <version>1.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.taglibs</groupId>
-            <artifactId>com.springsource.org.apache.taglibs.standard</artifactId>
-            <version>1.1.2</version>
-        </dependency>
+		<!-- Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>com.springsource.javax.servlet</artifactId>
+			<version>2.5.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>com.springsource.javax.servlet.jsp</artifactId>
+			<version>2.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>com.springsource.javax.servlet.jsp.jstl</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.taglibs</groupId>
+			<artifactId>com.springsource.org.apache.taglibs.standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
 
-        <!-- Rome RSS -->
-        <dependency>
-            <groupId>com.sun.syndication</groupId>
-            <artifactId>com.springsource.com.sun.syndication</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jdom</groupId>
-            <artifactId>com.springsource.org.jdom</artifactId>
-            <version>1.1.0</version>
-            <scope>runtime</scope>
-        </dependency>
+		<!-- Rome RSS -->
+		<dependency>
+			<groupId>com.sun.syndication</groupId>
+			<artifactId>com.springsource.com.sun.syndication</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>com.springsource.org.jdom</artifactId>
+			<version>1.1.0</version>
+			<scope>runtime</scope>
+		</dependency>
 
-        <!-- JAXB -->
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>com.springsource.javax.xml.bind</artifactId>
-            <version>2.1.7</version>
-            <scope>provided</scope>
-        </dependency>
+		<!-- JAXB -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>com.springsource.javax.xml.bind</artifactId>
+			<version>2.1.7</version>
+			<scope>provided</scope>
+		</dependency>
 
-        <!-- Test dependencies
-        <dependency>
-            <groupId>org.junit</groupId>
-            <artifactId>com.springsource.org.junit</artifactId>
-            <version>4.7.0</version>
-            <scope>test</scope>
-        </dependency>
-         -->
+		<!-- Test dependencies
+				<dependency>
+					<groupId>org.junit</groupId>
+					<artifactId>com.springsource.org.junit</artifactId>
+					<version>4.7.0</version>
+					<scope>test</scope>
+				</dependency>
+				 -->
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.7</version>
-            <scope>test</scope>
-        </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.7</version>
+			<scope>test</scope>
+		</dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>org.springframework.test</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.transaction</groupId>
-            <artifactId>com.springsource.javax.transaction</artifactId>
-            <version>1.1.0</version>
-            <scope>test</scope>
-        </dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>com.springsource.javax.transaction</artifactId>
+			<version>1.1.0</version>
+			<scope>test</scope>
+		</dependency>
 
-        <dependency>
-            <groupId>org.seleniumhq.selenium.client-drivers</groupId>
-            <artifactId>selenium-java-client-driver</artifactId>
-            <version>1.0</version>
-            <scope>test</scope>
-        </dependency>
-
-
-    </dependencies>
-    <repositories>
-        <repository>
-            <id>com.springsource.repository.bundles.release</id>
-            <name>SpringSource Enterprise Bundle Repository - SpringSource Releases</name>
-            <url>http://repository.springsource.com/maven/bundles/release</url>
-        </repository>
-        <repository>
-            <id>com.springsource.repository.bundles.external</id>
-            <name>SpringSource Enterprise Bundle Repository - External Releases</name>
-            <url>http://repository.springsource.com/maven/bundles/external</url>
-        </repository>
-        <repository>
-            <id>com.springsource.repository.bundles.milestone</id>
-            <name>SpringSource Enterprise Bundle Repository - SpringSource Milestones</name>
-            <url>http://repository.springsource.com/maven/bundles/milestone</url>
-        </repository>
-        <repository>
-            <id>com.springsource.repository.bundles.snapshot</id>
-            <name>SpringSource Enterprise Bundle Repository - Snapshot Releases</name>
-            <url>http://repository.springsource.com/maven/bundles/snapshot</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>nexus-dexter-releases</id>
-            <name>Xebialabs - Deployit Releases</name>
-            <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
-        </pluginRepository>
-    </pluginRepositories>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <verbose>true</verbose>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                    <showWarnings>true</showWarnings>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <include>**/*Tests.java</include>
-                    </includes>
-                    <excludes>
-                        <exclude>**/Selenium*.java</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <warName>petclinic</warName>
-                </configuration>
-            </plugin>
-      
-
-        </plugins>
-    </build>
-
-    <profiles>
-        <profile>
-            <id>functional-tests</id>
-            <build>
-                <plugins>
-                    <!-- DEPLOYIT-->
-                    <plugin>
-                        <groupId>com.xebialabs.deployit</groupId>
-                        <artifactId>maven-deployit-plugin</artifactId>
-
-                        <executions>
-                            <execution>
-                                <id>deploy-id</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>deploy</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>clean-id</id>
-                                <phase>post-integration-test</phase>
-                                <goals>
-                                    <goal>clean</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <testmode>false</testmode>
-                            <useImportablePackage>false</useImportablePackage>
-                            <environment>
-                                <ConfigurationItem type="Host">
-                                    <label>Tomcat Host</label>
-                                    <address>ubuntu-weblogic-1.local</address>
-                                    <username>weblogic</username>
-                                    <password>weblogic</password>
-                                    <operatingSystemFamily>UNIX</operatingSystemFamily>
-                                    <accessMethod>SSH_SCP</accessMethod>
-                                </ConfigurationItem>
-                                <ConfigurationItem type="TomcatServer">
-                                    <label>Tomcat server</label>
-                                    <host>Tomcat Host</host>
-                                    <name>tomcattest</name>
-                                    <port>8080</port>
-                                    <accessMethod>http</accessMethod>
-                                    <tomcatHome>/opt/apache-tomcat-6.0.26</tomcatHome>
-                                    <startCommand>/opt/apache-tomcat-6.0.26/bin/catalina.sh start</startCommand>
-                                    <stopCommand>/opt/apache-tomcat-6.0.26/bin/catalina.sh stop</stopCommand>
-                                    <appBase>/opt/apache-tomcat-6.0.26/mywebapps</appBase>
-                                </ConfigurationItem>
-                            </environment>
-                            
-                            <middlewareResources>
-                                <ConfigurationItem type="TomcatDataSource">
-                                    <label>My application datasource</label>
-                                    <jndiName>jdbc/petclinicHSQL</jndiName>
-                                    <driverClass>org.hsqldb.jdbcDriver</driverClass>
-                                    <connectionUrl>jdbc:hsqldb:file:/tmp/database.hdb</connectionUrl>
-                                    <maxActive>10</maxActive>
-                                </ConfigurationItem>
-                            </middlewareResources>
-                            
-                            <mappings>
-                                <ConfigurationItem type="WarMapping">
-                                    <label>WarMapping pocweb</label>
-                                    <source>org.springframework.samples.petclinic - 1.0.0-SNAPSHOT/petclinic.war</source>
-                                    <target>Tomcat server</target>
-                                    <contextRoot>petclinic</contextRoot>
-                                    <keyvaluepairs>[]</keyvaluepairs>
-                                </ConfigurationItem>
-                            </mappings>
-
-                        </configuration>
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.xebialabs.deployit</groupId>
-                                <artifactId>tomcat-plugin</artifactId>
-                                <version>1.2.2</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
-
-                    <!-- Selenium Server plugin -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>selenium-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>xvfb</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>xvfb</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>start</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>start-server</goal>
-                                </goals>
-                                <configuration>
-                                    <background>true</background>
-                                    <logOutput>true</logOutput>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>stop</id>
-                                <phase>post-integration-test</phase>
-                                <goals>
-                                    <goal>stop-server</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <!-- Exclude Selenium Tests from test phase,
-                                    Include Selenium Test into integration-test phase -->
-
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <excludes>
-                                <exclude>**/Selenium*.java</exclude>
-                            </excludes>
-                        </configuration>
-
-                        <executions>
-                            <execution>
-                                <id>integration-tests</id>
-                                <phase>integration-test</phase>
-                                <goals>
-                                    <goal>test</goal>
-                                </goals>
-                                <configuration>
-                                    <skip>false</skip>
-                                    <excludes>
-                                        <exclude>none</exclude>
-                                    </excludes>
-                                    <includes>
-                                        <include>**/Selenium*.java</include>
-                                    </includes>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
+		<dependency>
+			<groupId>org.seleniumhq.selenium.client-drivers</groupId>
+			<artifactId>selenium-java-client-driver</artifactId>
+			<version>1.0</version>
+			<scope>test</scope>
+		</dependency>
 
 
-            </build>
-        </profile>
-        <profile>
-            <id>performance</id>
-            <build>
-                <plugins>
-                    <!-- DEPLOYIT-->
-                    <plugin>
-                        <groupId>com.xebialabs.deployit</groupId>
-                        <artifactId>maven-deployit-plugin</artifactId>
+	</dependencies>
+	<repositories>
+		<repository>
+			<id>com.springsource.repository.bundles.release</id>
+			<name>SpringSource Enterprise Bundle Repository - SpringSource Releases</name>
+			<url>http://repository.springsource.com/maven/bundles/release</url>
+		</repository>
+		<repository>
+			<id>com.springsource.repository.bundles.external</id>
+			<name>SpringSource Enterprise Bundle Repository - External Releases</name>
+			<url>http://repository.springsource.com/maven/bundles/external</url>
+		</repository>
+		<repository>
+			<id>com.springsource.repository.bundles.milestone</id>
+			<name>SpringSource Enterprise Bundle Repository - SpringSource Milestones</name>
+			<url>http://repository.springsource.com/maven/bundles/milestone</url>
+		</repository>
+		<repository>
+			<id>com.springsource.repository.bundles.snapshot</id>
+			<name>SpringSource Enterprise Bundle Repository - Snapshot Releases</name>
+			<url>http://repository.springsource.com/maven/bundles/snapshot</url>
+		</repository>
+	</repositories>
 
-                        <executions>
-                            <execution>
-                                <id>deploy-id</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>deploy</goal>
-                                </goals>
-                            </execution>                            
-                            <execution>
-                                <id>clean-id</id>
-                                <phase>post-integration-test</phase>
-                                <goals>
-                                    <goal>clean</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <testmode>false</testmode>
-                            <useImportablePackage>false</useImportablePackage>
-                            <environment>
-                                <ConfigurationItem type="Host">
-                                    <label>Host Production Weblogic</label>
-                                    <address>ubuntu-weblogic-1.local</address>
-                                    <username>weblogic</username>
-                                    <password>weblogic</password>
-                                    <operatingSystemFamily>UNIX</operatingSystemFamily>
-                                    <accessMethod>SSH_SCP</accessMethod>
-                                </ConfigurationItem>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus-dexter-releases</id>
+			<name>Xebialabs - Deployit Releases</name>
+			<url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+		</pluginRepository>
+	</pluginRepositories>
 
-                                <ConfigurationItem type="WlsDomain">
-                                    <label>Domain WLS Petshop</label>
-                                    <name>petshop</name>
-                                    <activeHost>Host Production Weblogic</activeHost>
-                                    <port>7001</port>
-                                    <username>weblogic</username>
-                                    <password>weblogic10</password>
-                                    <adminServerName>AdminServer</adminServerName>
-                                    <wlHome>/opt/oracle/wls10.3.1.0/wlserver_10.3</wlHome>
-                                    <wlJavaHome>/opt/oracle/wls10.3.1.0/jdk160_11</wlJavaHome>                                                                      
-                                </ConfigurationItem>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<verbose>true</verbose>
+					<source>1.5</source>
+					<target>1.5</target>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>**/*Tests.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/Selenium*.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warName>petclinic</warName>
+				</configuration>
+			</plugin>
 
-                                <ConfigurationItem type="WlsServer">
-                                    <label>Petshop Server 1</label>
-                                    <name>Server-1</name>
-                                    <host>Host Production Weblogic</host>
-                                    <domain>Domain WLS Petshop</domain>
-                                    <port>8001</port>
-                                    <addedToEnvironment>false</addedToEnvironment>
-                                </ConfigurationItem>
-                                
-                                <ConfigurationItem type="WlsServer">
-                                    <label>Petshop Server 2</label>
-                                    <name>Server-2</name>
-                                    <host>Host Production Weblogic</host>
-                                    <domain>Domain WLS Petshop</domain>
-                                    <port>9001</port>
-                                    <addedToEnvironment>false</addedToEnvironment>
-                                </ConfigurationItem>
 
-                                <ConfigurationItem type="WlsCluster">
-                                    <label>Petshop Cluster</label>
-                                    <domain>Domain WLS Petshop</domain>
-                                    <name>Cluster-0</name>
-                                    <servers>[Petshop Server 1,Petshop Server 2]</servers>
-                                </ConfigurationItem>
+		</plugins>
+	</build>
 
-                                <ConfigurationItem type="Host">
-                                    <label>Host Production Apache</label>
-                                    <address>ubuntu-weblogic-1.local</address>
-                                    <username>weblogic</username>
-                                    <password>weblogic</password>
-                                    <sudoUsername>root</sudoUsername>
-                                    <operatingSystemFamily>UNIX</operatingSystemFamily>
-                                    <accessMethod>SSH_SUDO</accessMethod>
-                                </ConfigurationItem>
-                                
-                                <ConfigurationItem type="ApacheHttpdServer">
-                                    <label>ApacheWeb Server</label>
-                                    <host>Host Production Apache</host>                                    
-                                    <htdocsLocation>/home/weblogic/www</htdocsLocation>
-                                    <errorLogLocation>/var/log/apache2/error.log</errorLogLocation>
-                                    <configurationLocation>/etc/apache2/mods-enabled</configurationLocation>
-                                    <apachectlPath>/usr/sbin/apache2ctl</apachectlPath>
-                                    <accessLogLocation>/var/log/apache2/access.log</accessLogLocation>                                    
-                                </ConfigurationItem>
-                            </environment>
-                            
-                            <middlewareResources>
-                                <ConfigurationItem type="ApacheHttpdWlsPluginConfiguration">
-                                    <label>ApacheWlsplugin Configuration</label>
-                                    <mimeMatchExpressions>*</mimeMatchExpressions>
-                                </ConfigurationItem>
-                            </middlewareResources>
+	<profiles>
+		<profile>
+			<id>functional-tests</id>
+			<build>
+				<plugins>
+					<!-- DEPLOYIT-->
+					<plugin>
+						<groupId>com.xebialabs.deployit</groupId>
+						<artifactId>maven-deployit-plugin</artifactId>
+						<version>1.3-beta-4-SNAPSHOT</version>
 
-                            <mappings>
-                                <ConfigurationItem type="ApacheHttpdWlsPluginConfigurationMapping">
-                                    <label>MyApacheWlsPlugin</label>
-                                    <source>ApacheWlsplugin Configuration</source>
-                                    <target>ApacheWeb Server</target>
-                                    <clusters>[Petshop Cluster]</clusters>
-                                    <virtualHost>my.petclinic.local:8888</virtualHost>
-                                    <sourcePropertyOverrides>[]</sourcePropertyOverrides>
-                                </ConfigurationItem>
-                            </mappings>
+						<executions>
+							<execution>
+								<id>deploy-id</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>deploy</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>clean-id</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>clean</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<testmode>false</testmode>
+							<environment>
+								<ConfigurationItem>
+									<type>Host</type>
+									<label>Tomcat Host</label>
+									<address>tomcat6.vm</address>
+									<username>ubuntu</username>
+									<password>ubuntu</password>
+									<operatingSystemFamily>UNIX</operatingSystemFamily>
+									<accessMethod>SSH_SFTP</accessMethod>
+								</ConfigurationItem>
+								<ConfigurationItem>
+									<type>TomcatUnmanagedServer</type>
+									<label>Tomcat server</label>
+									<host>Tomcat Host</host>
+									<name>tomcattest</name>
+									<port>8080</port>
+									<baseUrl>http://tomcat6.vm:8080</baseUrl>
+									<accessMethod>http</accessMethod>
+									<tomcatHome>/home/ubuntu/tomcat/tomcat6-1</tomcatHome>
+									<startCommand>/home/ubuntu/tomcat/tomcat6-1/bin/startup.sh</startCommand>
+									<stopCommand>/home/ubuntu/tomcat/tomcat6-1/bin/startup.sh</stopCommand>
+									<appBase>webapps</appBase>
+									<service>Catalina</service>
+								</ConfigurationItem>
+							</environment>
 
-                        </configuration>
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.xebialabs.deployit</groupId>
-                                <artifactId>wls-plugin</artifactId>
-                                <version>1.2.2</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>com.xebialabs.deployit</groupId>
-                                <artifactId>apache-httpd-plugin</artifactId>
-                                <version>1.2.2</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
+							<middlewareResources>
+								<ConfigurationItem>
+									<type>TomcatDataSource</type>
+									<label>My application datasource</label>
+									<jndiName>jdbc/petclinicHSQL</jndiName>
+									<driverClass>org.hsqldb.jdbcDriver</driverClass>
+									<connectionUrl>jdbc:hsqldb:file:/tmp/database.hdb</connectionUrl>
+									<maxActive>10</maxActive>
+								</ConfigurationItem>
+							</middlewareResources>
 
-                    <!-- JMeter plugin  -->
-                    <plugin>
-                        <groupId>org.apache.jmeter</groupId>
-                        <artifactId>maven-jmeter-plugin</artifactId>
-                        <version>1.0</version>
-                        <executions>
-                            <execution>
-                                <id>jmeter-tests</id>
-                                <phase>integration-test</phase>
-                                <goals>
-                                    <goal>jmeter</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <reportDir>${project.build.directory}/jmeter-reports</reportDir>
-                            <jmeterUserProperties>
+							<mappings>
+								<ConfigurationItem>
+									<type>TomcatWarMapping</type>
+									<label>WarMapping pocweb</label>
+									<source>org.springframework.samples.petclinic/1.0.0-SNAPSHOT/War/petclinic.war</source>
+									<target>Tomcat server</target>
+									<contextRoot>petclinic</contextRoot>
+									<keyvaluepairs>[]</keyvaluepairs>
+								</ConfigurationItem>
+							</mappings>
 
-                            </jmeterUserProperties>
-                        </configuration>
-                        <dependencies>
-                            <dependency>
-                                <groupId>commons-logging</groupId>
-                                <artifactId>commons-logging</artifactId>
-                                <version>1.0.4</version>
-                            </dependency>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>com.xebialabs.deployit</groupId>
+								<artifactId>tomcat-plugin</artifactId>
+								<version>1.3-beta-3-SNAPSHOT</version>
+							</dependency>
+						</dependencies>
+					</plugin>
 
-                        </dependencies>
-                    </plugin>
-                   
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+					<!-- Selenium Server plugin -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>selenium-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>xvfb</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>xvfb</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>start</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>start-server</goal>
+								</goals>
+								<configuration>
+									<background>true</background>
+									<logOutput>true</logOutput>
+								</configuration>
+							</execution>
+							<execution>
+								<id>stop</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>stop-server</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- Exclude Selenium Tests from test phase,
+														Include Selenium Test into integration-test phase -->
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<excludes>
+								<exclude>**/Selenium*.java</exclude>
+							</excludes>
+						</configuration>
+
+						<executions>
+							<execution>
+								<id>integration-tests</id>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>test</goal>
+								</goals>
+								<configuration>
+									<skip>false</skip>
+									<excludes>
+										<exclude>none</exclude>
+									</excludes>
+									<includes>
+										<include>**/Selenium*.java</include>
+									</includes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+
+
+			</build>
+		</profile>
+		<profile>
+			<id>performance</id>
+			<build>
+				<plugins>
+					<!-- DEPLOYIT-->
+					<plugin>
+						<groupId>com.xebialabs.deployit</groupId>
+						<artifactId>maven-deployit-plugin</artifactId>
+						<version>1.3-beta-4-SNAPSHOT</version>
+						<executions>
+							<execution>
+								<id>deploy-id</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>deploy</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>clean-id</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>clean</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<testmode>false</testmode>							
+							<environment>
+								<ConfigurationItem>
+									<type>Host</type>
+									<label>Host Production Weblogic</label>
+									<address>weblogic.vm</address>
+									<username>ubuntu</username>
+									<password>ubuntu</password>
+									<operatingSystemFamily>UNIX</operatingSystemFamily>
+									<accessMethod>SSH_SFTP</accessMethod>
+								</ConfigurationItem>
+
+								<ConfigurationItem>
+									<type>WlsDomain</type>
+									<label>Domain WLS Petshop</label>
+									<name>mydomain</name>
+									<activehost>Host Production Weblogic</activehost>
+									<port>7001</port>
+									<username>weblogic</username>
+									<password>weblogic10</password>
+									<adminservername>myserver</adminservername>
+									<wlhome>/home/ubuntu/oracle/wls1033/wlserver</wlhome>
+									<usenodemanager>true</usenodemanager>
+								</ConfigurationItem>
+
+								<ConfigurationItem>
+									<type>WlsServer</type>
+									<label>Petshop Server 1</label>
+									<name>Server-1</name>
+									<host>Host Production Weblogic</host>
+									<domain>Domain WLS Petshop</domain>
+									<port>8001</port>
+									<addedToEnvironment>false</addedToEnvironment>
+								</ConfigurationItem>
+
+								<ConfigurationItem>
+									<type>WlsServer</type>
+									<label>Petshop Server 2</label>
+									<name>Server-2</name>
+									<host>Host Production Weblogic</host>
+									<domain>Domain WLS Petshop</domain>
+									<port>9001</port>
+									<addedToEnvironment>false</addedToEnvironment>
+								</ConfigurationItem>
+
+								<ConfigurationItem>
+									<type>WlsCluster</type>
+									<label>Petshop Cluster</label>
+									<domain>Domain WLS Petshop</domain>
+									<name>MyCluster</name>
+									<servers>[Petshop Server 1,Petshop Server 2]</servers>
+								</ConfigurationItem>
+
+								
+								<ConfigurationItem>
+									<type>Host</type>
+									<label>Host Production Apache</label>
+									<address>apache2.vm</address>
+									<username>ubuntu</username>
+									<password>ubuntu</password>
+									<sudoUsername>root</sudoUsername>
+									<operatingSystemFamily>UNIX</operatingSystemFamily>
+									<accessMethod>SSH_SUDO</accessMethod>
+								</ConfigurationItem>
+
+								<ConfigurationItem>
+									<type>ApacheHttpdServer</type>
+									<label>ApacheWeb Server</label>
+									<host>Host Production Apache</host>
+									<htdocsLocation>/home/ubuntu/wwww</htdocsLocation>
+									<errorLogLocation>/var/log/apache2/error.log</errorLogLocation>
+									<configurationLocation>/etc/apache2/mods-enabled</configurationLocation>
+									<apachectlPath>/usr/sbin/apache2ctl</apachectlPath>
+									<accessLogLocation>/var/log/apache2/access.log</accessLogLocation>
+								</ConfigurationItem>
+							</environment>
+
+							<middlewareResources>
+								<ConfigurationItem>
+									<type>ApacheHttpdWlsPluginConfiguration</type>
+									<label>ApacheWlsplugin Configuration</label>
+									<mimeMatchExpressions>*</mimeMatchExpressions>
+								</ConfigurationItem>
+							</middlewareResources>
+
+							<mappings>
+								<MappingItem>
+									<type>ApacheHttpdWlsPluginConfigurationMapping</type>
+									<label>MyApacheWlsPlugin</label>
+									<source>ApacheWlsplugin Configuration</source>
+									<target>ApacheWeb Server</target>
+									<clusters>[Petshop Cluster]</clusters>
+									<virtualHost>my.remote.host:8888</virtualHost>
+									<sourcePropertyOverrides>[]</sourcePropertyOverrides>
+								</MappingItem>
+							</mappings>
+
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>com.xebialabs.deployit</groupId>
+								<artifactId>wls-plugin</artifactId>
+								<version>1.3-beta-3-SNAPSHOT</version>
+							</dependency>
+							<dependency>
+								<groupId>com.xebialabs.deployit</groupId>
+								<artifactId>apache-httpd-plugin</artifactId>
+								<version>1.3-beta-3-SNAPSHOT</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+
+					<!-- JMeter plugin  -->
+					<plugin>
+						<groupId>org.apache.jmeter</groupId>
+						<artifactId>maven-jmeter-plugin</artifactId>
+						<version>1.0</version>
+						<executions>
+							<execution>
+								<id>jmeter-tests</id>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>jmeter</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<reportDir>${project.build.directory}/jmeter-reports</reportDir>
+							<jmeterUserProperties>
+
+							</jmeterUserProperties>
+						</configuration>
+						<dependencies>
+							<dependency>
+								<groupId>commons-logging</groupId>
+								<artifactId>commons-logging</artifactId>
+								<version>1.0.4</version>
+							</dependency>
+
+						</dependencies>
+					</plugin>
+
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

@@ -2,121 +2,125 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 
-    <parent>
-        <groupId>com.xebialabs.deployit</groupId>
-        <artifactId>maven-deployit-plugin-integration-test</artifactId>
-        <relativePath>../pom.xml</relativePath>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
-    
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.xebialabs.deployit</groupId>
+	<parent>
+		<groupId>com.xebialabs.deployit</groupId>
+		<artifactId>maven-deployit-plugin-integration-test</artifactId>
+		<relativePath>../pom.xml</relativePath>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
 
-    <artifactId>maven-deployit-plugin-test-victim-wls</artifactId>
-    <packaging>ear</packaging>
-    <version>1.2.2</version>
-    <name>wls</name>
-    <url>http://maven.apache.org</url>
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.xebialabs.deployit</groupId>
-                <artifactId>maven-deployit-plugin</artifactId>
-                <version>@project.version@</version>
-                <executions>
-                    <execution>
-                        <id>deployit-plugin-test</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <port>9090</port>
-                    <testmode>true</testmode>
-                    <environment>
-                        <ConfigurationItem type="Host">
-                            <label>Host Production Weblogic</label>
-                            <address>ubuntu-weblogic-1.local</address>
-                            <username>weblogic</username>
-                            <password>weblogic</password>
-                            <operatingSystemFamily>UNIX</operatingSystemFamily>
-                            <accessMethod>SSH_SCP</accessMethod>
-                        </ConfigurationItem>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.xebialabs.deployit</groupId>
 
-                        <ConfigurationItem type="WlsDomain">
-                            <label>Domain WLS Petshop</label>
-                            <activeHost>Host Production Weblogic</activeHost>
-                            <password>weblogic10</password>
-                            <wlHome>/opt/oracle/wls10.3.1.0/wlserver_10.3</wlHome>
-                            <adminServerName>AdminServer</adminServerName>
-                            <wlJavaHome>/opt/oracle/wls10.3.1.0/jdk160_11</wlJavaHome>
-                            <username>weblogic</username>
-                            <name>petshop</name>
-                            <port>7001</port>
-                            <usenodemanager>true</usenodemanager>
-                        </ConfigurationItem>
+	<artifactId>maven-deployit-plugin-test-victim-wls</artifactId>
+	<packaging>ear</packaging>
+	<version>1.2.2</version>
+	<name>wls</name>
+	<url>http://maven.apache.org</url>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.xebialabs.deployit</groupId>
+				<artifactId>maven-deployit-plugin</artifactId>
+				<version>@project.version@</version>
+				<executions>
+					<execution>
+						<id>deployit-plugin-test</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<port>9090</port>
+					<testmode>true</testmode>
+					<environment>
+						<ConfigurationItem>
+							<type>Host</type>
+							<label>Host Production Weblogic</label>
+							<address>ubuntu-weblogic-1.local</address>
+							<username>weblogic</username>
+							<password>weblogic</password>
+							<operatingSystemFamily>UNIX</operatingSystemFamily>
+							<accessMethod>SSH_SCP</accessMethod>
+						</ConfigurationItem>
 
-                        <ConfigurationItem type="WlsServer">
-                            <label>Petshop Server 1</label>
-                            <host>Host Production Weblogic</host>
-                            <domain>Domain WLS Petshop</domain>
-                            <port>8001</port>
-                            <name>Server-1</name>
-                        </ConfigurationItem>
-                        
-                        <ConfigurationItem type="WlsServer" addToEnv="false">
-                            <label>AdminServer</label>
-                            <host>Host Production Weblogic</host>
-                            <domain>Domain WLS Petshop</domain>
-                            <port>7001</port>
-                            <name>AdminServer</name>
-                        </ConfigurationItem>
+						<ConfigurationItem>
+							<type>WlsDomain</type>
+							<label>Domain WLS Petshop</label>
+							<activeHost>Host Production Weblogic</activeHost>
+							<password>weblogic10</password>
+							<wlHome>/opt/oracle/wls10.3.1.0/wlserver_10.3</wlHome>
+							<adminServerName>AdminServer</adminServerName>
+							<wlJavaHome>/opt/oracle/wls10.3.1.0/jdk160_11</wlJavaHome>
+							<username>weblogic</username>
+							<name>petshop</name>
+							<port>7001</port>
+							<usenodemanager>true</usenodemanager>
+						</ConfigurationItem>
 
-                    </environment>
+						<ConfigurationItem>
+							<type>WlsServer</type>
+							<label>Petshop Server 1</label>
+							<host>Host Production Weblogic</host>
+							<domain>Domain WLS Petshop</domain>
+							<port>8001</port>
+							<name>Server-1</name>
+						</ConfigurationItem>
 
+						<ConfigurationItem addToEnv="false">
+							<type>WlsServer</type>
+							<label>AdminServer</label>
+							<host>Host Production Weblogic</host>
+							<domain>Domain WLS Petshop</domain>
+							<port>7001</port>
+							<name>AdminServer</name>
+						</ConfigurationItem>
 
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.xebialabs.deployit</groupId>
-                        <artifactId>wls-plugin</artifactId>
-                        <version>${deployitVersion}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>com.xebialabs.deployit</groupId>
-                        <artifactId>apache-httpd-plugin</artifactId>
-                        <version>${deployitVersion}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-        </plugins>
-    </build>
-
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+					</environment>
 
 
-    <repositories>
-        <repository>
-            <id>xebialabs-releases</id>
-            <url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
-        </repository>
-    </repositories>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.xebialabs.deployit</groupId>
+						<artifactId>wls-plugin</artifactId>
+						<version>${deployitVersion}</version>
+					</dependency>
+					<dependency>
+						<groupId>com.xebialabs.deployit</groupId>
+						<artifactId>apache-httpd-plugin</artifactId>
+						<version>${deployitVersion}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+
+	<repositories>
+		<repository>
+			<id>xebialabs-releases</id>
+			<url>http://dexter.xebialabs.com/nexus/content/repositories/releases</url>
+		</repository>
+	</repositories>
 
 </project>

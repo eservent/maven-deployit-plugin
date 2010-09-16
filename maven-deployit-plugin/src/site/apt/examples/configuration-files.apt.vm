@@ -46,7 +46,8 @@ Include configuration files to the deployment
         <configuration>
             
             <environment>
-                <ConfigurationItem type="Host">
+                <ConfigurationItem>
+                    <type>Host</type>
                     <label>APBIVM02-VM06</label>
                     <address>ip-address</address>
                     <username>username</username>
@@ -55,7 +56,8 @@ Include configuration files to the deployment
                     <accessMethod>SSH_SCP</accessMethod>
                 </ConfigurationItem>
                 
-                <ConfigurationItem type="JbossasServer">
+                <ConfigurationItem>
+                    <type>JbossasServer</type>
                     <label>AS02-VM06-JBOSS5</label>
                     <host>APBIVM02-VM06</host>
                     <version>JBOSSAS_50</version>
@@ -72,7 +74,8 @@ Include configuration files to the deployment
 			</deployableArtifacts>
 
 			<mappings>
-				<MappingItem type="ConfigurationFilesMapping">
+				<MappingItem>
+					<type>ConfigurationFilesMapping</type>
 					<source>ConfigurationFiles/package/resources.dir</source>
 					<target>APBIVM02-VM06</target>
 					<keyvaluepairs>[[key=database.connection.url value=a][key=database.driver.class value=b]]</keyvaluepairs>

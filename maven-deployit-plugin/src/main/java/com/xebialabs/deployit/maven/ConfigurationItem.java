@@ -45,6 +45,11 @@ public class ConfigurationItem {
             addedToEnvironment = Boolean.parseBoolean(value.toString());
             return;
         }
+
+	    if ("type".equals(name)) {
+		    setMainType(value.toString());
+		    return;
+	    }
         parameters.append(' ').append(name).append('=').append('"').append(value).append('"').append(' ');
         if ("label".equals(name)) {
             label = value.toString();
